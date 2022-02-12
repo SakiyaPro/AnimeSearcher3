@@ -1,0 +1,23 @@
+[[source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+django-taggit = "*"
+django-allauth = "==0.45.0"
+djangorestframework = "==3.12.1"
+django-filter = "*"
+django-cors-headers = "*"
+djangorestframework-simplejwt = "==4.8.0"
+dj-rest-auth = "==2.1.2"
+selenium = "==3.141.0"
+chromedriver_binary= "==93.0.4577.15"
+
+Pillow = "*"
+autopep8 = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.9"
