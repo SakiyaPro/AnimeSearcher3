@@ -16,6 +16,7 @@ import glob
 import shutil
 
 from django_filters import rest_framework as filters
+from django_filters.widgets import CSVWidget
 from rest_framework import viewsets
 
 from .serializer import AnimeDataSerializer, CharacterDataSerializer, PersonDataSerializer
@@ -25,6 +26,8 @@ from anime_data.functions import driver, All_Genre
 
 class AnimeDataFilter(filters.FilterSet):
     # filter => annictId
+    annictId_many = filters.CharFilter(
+        field_name="annictId", method='filter_annictId_many')  # 何故か widget が数値を読み取らないので、method でゴリ押し
     annictId_gte = filters.NumberFilter(
         field_name="annictId", lookup_expr='gte')  # ◯◯以上
     annictId_lte = filters.NumberFilter(
@@ -68,12 +71,29 @@ class AnimeDataFilter(filters.FilterSet):
     # filter => image, tags
     image = filters.BooleanFilter(field_name="image")  # True or False
     tags = filters.BooleanFilter(field_name="tags")  # True or False
+    genres = filters.ModelMultipleChoiceFilter(
+        field_name="genres__genre", to_field_name='genre', widget=CSVWidget,  queryset=GenreData.objects.all(), method='filter_genres')
 
     class Meta:
         model = AnimeData
         # フィルタを列挙する。
         # デフォルトの検索方法でいいなら、モデルフィールド名のフィルタを直接定義できる。
         fields = '__all__'
+
+    def filter_annictId_many(self, queryset, name, value):
+        # 複数の annictId をフィルタリング
+        if value:
+            result = value.split(',')
+            result = [int(v) for v in result]
+            queryset = queryset.filter(annictId__in=result)
+        return queryset
+
+    def filter_genres(self, queryset, name, value):
+        # 複数のジャンルをフィルタリング
+        if value:
+            for v in value:
+                queryset = queryset.filter(genres=v)
+        return queryset
 
 
 class AnimeDataViewSet(viewsets.ModelViewSet):
@@ -240,7 +260,8 @@ def CreateData(request):
             pass
         try:
             del create_data["title"]
-            AnimeData.objects.filter(annictId=result["annictId"]).update(**create_data)
+            AnimeData.objects.filter(
+                annictId=result["annictId"]).update(**create_data)
         except Exception as E:
             raise E
         anime_data = AnimeData.objects.get(annictId=result["annictId"])
@@ -334,15 +355,12 @@ def CreateData(request):
 
 
 def CreateGenre(request):
-    title_data = AnimeData.objects.all().filter(genres=None).order_by("annictId").values("title")
+    title_data = AnimeData.objects.all().filter(
+        annictId__gte=1730).order_by("annictId").values("title")
     all_genre = All_Genre()
     web_driver = driver()
-    num = 0
     for title in title_data:
-        num += 1
         title = title["title"]
-        if num >= 2000:
-            raise ValueError
         web_driver.get(
             f"http://ruijianime.com/main/title_search.php?srchanime={title}")
         try:

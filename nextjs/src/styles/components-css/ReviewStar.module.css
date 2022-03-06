@@ -1,0 +1,94 @@
+/* =======================================================
+レビューの星 */
+
+.noReviewStarWrapper {
+    color: #CCCCCC;
+}
+
+.noReviewText {
+    font-size: 0.9rem;
+}
+
+.reviewStarWrapper {
+    color: #ffcf32;
+}
+
+.star5_rating {
+    position: relative;
+    z-index: 0;
+    display: inline-block;
+    white-space: nowrap;
+    color: #CCCCCC
+        /* グレーカラー 自由に設定化 */
+        /*font-size: 30px; フォントサイズ 自由に設定化 */
+}
+
+.star5_rating:before, .star5_rating:after {
+    content: '★★★★★';
+}
+
+.star5_rating:after {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    color: #ffcf32;
+    /* イエローカラー 自由に設定化 */
+}
+
+/* 星5 */
+.star5_rating[datarate="5"]:after {
+    width: 100%;
+}
+
+/* 星4.5 */
+.star5_rating[datarate="4.5"]:after {
+    width: 90%;
+}
+
+/* 星4 */
+.star5_rating[datarate="4"]:after {
+    width: 80%;
+}
+
+/* 星3.5 */
+.star5_rating[datarate="3.5"]:after {
+    width: 70%;
+}
+
+/* 星3 */
+.star5_rating[datarate="3"]:after {
+    width: 60%;
+}
+
+/* 星2.5 */
+.star5_rating[datarate="2.5"]:after {
+    width: 50%;
+}
+
+/* 星2 */
+.star5_rating[datarate="2"]:after {
+    width: 40%;
+}
+
+/* 星1.5 */
+.star5_rating[datarate="1.5"]:after {
+    width: 30%;
+}
+
+/* 星1 */
+.star5_rating[datarate="1"]:after {
+    width: 20%;
+}
+
+/* 星0.5 */
+.star5_rating[datarate="0.5"]:after {
+    width: 10%;
+}
+
+/* 星0 */
+.star5_rating[datarate="0"]:after {
+    width: 0%;
+}

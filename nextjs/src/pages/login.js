@@ -1,4 +1,5 @@
 import Link from "next/link";
+import React, { useEffect, useLayoutEffect, useGlobal, useState, useRef } from "reactn";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 import axios from 'axios'
@@ -7,26 +8,31 @@ import styles from "../styles/login.module.css"
 export default function Login(props) {
 
     const router = useRouter();
+    const profile = useRef(useGlobal("profile")[0])
+    console.log(profile.current);
 
     // ログイン処理関数
     const login = async formEvent => {
         formEvent.preventDefault()
-        const res_token = await axios.post(
+        const res_token = await(await axios.post(
             'http://192.168.0.13:8000/dj-rest-auth/login/',
             {
                 email: formEvent.target.email.value,
                 password: formEvent.target.password.value
             }
-        )
+        )).data
         console.log(res_token);
-        const access_token = res_token.data.access_token
-        Cookies.set("access_token", access_token);
-        console.log(access_token);
+        Cookies.set("user_id", res_token.user.pk)
+        Cookies.set("access_token", res_token.access_token);
+        Cookies.set("refresh_token", res_token.refresh_token);
+        console.log(`ユーザーID: ${Cookies.get("user_id")}`);
+        console.log(`アクセストークン: ${Cookies.get("access_token")}`);
+        console.log(`リフレッシュトークン: ${Cookies.get("refresh_token")}`);
         router.replace("/account/private");
     }
 
     return (
-        <>
+        <div className={`${styles.loginFormWrapper}`}>
             <h1>Login</h1>
             <div className={`${styles.login}`}>
                 <h2 className={`${styles.active}`}>login</h2>
@@ -58,6 +64,6 @@ export default function Login(props) {
             <div>
                 <Link href="/"><a>Homeへ</a></Link>
             </div>
-        </>
+        </div>
     );
 }

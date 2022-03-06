@@ -42,11 +42,6 @@
 サイトロゴ */
 .siteLogo {
     margin-left: 10px;
-    padding: 10px 0px 8px 0px;
-    padding-bottom: 17px;
-    position: fixed;
-    z-index: 10;
-    top: 0;
 }
 
 /* ============================================
@@ -75,7 +70,10 @@
 /* ============================================
 検索バー */
 
-.searchForm {}
+.searchForm {
+    margin-top: 30px;
+    margin-bottom: 40px;
+}
 
 .searchBar {
     padding: 10px 10px 10px 10px;
@@ -123,6 +121,6 @@
 }
 
 .headerContents span {
-    font-size: 1rem;
+    font-size: 1.3rem;
     vertical-align: middle;
 }

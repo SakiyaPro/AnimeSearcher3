@@ -1,143 +1,77 @@
 .reload_icon {
-    margin-left: 20px;
+    margin-left: 10px;
+}
+
+.flexItem {
+    display: flex;
+}
+
+/* ==============================================
+mainVisual */
+.mainVisual {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.mainVisualImage {
+    box-shadow: 3px 3px 3px #000;
+    position: relative;
+}
+
+.animeSiteLogo {
+    filter: drop-shadow(2px 2px 1px #000);
+    position: absolute;
+    right: 10px;
+    top: 20px;
+}
+
+.animeSiteLogo img {
+    border-radius: 10px;
+    margin-right: 10px;
+}
+
+.animeSiteLogo span {
+    font-size: 2rem;
+    letter-spacing: 0.2rem;
+    font-weight: bold;
+    color: #FF6D6D;
+}
+
+/* ==============================================
+SectionTitle */
+.supportWrapper {
+    display: flex;
+    justify-content: center;
 }
 
 /* ===============================================
 Recommend Content */
 
-.recommendContent {
-    display: flex;
-    width: 400px;
-    align-items: left;
-    flex-wrap: wrap;
-    padding-top: 20px;
-    padding-left: 20px;
-    background-color: #000;
-    color: #000;
-    position: fixed;
-    left: 160px;
-    z-index: 10;
-}
-
 .recommendContentTitleWrapper {
     display: flex;
-    flex-direction: column;
-    align-items: left;
-    padding-left: 10px;
+    align-items: center;
     margin-bottom: 30px;
-    margin-right: 20px;
-    gap: 2px;
+    gap: 10px;
 }
 
 .recommendContentTitleWrapper span {
     font-weight: bold;
-    color: #FF6D6D;
     font-size: 1.2rem;
-    margin-right: 10px;
-}
-
-.recommendContentTitle {
-    font-size: 1.2rem;
-    font-weight: bold;
-    margin-right: 10px;
 }
 
 .viewAnimeWrapper {
     display: flex;
+    width: 1250px;
     flex-wrap: wrap;
-    justify-content: center;
-    width: 670px;
-    border-right: 2px solid #aaa;
-    border-left: 2px solid #aaa;
-    margin: 30px auto;
+    justify-content: space-between;
+    padding: 1.6rem;
+    margin: 0px auto;
 }
 
-.viewAnimeGround {
-    padding: 3px;
-}
-
-.viewAnime {
-    display: flex;
-    flex-direction: column;
-    width: 300px;
-    margin-left: 15px;
-    margin-right: 10px;
-    margin-bottom: 10px;
-    position: relative;
-}
-
-.viewAnimeImage {
-    position: relative;
-}
-
-.viewAnimeImage::after {
-    position: absolute;
-    content: '';
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    box-shadow: inset 0 0 2px 1px rgb(16, 17, 18);
-}
-
-
-.viewAnime img {
-    filter: brightness(103%);
-}
-
-.viewAnime h3 {
-    width: 200px;
-    font-size: 1rem;
-    font-weight: bold;
-    color: #72D6C9;
-    text-decoration: underline;
-    margin-top: 4px;
-}
-
-.viewAnime p {
-    margin: 5px;
-    font-size: 0.9rem;
-    filter: drop-shadow(1px 1px 2px #000);
-}
-
-.goodBad {
-    display: flex;
-    align-items: center;
-    position: absolute;
-    top: 175px;
-    right: 10px;
-}
-
-.goodBad a {
-    margin-left: 12px;
-}
-
-/* ====================================================
-rightSideAnimeView */
-
-.rightSideAnimeView {
-    display: none;
-    position: fixed;
-    top: 30px;
-    right: 100px;
-}
-
-.viewAnime:hover .rightSideAnimeView {
-    display: block;
-}
-
-.rightSideAnimeView h3 {
-    width: 400px;
-    font-size: 1.4rem;
-}
-
-.rightSideAnimeView p {
-    font-size: 1.1rem;
-    margin-top: 10px;
-}
-
-.rightSideAnimeView .goodBad {
-    position:unset;
+.viewAnimeWrapper .thumbnail {
+    margin-bottom: 35px;
 }
 
 /* ======================================================
@@ -145,7 +79,7 @@ select btn */
 
 .selectFlex {
     display: flex;
-    justify-content: left;
+    justify-content: center;
     align-items: center;
     gap: 5px;
 }

@@ -9,6 +9,7 @@ from anime_data.models.CharacterData import CharacterData
 from anime_data.models.EpisodesData import EpisodesData
 from anime_data.models.PersonData import PersonData
 from anime_data.models.StaffsData import StaffsData
+from users.models import ReviewAnime
 
 
 # AnimeData.seriesList
@@ -55,6 +56,12 @@ class GenreDataSerializer(serializers.ModelSerializer):
         model = GenreData
         exclude = ("id", "created", "modified")
 
+# AnimeData.reviewanime
+class ReviewAnimeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ReviewAnime
+        exclude = ("id", "created")
+
 ### AnimeData
 class AnimeDataSerializer(serializers.ModelSerializer):
     seriesList = AnimeSeriesDataSerializer(many=True)
@@ -62,6 +69,8 @@ class AnimeDataSerializer(serializers.ModelSerializer):
     episodes = EpisodesDataSerializer(many=True)
     staffs = StaffsDataSerializer(many=True)
     genres = GenreDataSerializer(many=True)
+    reviewanime_set = ReviewAnimeSerializer(many=True)
     class Meta:
         model = AnimeData
-        exclude = ("id", "created", "modified")
+        exclude = ("created", "modified")
+ 

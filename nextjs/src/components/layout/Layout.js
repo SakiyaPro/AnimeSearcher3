@@ -10,10 +10,12 @@ export default function Layout(props) {
             <header>
                 <button className={`${styles.openbtn1}`}><span></span><span></span><span></span></button>
                 <Menu width="350px" className={`${styles.MenuBackground}`}>
-                    {/* <h1 className={`${styles.siteLogo}`}>
-                    <Logo width="110px" height="auto" />
-                </h1> */}
                     <ul className={`${styles.headerContents}`}>
+                        <li>
+                            <h1 className={`${styles.siteLogo}`}>
+                                <Logo width="200px" height="auto" />
+                            </h1>
+                        </li>
                         <li>
                             <form method="get" action="#" className={`${styles.searchForm}`}>
                                 <input className={`${styles.searchBar}`} type="text" size="20" placeholder=" アニメを検索" />
@@ -23,31 +25,23 @@ export default function Layout(props) {
                         <li>
                             <Link href="/">
                                 <a className={`${styles.item}`}>
-                                    <img src="/image/systemIcon/home.png" width="30px" />
+                                    <img src="/image/systemIcon/home.png" width="40px" />
                                     <span>ホーム</span>
                                 </a>
                             </Link>
                         </li>
                         <li>
-                            <Link href="/">
+                            <Link href="/anime/recommend">
                                 <a className={`${styles.item}`}>
-                                    <img src="/image/systemIcon/news_icon.png" width="30px" />
-                                    <span>記事</span>
+                                    <img src="/image/systemIcon/recommend.png" width="40px" />
+                                    <span>アニメを探す</span>
                                 </a>
                             </Link>
                         </li>
                         <li>
                             <Link href="/">
                                 <a className={`${styles.item}`}>
-                                    <img src="/image/systemIcon/ranking_icon.png" width="30px" />
-                                    <span>ランキング</span>
-                                </a>
-                            </Link>
-                        </li>
-                        <li>
-                            <Link href="/">
-                                <a className={`${styles.item}`}>
-                                    <img src="/image/systemIcon/review_icon.png" width="30px" />
+                                    <img src="/image/systemIcon/review_icon.png" width="35px" />
                                     <span>レビュー</span>
                                 </a>
                             </Link>
@@ -55,7 +49,7 @@ export default function Layout(props) {
                         <li>
                             <Link href="/account/private">
                                 <a className={`${styles.item}`}>
-                                    <img src="/image/systemIcon/login_icon.png" width="30px" />
+                                    <img src="/image/systemIcon/login_icon.png" width="35px" />
                                     <span>ログイン</span>
                                 </a>
                             </Link>

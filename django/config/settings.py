@@ -22,10 +22,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure--w@!)fvdh72o8-wuwpa_(c00g(ew4t-t*#ghk+uwn^n%0fhce6'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = 1
 
 ALLOWED_HOSTS = ["*"]
 
@@ -113,7 +113,8 @@ SIMPLE_JWT = {
     #トークンをJWTに設定
     'AUTH_HEADER_TYPES': ('JWT'),
     #トークンの持続時間の設定
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60)
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=2),
 }
 
 REST_USE_JWT = True
@@ -180,12 +181,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
+# 本番環境で静的ファイルを保存する先の指定
+STATIC_ROOT = os.path.join(BASE_DIR, 'app/static')
+# 静的ファイルを開発環境で読み込むための設定
 STATIC_URL = '/static/'
 
-# 画像を保存する先の指定
+# 本番環境で画像を保存する先の指定
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-# 画像をdjango側で読み込むための設定
+# 画像を開発環境で読み込むための設定
 MEDIA_URL = '/media/'
 
 # Default primary key field type

@@ -31,7 +31,7 @@ services:
             # 1ならデバックモード
             - DEBUG=1
             # setting.pyに記載されているSECRET_KEYを記入
-            - SECRET_KEY=hoge
+            - SECRET_KEY=django-insecure--w@!)fvdh72o8-wuwpa_(c00g(ew4t-t*#ghk+uwn^n%0fhce6
 
         ports:
             - 8000:8000

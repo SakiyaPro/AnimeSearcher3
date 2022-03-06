@@ -14,7 +14,7 @@ ENV PYTHONUNBUFFERED 1
 RUN pip install --upgrade setuptools pip \
     && pip install pipenv \
     && apt update \
-    && apt install -y sqlite3 unzip wget vim gnupg2
+    && apt install -y sqlite3 unzip wget vim gnupg2 gcc
 
 #google-chrome
 RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \

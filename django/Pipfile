@@ -16,6 +16,7 @@ chromedriver_binary= "==93.0.4577.15"
 
 Pillow = "*"
 autopep8 = "*"
+uwsgi = "==2.0.19"
 
 [dev-packages]
 

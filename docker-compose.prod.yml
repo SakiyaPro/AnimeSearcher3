@@ -1,0 +1,50 @@
+version: '3.7'
+
+services:
+    nextjs:
+        container_name: nextjs
+
+        build: ./nextjs
+
+        command: npm run dev
+
+        volumes:
+            - ./nextjs:/usr/src/nextjs
+
+        ports:
+            - 3000:3000
+
+        depends_on:
+          - django
+
+    django:
+        container_name: django
+
+        build: ./django
+
+        command: uwsgi --socket :8000 --http :8001  --module config.wsgi --py-autoreload 1 -b 32768
+
+        volumes:
+            - ./django:/usr/src/django
+
+        environment:
+            # 1ならデバックモード
+            - DEBUG=0
+            # setting.pyに記載されているSECRET_KEYを記入
+            - SECRET_KEY=django-insecure--w@!)fvdh72o8-wuwpa_(c00g(ew4t-t*#ghk+uwn^n%0fhce6
+
+        ports:
+            - 8000:8000
+
+    nginx:
+        image: nginx:1.13
+        container_name: nginx
+        ports:
+        - "80:80"
+        volumes:
+        - ./nginx/conf:/etc/nginx/conf.d
+        - ./nginx/uwsgi_params:/etc/nginx/uwsgi_params
+        - ./django/static:/usr/src/django/app/static
+        - ./django/media:/usr/src/django/app/media
+        depends_on:
+        - nextjs

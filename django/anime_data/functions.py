@@ -10,6 +10,7 @@ def driver():
     options.add_argument('--headless')
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-gpu')
+    options.add_argument('--disable-dev-shm-usage')
     # webdriverの起動
     return webdriver.Chrome(options=options)
 
