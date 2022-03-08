@@ -99,7 +99,7 @@ export default function BarGraph({ reviewanime_set }) {
                     backgroundColor: backgroundColor["5"],
                     animation: `show-bar-one-${animeId} 1.2s 0.4s forwards`
                 }} ></div>
-                <div>{bar1width * 100}%</div>
+                <div className={`${styles.voteText}`} text={`${bar1width * 100}%`}></div>
             </div>
             <div className={`${styles.bar_two} ${styles.bar_box}`}>
                 <div className={`${styles.bar_name}`}>かなり面白い</div>
@@ -109,7 +109,7 @@ export default function BarGraph({ reviewanime_set }) {
                         backgroundColor: backgroundColor["4"],
                         animation: `show-bar-two-${animeId} 1.2s 0.4s forwards`
                     }}></div>
-                <div>{bar2width * 100}%</div>
+                <div className={`${styles.voteText}`} text={`${bar2width * 100}%`}></div>
             </div>
             <div className={`${styles.bar_three} ${styles.bar_box}`}>
                 <div className={`${styles.bar_name}`}>普通に面白い</div>
@@ -118,7 +118,7 @@ export default function BarGraph({ reviewanime_set }) {
                     backgroundColor: backgroundColor["3"],
                     animation: `show-bar-three-${animeId} 1.2s 0.4s forwards`
                 }} ></div>
-                <div>{bar3width * 100}%</div>
+                <div className={`${styles.voteText}`} text={`${bar3width * 100}%`}></div>
             </div>
             <div className={`${styles.bar_four} ${styles.bar_box}`}>
                 <div className={`${styles.bar_name}`}>ギリギリ観れた</div>
@@ -127,7 +127,7 @@ export default function BarGraph({ reviewanime_set }) {
                     backgroundColor: backgroundColor["2"],
                     animation: `show-bar-four-${animeId} 1.2s 0.4s forwards`
                 }}></div>
-                <div>{bar4width * 100}%</div>
+                <div className={`${styles.voteText}`} text={`${bar4width * 100}%`}></div>
             </div>
             <div className={`${styles.bar_five} ${styles.bar_box}`}>
                 <div className={`${styles.bar_name}`}>視聴断念・・・</div>
@@ -136,7 +136,7 @@ export default function BarGraph({ reviewanime_set }) {
                     backgroundColor: backgroundColor["1"],
                     animation: `show-bar-five-${animeId} 1.2s 0.4s forwards`
                 }} ></div>
-                <div>{bar5width * 100}%</div>
+                <div className={`${styles.voteText}`} text={`${bar5width * 100}%`}></div>
             </div>
         </div>
     )

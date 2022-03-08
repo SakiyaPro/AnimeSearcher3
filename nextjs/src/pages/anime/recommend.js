@@ -46,11 +46,15 @@ export default function Recommend({ watchersData, seasonData, genresData }) {
         /* const data = await (await axios.get(
             `${process.env.NEXT_PUBLIC_DJANGO_URL}api/animedata/?format=json&limit=4&watchersCount_lte=${watchersCount_lte}&watchersCount_gte=${watchersCount_gte}`)
         ).data.results */
-        const data = await (await axios.get(
-            `${process.env.NEXT_PUBLIC_DJANGO_URL}api/animedata/8643`)
-        ).data
-        console.log(data.reviewanime_set);
-        setWatchersStateData([data])
+        try {
+            const data = await (await axios.get(
+                `${process.env.NEXT_PUBLIC_DJANGO_URL}api/animedata/8643`)
+            ).data
+            console.log(data.reviewanime_set);
+            setWatchersStateData([data])
+        } catch(error) {
+            console.log(error);
+        }
     }
     useEffect(() => {
         console.log(watchersStateData);

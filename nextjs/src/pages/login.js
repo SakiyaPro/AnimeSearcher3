@@ -15,7 +15,7 @@ export default function Login(props) {
     const login = async formEvent => {
         formEvent.preventDefault()
         const res_token = await(await axios.post(
-            'http://192.168.0.13:8000/dj-rest-auth/login/',
+            `${process.env.NEXT_PUBLIC_DJANGO_URL}dj-rest-auth/login/`,
             {
                 email: formEvent.target.email.value,
                 password: formEvent.target.password.value

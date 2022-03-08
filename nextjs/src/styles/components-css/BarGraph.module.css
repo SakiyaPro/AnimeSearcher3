@@ -19,8 +19,17 @@
     cursor: pointer;
 }
 
+.voteText::after{
+    content: attr(text)
+}
+
 .bar_box:hover {
-    
+    opacity: 0.7;
+}
+
+.bar_box:hover .voteText::after {
+    font-weight: bold;
+    content: "投票する";
 }
 
 .bar_box .bar_name {
