@@ -1,0 +1,72 @@
+/* =======================================
+pagenation */
+
+.pagenationWrapper {
+    position: relative;
+}
+
+.pagenation {
+    display: flex;
+    justify-content: flex-start;
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+}
+
+.pagenation .pageNumber {
+    width: 30px;
+    color: #aaa;
+}
+
+.pagenation .pageNumber:hover {
+    color: #000;
+    transform: scale(1.3);
+}
+
+.pagenation .activePage {
+    font-size: 1.5rem;
+    text-decoration: overline;
+    color: #000;
+}
+
+/* ===========================================
+viewAnime */
+
+.viewAnimeWrapper {
+    display: flex;
+    justify-content: space-between;
+    width: 690px;
+    flex-wrap: wrap;
+}
+
+/* =======================================
+after & before page button */
+
+.beforePageButton:hover {
+    opacity: 0.9;
+}
+
+.beforePageButton::after {
+    content: "";
+    position: absolute;
+    top: 7px;
+    width: 10px;
+    height: 10px;
+    border-bottom: 2px solid #000;
+    border-left: 2px solid #000;
+    transform: rotate(45deg);
+}
+
+.afterPageButton:hover {
+    opacity: 0.9;
+}
+
+.afterPageButton::after {
+    content: "";
+    position: absolute;
+    top: 7px;
+    width: 10px;
+    height: 10px;
+    border-top: 2px solid #000;
+    border-right: 2px solid #000;
+    transform: rotate(45deg);
+}

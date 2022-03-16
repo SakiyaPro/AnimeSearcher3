@@ -1,5 +1,5 @@
 import Link from "next/link";
-import React, { useEffect, useLayoutEffect, useGlobal, useState, useRef } from "reactn";
+import React from "react";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 import axios from 'axios'
@@ -8,13 +8,11 @@ import styles from "../styles/login.module.css"
 export default function Login(props) {
 
     const router = useRouter();
-    const profile = useRef(useGlobal("profile")[0])
-    console.log(profile.current);
 
     // ログイン処理関数
     const login = async formEvent => {
         formEvent.preventDefault()
-        const res_token = await(await axios.post(
+        const res_token = await (await axios.post(
             `${process.env.NEXT_PUBLIC_DJANGO_URL}dj-rest-auth/login/`,
             {
                 email: formEvent.target.email.value,

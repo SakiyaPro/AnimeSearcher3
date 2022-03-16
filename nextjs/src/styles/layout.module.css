@@ -66,32 +66,6 @@
     opacity: 0.8;
 }
 
-
-/* ============================================
-検索バー */
-
-.searchForm {
-    margin-top: 30px;
-    margin-bottom: 40px;
-}
-
-.searchBar {
-    padding: 10px 10px 10px 10px;
-    border: 1px solid #484848;
-    background-color: #212121;
-}
-
-.searchBar:focus {
-    outline: none;
-}
-
-.searchButton {
-    padding: 9px;
-    padding-right: 0px;
-    border: 1px solid #484848;
-    background-color: #424242;
-}
-
 /* ===========================================
 ヘッダーコンテンツ */
 .headerContents {

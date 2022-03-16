@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 
+from .models.AnimeData import GenreData
 from .models import AnimeData, PersonData, CharacterData, AnimeSeriesData, CastsData, EpisodesData, PersonData, AnimeData
 
 
@@ -19,5 +20,6 @@ class AnimeData_Admin(admin.ModelAdmin):
 
 
 admin.site.register(AnimeData, AnimeData_Admin)
+admin.site.register(GenreData)
 admin.site.register(PersonData)
 admin.site.register(CharacterData)

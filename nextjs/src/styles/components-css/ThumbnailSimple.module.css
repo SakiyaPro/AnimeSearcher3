@@ -1,0 +1,51 @@
+/* ============================================
+アニメの簡易情報表示 */
+
+.viewAnime {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 6px;
+    border-radius: 6px;
+}
+
+.viewAnimeBackground {
+    padding: 0px 0px 7px 0px;
+    transition: 0.15s;
+    background-color: #fbfbfd;
+    position: relative;
+}
+
+.viewAnimeGround {
+    text-align: left;
+}
+
+.viewAnime h3 {
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    padding: 0px 7px;
+    text-decoration: underline;
+    margin-top: 9px;
+}
+
+.iconWrapper {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    color: #D76F92;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    z-index: 10;
+}
+
+.commentIcon {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    background-color: #fff;
+    padding: 6px 12px;
+}
+
+.reviewIcon {}

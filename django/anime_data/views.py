@@ -1,7 +1,5 @@
-from multiprocessing.sharedctypes import Value
 import requests
 import time
-import types
 from django.template.response import TemplateResponse
 
 from anime_data.models.AnimeData import AnimeData, GenreData
@@ -18,8 +16,9 @@ import shutil
 from django_filters import rest_framework as filters
 from django_filters.widgets import CSVWidget
 from rest_framework import viewsets
+from rest_framework.response import Response
 
-from .serializer import AnimeDataSerializer, CharacterDataSerializer, PersonDataSerializer
+from .serializer import AnimeDataSerializer, CharacterDataSerializer, PersonDataSerializer, AnimeIdSerializer, GenreDataSerializer
 
 from anime_data.functions import driver, All_Genre
 
@@ -59,6 +58,8 @@ class AnimeDataFilter(filters.FilterSet):
     seriesList = filters.CharFilter(
         field_name="seriesList", lookup_expr='contains')  # 部分一致
     # filter => watchersCount
+    watchersCount_max = filters.CharFilter(
+        field_name="annictId", method='filter_watchersCount_max')
     watchersCount_lte = filters.NumberFilter(
         field_name="watchersCount", lookup_expr='lte')  # ◯◯以下
     watchersCount_gte = filters.NumberFilter(
@@ -88,6 +89,12 @@ class AnimeDataFilter(filters.FilterSet):
             queryset = queryset.filter(annictId__in=result)
         return queryset
 
+    def filter_watchersCount_max(self, queryset, name, value):
+        # watchersCountを降順にする
+        if value == 'true':
+            queryset = queryset.order_by('-watchersCount')
+        return queryset
+
     def filter_genres(self, queryset, name, value):
         # 複数のジャンルをフィルタリング
         if value:
@@ -100,6 +107,53 @@ class AnimeDataViewSet(viewsets.ModelViewSet):
     queryset = AnimeData.objects.order_by('?').all()
     serializer_class = AnimeDataSerializer
     filter_class = AnimeDataFilter
+
+    # PATCH
+    def partial_update(self, request, pk=None):
+        queryset = self.queryset.get(id=pk)
+        validated_data = request.data.copy()
+        # remove(削除)
+        if validated_data.get('remove', '') == "true":
+            if validated_data.get('genre', ''):
+                genre = GenreData.objects.get(genre=request.data['genre'])
+                if not genre:
+                    raise ValueError(
+                        f"{validated_data['genre']} is not found.")
+                elif not AnimeData.objects.filter(id=pk, genres=genre.id):
+                    raise ValueError(
+                        f"{validated_data['genre']} is not included in the animedata.")
+                queryset.genres.remove(genre)
+                return Response(f"ジャンル '{validated_data['genre']}' の削除が完了しました。")
+        # add (追加) create (作成)
+        else:
+            if validated_data.get('genre', ''):
+                genre = GenreData.objects.get(genre=validated_data['genre'])
+                if not genre:
+                    raise ValueError(
+                        f"{validated_data['genre']} is not found.")
+                elif AnimeData.objects.filter(id=pk, genres=genre.id):
+                    raise ValueError(
+                        f"{validated_data['genre']} is allready")
+                queryset.genres.add(genre)
+                return Response(f"ジャンル '{validated_data['genre']}' の追加が完了しました。")
+        return Response("リクエストが正しくありません")
+
+
+    def get_seriesAnime(self, request, pk=None):
+        result = {}
+        if pk:
+            result = self.queryset.filter(seriesList=pk)
+        return result
+
+
+class AnimeIdViewSet(viewsets.ModelViewSet):
+    queryset = AnimeData.objects.order_by('id').all()
+    serializer_class = AnimeIdSerializer
+
+
+class GenreDataViewSet(viewsets.ModelViewSet):
+    queryset = GenreData.objects.order_by('id').all()
+    serializer_class = GenreDataSerializer
 
 
 class CharacterDataViewSet(viewsets.ModelViewSet):

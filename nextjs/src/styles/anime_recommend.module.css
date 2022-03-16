@@ -6,6 +6,36 @@
     display: flex;
 }
 
+/* ==========================================
+メインコンテツ(選択) */
+
+.selectMainContents {
+    display: flex;
+    width: 1226px;
+    margin: 0 auto;
+    gap: 10px;
+    position: relative;
+    z-index: 10;
+    border-bottom: 3px solid #222;
+}
+
+.selectMainContents .mainContent {
+    font-size: 1.15rem;
+    font-weight: bold;
+    background-color: #F6E3E9;
+    border: 3px solid #F6E3E9;
+    padding: 10px 20px;
+    border-bottom-width: 0px;
+}
+
+.selectMainContents .active {
+    color: #ECF0F3;
+    background-color: #222;
+    border: 3px solid #222;
+    position: relative;
+    top: 3px;
+}
+
 /* ==============================================
 mainVisual */
 .mainVisual {
@@ -43,7 +73,7 @@ mainVisual */
 SectionTitle */
 .supportWrapper {
     display: flex;
-    justify-content: center;
+    margin-left: 20px;
 }
 
 /* ===============================================
@@ -52,7 +82,6 @@ Recommend Content */
 .recommendContentTitleWrapper {
     display: flex;
     align-items: center;
-    margin-bottom: 30px;
     gap: 10px;
 }
 
@@ -63,10 +92,10 @@ Recommend Content */
 
 .viewAnimeWrapper {
     display: flex;
-    width: 1250px;
+    width: 1226px;
     flex-wrap: wrap;
     justify-content: space-between;
-    padding: 1.6rem;
+    padding-top: 20px;
     margin: 0px auto;
 }
 
@@ -116,13 +145,13 @@ select btn */
 .cp_ipselect.cp_sl03 {
     position: relative;
     border-radius: 2px;
-    border: 2px solid #212121;
-    background: #212121;
+    border: 2px solid #222;
+    background: #222;
 }
 
 .cp_ipselect.cp_sl03::before {
     position: absolute;
-    top: 0.8em;
+    top: 0.5em;
     right: 0.8em;
     width: 0;
     height: 0;
@@ -130,7 +159,7 @@ select btn */
     content: '';
     border-left: 6px solid transparent;
     border-right: 6px solid transparent;
-    border-top: 6px solid #212121;
+    border-top: 6px solid #fff;
     pointer-events: none;
 }
 
@@ -138,5 +167,5 @@ select btn */
     padding: 1px 18px 2px 8px;
     color: #fff;
     font-size: 0.9rem;
-    background-color: #212121;
+    background-color: #222;
 }

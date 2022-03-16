@@ -15,6 +15,9 @@ from anime_data.models.StaffsData import StaffsData
 class GenreData(TimeStampedModel):
     genre = models.CharField("アニメジャンル", max_length=50, unique=True)
 
+    def __str__(self):
+        return str(self.id) + '-' + self.genre
+
 class AnimeData(TimeStampedModel):
     # --------AnnictAPI searchWorks-------------------------------------
     annictId = IntegerField("AnnictId", unique=True)

@@ -35,7 +35,7 @@ export default function ReviewStar(datarate) {
         <>
             {!data ?
                 <span className={`${styles.noReviewStarWrapper}`}>
-                    <span>☆☆☆☆☆</span><span className={`${styles.noReviewText}`}> 😭NoReview </span>
+                    <span>☆☆☆☆☆</span>
                 </span> :
                 <span className={`${styles.reviewStarWrapper}`}>
                     <span className={`${styles.star5_rating}`} datarate={data}></span><span>({Object.values(datarate)})</span>

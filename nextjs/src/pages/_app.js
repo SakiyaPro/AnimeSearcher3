@@ -2,29 +2,28 @@ import '../styles/reset.min.css'
 import '../styles/globals.css'
 import 'swiper/css/bundle'
 
-import Layout from '../components/layout/Layout'
-
-import Head from "next/head";
+import React from "react";
 import { useRouter } from "next/router";
-import React, { useState, useEffect, setGlobal } from "reactn";
-import axios from 'axios'
+import Head from "next/head";
+import Layout2 from '../components/layout/Layout2'
+import { login_request } from '../utils/functions'
+
 
 export default function MyApp({ Component, pageProps }) {
   const router = useRouter();
 
   return (
     <>
-      <Head>
-        <link href="https://fonts.googleapis.com/css?family=M+PLUS+1p" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css2?family=Murecho:wght@600&family=Noto+Sans+JP&family=Outfit&display=swap" rel="stylesheet" />
+      <Head><title> AnimeSearcher </title>
+        <meta name="description" content="おすすめアニメを検索！" />
+        <link rel="icon" href="/image/favicon/favicon.png" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700;900&family=Outfit&display=swap" rel="stylesheet" />
       </Head>
-      {router.pathname === "/" ?
+      <Layout2>
         <Component {...pageProps} />
-        :
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      }
+      </Layout2>
     </>
   )
 }

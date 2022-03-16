@@ -3,10 +3,7 @@
 
 .noReviewStarWrapper {
     color: #CCCCCC;
-}
-
-.noReviewText {
-    font-size: 0.9rem;
+    font-size: 22px;
 }
 
 .reviewStarWrapper {

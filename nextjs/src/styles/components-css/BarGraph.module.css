@@ -2,41 +2,27 @@
 グラフ */
 
 .bar_graph {
-    filter: drop-shadow(2px 3px 1px #000);
-    margin-top: 10px;
     padding: 10px;
-}
-
-.bar_graph .bar_name {
-    animation: fade-in-text 2.2s 0.1s forwards;
-    opacity: 0;
 }
 
 .bar_box {
     display: flex;
     align-items: center;
-    margin-bottom: 8px;
+    margin-bottom: 2px;
     cursor: pointer;
 }
 
-.voteText::after{
-    content: attr(text)
-}
-
-.bar_box:hover {
-    opacity: 0.7;
-}
-
-.bar_box:hover .voteText::after {
-    font-weight: bold;
-    content: "投票する";
-}
-
 .bar_box .bar_name {
+    color: #7d7d7d;
     font-size: 0.8rem;
     font-weight: bold;
     min-width: 100px;
     text-align: left;
+}
+
+.voteText::after {
+    color: #7d7d7d;
+    content: attr(text)
 }
 
 .bar_box .bar {
@@ -46,6 +32,18 @@
     margin-right: 5px;
 }
 
+.bar_box:hover .bar {
+    opacity: 0.7;
+}
+
+
+.bar_box:hover .voteText::after {
+    font-size: 0.8rem;
+    color: #444;
+    font-weight: bold;
+    content: "投票する";
+}
+
 .bar_graph_one .bar::after {
     animation: fade-in-text 2.2s 0.1s forwards;
     content: attr(text);
@@ -53,16 +51,4 @@
     position: absolute;
     left: 5px;
     top: 7px;
-}
-
-/* Bar Graph Horizontal Animations */
-
-@keyframes fade-in-text {
-    0% {
-        opacity: 0;
-    }
-
-    100% {
-        opacity: 1;
-    }
 }

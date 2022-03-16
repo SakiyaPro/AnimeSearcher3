@@ -1,0 +1,141 @@
+.modifired {
+    font-size: 14px;
+    color: rgb(83, 100, 113);
+    margin: 16px 0px;
+}
+
+.modifired span:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.bottomItems {
+    padding: 16px 0px;
+    font-size: 16px;
+    color: rgb(29, 155, 240);
+    border-top: 1px solid rgb(239, 243, 244);
+}
+
+.bottomItems .tagWrapper {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    padding-left: 35px;
+    position: relative;
+}
+
+.bottomItems .tagWrapper .tag:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.addButton {
+    position: absolute;
+    left: 0px;
+}
+
+.addButton:hover {
+    opacity: 0.7;
+}
+
+.desableAddButton {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.4);
+    position: fixed;
+    top: calc(50% - 100vh/2);
+    left: calc(50% - 100vw/2);
+    z-index: 9998;
+}
+
+.activeAddButton .desableButton {
+    width: 34px;
+    height: 34px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+
+.activeAddButton .desableButton:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.activeAddButton {
+    width: 600px;
+    max-width: 80vw;
+    height: auto;
+    max-height: 90vh;
+    color: #444;
+    font-size: 16px;
+    border-radius: 16px;
+    background-color: #fff;
+    padding-top: 16px;
+    padding-left: 16px;
+    padding-right: 16px;
+    position: fixed;
+    top: 5%;
+    left: calc(55% - 800px/2);
+    z-index: 9999;
+}
+
+.activeAddButton .contentWrapper {
+    display: flex;
+    margin-bottom: 40px;
+}
+
+.contentTop {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    color: #333;
+    font-weight: bold;
+}
+
+.contentWrapper .text {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.currentTagWrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: rgb(29, 155, 240);
+    font-weight: 300;
+}
+
+.currentTagWrapper .tag {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    background-color: rgba(29, 155, 240, 0.05);
+    padding: 2px;
+}
+
+.addTagWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    font-weight: 300;
+}
+
+.addTagWrapper .tag {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    background-color: rgba(64, 64, 64, 0.05);
+    padding: 2px;
+}
+
+.iconWrapper {
+    display: flex;
+    gap: 5px;
+}
+
+.iconWrapper .smallBlueText {
+    font-size: 14px;
+}

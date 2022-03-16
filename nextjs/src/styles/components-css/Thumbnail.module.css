@@ -5,41 +5,46 @@
 
 .viewAnime {
     display: flex;
+    flex-direction: column;
     justify-content: flex-start;
     border-radius: 6px;
 }
 
 .viewAnimeBackground {
-    width: 560px;
-    border-radius: 4px;
-    padding: 10px;
-    transition: background-color 0.15s;
-    box-shadow: 3px 2px 8px #000;
+    padding: 6px 6px 16px 6px;
+    transition: 0.15s;
+    background-color: #fbfbfd;
+    position: relative;
 }
 
 .viewAnimeBackground:hover {
-    background-color: #000;
+    transform: scale(1.05);
 }
 
 .viewAnimeGround {
     text-align: left;
-    margin-left: 13px;
 }
 
 .viewAnime h3 {
-    font-size: 1rem;
     font-weight: bold;
     letter-spacing: 2px;
-    color: #72D6C9;
+    color: #004B91;
     text-decoration: underline;
-    margin-top: 4px;
-    padding-bottom: 7px;
+    margin-top: 9px;
 }
 
-.viewAnime p {
-    letter-spacing: 1px;
-    margin-top: 10px;
-    font-size: 1rem;
+.commentIcon {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 12px;
+    color: #D76F92;
+    font-size: 14px;
+    background-color: #fff;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    z-index: 10;
 }
 
 /* ==========================================
@@ -53,7 +58,7 @@
     position: fixed;
     left: calc(50% - 100vw/2);
     top: calc(50% - 100vh/2);
-    z-index: 5;
+    z-index: 20;
 }
 
 .detailAnime {
@@ -66,7 +71,7 @@
     position: fixed;
     left: calc(50% - 600px/2);
     top: calc(50% - 860px/2);
-    z-index: 10;
+    z-index: 30;
     box-shadow: 3px 3px 5px #000;
 }
 
@@ -102,4 +107,10 @@
     padding: 20px;
     font-size: 1.4rem;
     overflow-y: scroll;
+}
+
+.detailInfo h3 {
+    color: #85F4FF;
+    font-weight: bold;
+    letter-spacing: 2px;
 }

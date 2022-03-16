@@ -1,13 +1,14 @@
 import Cookies from 'js-cookie'
+import axios from 'axios'
 import React, { useEffect, useContext } from 'react'
 import styles from '../../styles/components-css/BarGraph.module.css'
 
 export default function BarGraph({ reviewanime_set }) {
     // cssに指定している.bar_nameのwidthを指定する。
-    const bar_name_width = "160px"
+    const bar_name_width = "140px"
     const graphParam = { "1": 0, "2": 0, "3": 0, "4": 0, "5": 0 }
     const fontColor = { "1": "#fff", "2": "#fff", "3": "#fff", "4": "#fff", "5": "#fff" }
-    const backgroundColor = { "1": "rgb(54, 165, 255)", "2": "#59b3fc", "3": "#6bb6ff", "4": "#a9d8ff", "5":"#c8e4ff" }
+    const backgroundColor = { "1": "rgb(54, 165, 255)", "2": "#59b3fc", "3": "#6bb6ff", "4": "#a9d8ff", "5": "#c8e4ff" }
     if (reviewanime_set) {
         reviewanime_set.map((review) => {
             graphParam[review.star] += 1
@@ -29,6 +30,18 @@ export default function BarGraph({ reviewanime_set }) {
         } if (graphParam["5"]) {
             graphParam["5"] = graphParam["5"] / total
         }
+    }
+
+    const voteButton = async (user_id, anime_id, star, ) => {
+        const res = await (await axios.post(
+            `${process.env.NEXT_PUBLIC_DJANGO_URL}users/reviewanime`,
+            {
+                "user_id": "",
+                "anime_id": "",
+                "star": "",
+                "comment": "",
+            }
+        ))
     }
 
     const animeId = reviewanime_set[0]?.anime

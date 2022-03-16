@@ -3,26 +3,34 @@ import ReviewStar from './ReviewStar'
 import BarGraph from './BarGraph'
 import styles from '../../styles/components-css/Thumbnail.module.css'
 
-export default function Thumbnail({ title, reviewanime_set, watchersCount, casts, src, width }) {
+export default function Thumbnail({ title, media, reviewanime_set, width, watchersCount, casts, src, article }) {
     const [detailAnimeState, setDetailAnimeState] = useState(false)
     const [detailAnimeContentState, setDetailAnimeContentState] = useState(1)
+    const review_amount = reviewanime_set.length
+    const defaultWidth = 370
+
 
     return (
         <>
-            <div className={`${styles.viewAnimeBackground}`}>
+            <div className={`${styles.viewAnimeBackground}`} style={{
+                width: width ? `${width + 12}px` : `${defaultWidth + 12}px`, height: article !== "true" ? "452px" : "auto", boxShadow: article !== "true" ? "0 1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%)" : "" }}>
+                <div className={`${styles.commentIcon}`}>
+                    <img src="/image/systemIcon/吹き出しアイコン.png" width="13px" />
+                    <span>{review_amount}</span>
+                </div>
                 <button className={`${styles.viewAnime}`} onClick={() => setDetailAnimeState(!detailAnimeState)}>
                     <div className={`${styles.viewAnimeImage}`}>
-                        <img className={`${styles.thumbnail}`} src={src} width={width} alt={title} />
+                        <img className={`${styles.thumbnail}`} src={src} width={width ? width : defaultWidth} alt={title} />
                     </div>
                     <div className={`${styles.viewAnimeGround}`}>
-                        <h3>{title}</h3>
-                        <p>{watchersCount} 人が視聴</p>
+                        <h3 style={{
+                            fontSize: article !== "true" ? "1.1rem" : "14px" }}>{title.length >= 36 ? `${title.slice(0, 30)} ...` : title}{media === 'MOVIE' ? ' （映画）' : (media === 'OVA' ? ' （OVA）' : '')}</h3>
                         {/* <p><ReviewStar datarate={reviewanime_set} /></p> */}
 
                         {/* <p>あなたの評価: - </p> */}
                     </div>
                 </button>
-                <BarGraph reviewanime_set={reviewanime_set} />
+                {article !== "true" && <BarGraph reviewanime_set={reviewanime_set} /> }
             </div>
             {
                 detailAnimeState &&
@@ -54,7 +62,7 @@ export default function Thumbnail({ title, reviewanime_set, watchersCount, casts
                         {
                             detailAnimeContentState === 1 &&
                             <div className={`${styles.detailInfo}`}>
-                                <h3>{title}</h3>
+                                <h3>{title}{media === 'MOVIE' ? ' （映画）' : (media === 'OVA' ? ' （OVA）' : '')}</h3>
                                 <ReviewStar datarate={reviewanime_set} />
                                 <p>視聴者数：{watchersCount} 人が視聴</p>
                                 {casts &&
