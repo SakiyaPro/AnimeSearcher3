@@ -6,9 +6,14 @@ export async function getAnimeData(animeId, {offset = 0}) {
     return res;
 }
 
+export async function getDetailAnimeData(animeId, { offset = 0 }) {
+    const res = await (await axios.get(`${process.env.NEXT_PUBLIC_DJANGO_URL}api/animedatadetail/${animeId}/?format=json`)).data;
+    return res;
+}
+
 // 放送年度で取得
 export async function getSeasonData(seasonName, seasonYear, {offset = 0}) {
-    const res = await (await axios.get(`${process.env.NEXT_PUBLIC_DJANGO_URL}api/animedata/?format=json&limit=10&offset=${offset}&watchersCount_max=true&seasonName=${seasonName}&seasonYear=${seasonYear}`)).data.results;
+    const res = await (await axios.get(`${process.env.NEXT_PUBLIC_DJANGO_URL}api/animedata/?format=json&limit=1000&offset=${offset}&watchersCount_max=true&seasonName=${seasonName}&seasonYear=${seasonYear}`)).data.results;
     return res;
 }
 

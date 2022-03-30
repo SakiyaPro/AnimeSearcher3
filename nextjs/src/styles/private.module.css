@@ -1,88 +1,229 @@
-/* ===============================
-wrapper & flex */
-.outerWrapper {
-    text-align: center;
-    margin: 0 auto;
+.profileWrapper {}
+
+.profileWrapper img {
+    object-fit: cover;
 }
 
-.innerWrapper {
-    display: inline-block;
-    width: 1226px;
-    height: 100vh;
-    background-color: rgb(58, 58, 58);
-    font-size: 1rem;
-    text-align: left;
-    padding: 3%;
+.profileWrapper .user_backImage {
+    width: 598px;
+    height: 199.33px;
+}
+
+.bottomProfileWrapper {
+    padding: 12px 16px 16px 16px;
     position: relative;
 }
 
-.innerWrapper .logout {
-    font-size: 1.2rem;
-    color: #fff;
-    border: 1px solid #ec97a6;
-    border-radius: 2px;
-    padding: 5px;
+.bottomProfileWrapper .user_iconWrapper {
     position: absolute;
-    top: 60px;
-    right: 80px;
+    top: -72px;
+    left: 17px;
 }
 
-.innerWrapper .user_icon {
-    border: 2px solid #fff;
-    border-radius: 4px;
-    object-fit: cover;
-    margin-right: 55px;
+.bottomProfileWrapper .user_icon {
+    width: 142px;
+    height: 142px;
+    background-color: #fff;
+    border: 4px solid #fff;
+    border-radius: 50%;
 }
 
-/* =========================================
-プロフィール */
-
-.profile {
+.bottomProfileWrapper .top {
+    width: 566px;
+    height: 68.61px;
     display: flex;
-    padding-bottom: 40px;
+    justify-content: flex-end;
 }
 
-.profileInfo p {
-    margin-bottom: 15px;
-    font-size: 1.2rem;
+.top .editProfileButton {
+    width: 169px;
+    height: 36px;
+    color: #444;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 0px 0px 0px 14px;
+    border: 1px solid rgb(207, 217, 222);
+    border-radius: 18px;
 }
 
-.profileInfo .username {
-    font-size: 1.9rem;
-    color: #e8e6e3;
-    margin-top: 10px;
+.bottomProfileWrapper .infomation {
+    margin-top: 4px;
+    margin-bottom: 12px;
 }
 
-/* ==================================================
-コンテンツラッパー */
+.infomation .user_name {
+    font-weight: bold;
+    font-size: 22px;
+    margin-top: 4px;
+    margin-bottom: 12px;
+}
 
-.articleTitleWrapper {
+.infomation .self_introduction {
+    font-weight: 300;
+    margin-bottom: 12px;
+}
+
+.infomation .date_joined {
     display: flex;
-    justify-content: left;
-    margin-bottom: 40px;
+    align-items: center;
+    gap: 5px;
+    font-size: 15px;
+    color: rgb(83, 100, 113);
+    font-weight: 100;
 }
 
-.articleTitleWrapper div {
-    padding: 10px 30px;
-    border: 1px solid #fff;
+.selectButtonWrapper {
+    display: flex;
+    justify-content: space-around;
+    color: rgb(83, 100, 113);
+    font-weight: 300;
+    border-bottom: 1px solid rgb(239, 243, 244);
 }
 
-.articleTitleWrapper div:first-child {
+.selectButtonWrapper .selectButton {
+    position: relative
+}
+
+.selectButtonWrapper .selectButton:hover {
+    background-color: rgb(15, 20, 25, 0.1);
+}
+
+.selectButton button {
+    padding: 16px 32px;
+}
+
+.selectButtonWrapper .active {
     color: #000;
     font-weight: bold;
-    background-color: #fff;
 }
 
-/* ==============================================
-reviewAnime */
+.selectButtonWrapper .active:after {
+    width: calc(100% - 64px);
+    margin-left: 32px;
+    height: 4px;
+    content: "";
+    background-color: rgb(29, 155, 240);
+    border-radius: 2px;
+    position: absolute;
+    right: 0;
+    left: 0;
+    bottom: 0;
+}
 
-.reviewAnime {
+/* ===============================
+マイプロフィール編集 */
+.editProfileWrapper {
+    font-size: 20px;
+    background-color: #fff;
+    padding-top: 10px;
+    border-radius: 16px;
+    font-weight: 400;
+    position: fixed;
+    top: 5%;
+    left: calc(55% - 800px/2);
+    z-index: 9999;
+}
+
+.editProfileTop {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 20px 7px 10px;
+    height: 40px;
+}
+
+.editProfileTop .topContent {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.editProfileTop .saveButton {
+    font-size: 17px;
+    padding: 5px 15px;
+    color: #fff;
+    border: #000;
+    background-color: rgb(29, 155, 240);
+    border-radius: 16px;
+}
+
+.editProfileTop .saveButton:hover {
+    opacity: 0.8;
+}
+
+.editForm {
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    color: #fff;
-    padding: 1.3rem;
-    background-color: #1b1b1b;
+}
+
+.editForm input[type="file"] {
+    display: none;
+}
+
+.editForm label {
+    padding: 10px 40px;
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    content: '';
+    background-size: contain;
+    background-image: url("/image/systemIcon/system/camera_icon.png");
+    background-repeat: no-repeat;
+    filter: drop-shadow(1px 1px 1px #000);
+}
+
+.editForm .backImageInput {
+    position: absolute;
+    top: 120px;
+    left: 270px;
+    z-index: 100000;
+}
+
+.editForm .iconImageInput {
+    position: absolute;
+    top: 50px;
+    left: 45px;
+    z-index: 10001;
+}
+
+.editInfomation {
+    display: flex;
+    flex-direction: column;
+}
+
+.editInfomation input {
+    width: 530px;
+    padding: 30px 5px 5px;
+    margin-left: 20px;
+    border: 1px solid #555;
+}
+
+.editInfomation textarea {
+    font-weight: 300;
+    font-size: 16px;
+    width: 530px;
+    height: 200px;
+    padding: 30px 5px 5px;
+    margin-left: 20px;
+    border: 1px solid #555;
+    resize: none;
+}
+
+.editInfomation textarea:focus {
+    outline: auto;
+}
+
+.editInfomation .editContent {
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.editInfomation .editContent span {
+    color: #888;
+    font-size: 15px;
+    position: absolute;
+    top: 5px;
+    left: 26px;
 }
 
 /* ================================
@@ -97,3 +238,15 @@ react-moveable 設定項目
     position: absolute;
 }
  */
+
+.logout {
+    margin-left: 220px;
+    padding: 7px 15px;
+    border-radius: 20px;
+    background-color: #444;
+    color: #fff;
+}
+
+.logout:hover {
+    opacity: 0.7;
+}

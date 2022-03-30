@@ -1,0 +1,20 @@
+.displayWrapper {
+    width: 600px;
+    height: 860px;
+    color: #333;
+    background-color: #fff;
+    padding: 16px;
+    border-radius: 16px;
+    position: fixed;
+    top: calc(50% - 860px/2);
+    left: calc(50% - 600px/2);
+    z-index: 100;
+}
+
+.animeTitle {
+    font-size: 20px;
+}
+
+.animeImage {
+    width: 568px;
+}

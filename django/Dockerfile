@@ -14,7 +14,7 @@ ENV PYTHONUNBUFFERED 1
 RUN pip install --upgrade setuptools pip \
     && pip install pipenv \
     && apt update \
-    && apt install -y sqlite3 unzip wget vim gnupg2 gcc
+    && apt install -y sqlite3 unzip wget vim gnupg2 gcc tk
 
 #google-chrome
 RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
@@ -31,7 +31,7 @@ ENV PATH /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/chrom
 COPY ./Pipfile /usr/src/django/Pipfile
 
 # pipfileからパッケージをインストールしてDjango環境を構築
-RUN pipenv install django==3.2
+RUN pip3 install django==3.2
 RUN pipenv install --skip-lock --system --dev
 
 # ホストのカレントディレクトリ（現在はappディレクトリ）を作業ディレクトリにコピー

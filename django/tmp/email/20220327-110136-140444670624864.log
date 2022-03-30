@@ -1,0 +1,18 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Subject: [example.com] Please Confirm Your E-mail Address
+From: webmaster@localhost
+To: sakiya10230305@gmail.com
+Date: Sun, 27 Mar 2022 02:01:36 -0000
+Message-ID: <164834649686.50.18087072306718291536@c7413be0d05f>
+
+Hello from example.com!
+
+You're receiving this e-mail because user sakiyaSub has given your e-mail address to register an account on example.com.
+
+To confirm this is correct, go to http://host.docker.internal:8000/dj-rest-auth/registration/account-confirm-email/MTM:1nYIDo:WxIa9E20oN9QgpfxHH62nu5WMfGOLqw9rS2RcvFzP_o/
+
+Thank you for using example.com!
+example.com
+-------------------------------------------------------------------------------

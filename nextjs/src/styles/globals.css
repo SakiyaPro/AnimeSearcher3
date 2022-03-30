@@ -1,6 +1,6 @@
 html,
 body {
-  color: #444;
+  color: #000;
   background-color: #fff;
   font-family: 'Noto Sans JP', メイリオ, sans-serif;
   font-weight: 400;
@@ -31,6 +31,7 @@ body {
   width: 990px;
   display: flex;
   justify-content: space-between;
+  position: relative;
 }
 
 .detailMainWrapper {
@@ -54,14 +55,25 @@ a {
   text-decoration: none;
 }
 
+textarea {
+  width: 100%;
+  resize: none;
+  overflow: hidden;
+  font-size: 18px;
+}
+
+textarea:focus {
+  outline: 0;
+}
+
 .a-decoration1 {
   color: rgb(29, 155, 240);
   text-decoration: underline;
 }
 
 .button-decoration1 {
-  width: 34px;
-  height: 34px;
+  min-width: 34px;
+  min-height: 34px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -71,6 +83,196 @@ a {
 .button-decoration1:hover {
   background-color: rgba(0, 0, 0, 0.1);
 }
+
+.modified {
+  font-size: 14px;
+  color: rgb(83, 100, 113);
+  margin: 16px 0px;
+}
+
+.modified span:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.tweetItem {
+  width: 226px;
+  min-height: 52px;
+  filter: drop-shadow(1px 2px 10px rgba(29, 155, 240, 0.2));
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 26px;
+  background-color: rgb(29, 155, 240);
+  margin-top: 12px;
+}
+
+.tweetItem:hover {
+  opacity: 0.7;
+}
+
+.tweetItemSmall {
+  width: 124px;
+  min-height: 36px;
+  font-size: 15px;
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.active {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.reviewPostBackground {
+  background-color: #fff;
+  padding-top: 10px;
+  border-radius: 16px;
+  font-weight: 400;
+  position: fixed;
+  top: 5%;
+  left: calc(55% - 800px/2);
+  z-index: 9999;
+}
+
+.reviewPostDisableButton {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-left: 16px;
+}
+
+.searchSuggest {
+  color: #444;
+  background-color: #fff;
+  font-size: 13px;
+}
+
+/* ============================================
+errorMassage */
+.errorMassage {
+  font-size: 15px;
+  color: red;
+}
+
+/* =============================================
+SectionReviewItem */
+
+.sectionReviewItem {
+  display: flex;
+  padding-right: 16px;
+  padding-left: 16px;
+  border-bottom: 1px solid rgb(239, 243, 244);
+}
+
+.sectionReviewItem input:focus {
+  outline: none;
+}
+
+.textArea {
+  display: flex;
+  flex-direction: column;
+  font-size: 18px;
+  gap: 15px;
+  width: 495px;
+  border-bottom: 1px solid rgb(239, 243, 244);
+}
+
+.textArea .starButton {
+  display: flex;
+  gap: 5px;
+  font-size: 12px;
+  color: rgb(29, 155, 240);
+  font-weight: 300;
+}
+
+.starButton .active {
+  color: #fff;
+  background-color: rgb(29, 155, 240);
+}
+
+.textArea .starButton button {
+  border: 2px solid rgb(29, 155, 240);
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.starButton button:hover {
+  opacity: 0.3;
+}
+
+.userBox {
+  display: flex;
+  height: 20px;
+  align-items: top;
+  gap: 10px;
+  margin-left: 20px;
+  position: absolute;
+  top: 10px;
+  left: -2px;
+}
+
+.user_icon img {
+  width: 48px;
+  height: 48px;
+  cursor: pointer;
+  background-color: #fff;
+  border-radius: 50%;
+}
+
+.user_icon img:hover {
+  opacity: 0.7;
+}
+
+.userBox .user_name {
+  display: flex;
+  gap: 20px;
+  font-size: 17px;
+  font-weight: bold;
+  max-height: 20px;
+}
+
+.userBox .user_name span:hover {
+  cursor: pointer;
+  text-decoration: 0.5px underline;
+}
+
+.animeTitle {
+  display: inline;
+  color: rgb(29, 155, 240);
+  font-size: 16px;
+  font-weight: 300;
+}
+
+.animeTitle:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.anime_image {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+}
+
+.anime_image img {
+  width: 220px;
+  border-radius: 8px;
+}
+
+.displayBackground {
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
+  opacity: 0.1;
+  position: fixed;
+  left: calc(50% - 100vw/2);
+  top: calc(50% - 100vh/2);
+  cursor: pointer;
+  z-index: 9000;
+}
+
 
 /* ==================================================
 main(center) */
@@ -99,18 +301,18 @@ main(center) */
   position: fixed;
   top: 0;
   left: 594px;
-  z-index: 999;
+  z-index: 50;
 }
 
 .detailSectionTop {
   width: 618px;
   left: 584px;
+  padding-left: 7px;
 }
 
 .sectionName {
   font-size: 20px;
   font-weight: bold;
-  margin-right: 20px;
 }
 
 .sectionTop .selectContents {
@@ -143,39 +345,58 @@ main(center) */
   position: relative;
 }
 
+.favoriteItem {
+  text-align: center;
+}
+
+.detailSectionItem {
+  font-size: 22px;
+  font-weight: 300;
+  padding-top: 10px;
+  border-bottom: 1px solid rgb(239, 243, 244);
+  position: relative;
+}
+
 .sectionItem:hover {
   background-color: rgba(0, 0, 0, 0.03);
 }
 
-.sectionItem .userIcon {
-  position: absolute;
-  top: 14px;
-  left: 16px;
-  z-index: 10;
-  transition: 0.15s;
+.sectionBottomItem {
+  display: flex;
+  color: rgb(83, 100, 113);
+  font-size: 14px;
+  font-weight: 100;
+  gap: 150px;
+  align-items: center;
+  margin-bottom: 15px;
+  margin-right: 76px;
+  margin-left: 76px;
 }
 
-.sectionItem .userIcon img {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
+.sectionBottomItem .btn1 {
+  display: flex;
+  gap: 5px;
 }
 
-.sectionItem .userIcon:hover {
-  filter: brightness(0.8)
+.sectionBottomItem .btn1 img {
+  width: 18px;
 }
 
-.sectionItem .userName {
-  color: #333;
-  font-weight: bold;
-  position: absolute;
-  top: 15px;
-  left: 76px;
-  z-index: 10;
+.sectionBottomItem .btn1:hover {
+  filter: invert(72%) sepia(26%) saturate(6428%) hue-rotate(1deg) brightness(105%) contrast(102%);
 }
 
-.sectionItem .userName:hover {
-  text-decoration: underline;
+.sectionBottomItem .btn2 {
+  display: flex;
+  gap: 5px;
+}
+
+.sectionBottomItem .btn2 img {
+  width: 18px;
+}
+
+.sectionBottomItem .btn2:hover {
+  filter: invert(11%) sepia(100%) saturate(5170%) hue-rotate(293deg) brightness(100%) contrast(130%);
 }
 
 .centerArticle {
@@ -186,14 +407,17 @@ main(center) */
 }
 
 .detailCenterArticle {
+  display: flex;
+  flex-direction: column;
   padding-bottom: 5px;
 }
 
 .centerArticle .content {
   display: flex;
   flex-direction: column;
+  gap: 10px;
   font-weight: 300;
-  margin-left: 60px;
+  margin-left: 30px;
 }
 
 .centerArticle .content .imageWrapper {
@@ -203,11 +427,10 @@ main(center) */
 .centerArticle .viewContent {
   display: flex;
   flex-direction: column;
+  gap: 25px;
 }
 
-.centerArticle .viewContent .imageWrapper {
-  margin-top: 12px;
-}
+.centerArticle .viewContent .imageWrapper {}
 
 .imageWrapper img {
   width: 504px;
@@ -225,6 +448,10 @@ main (right) */
 .rightWrapper {
   width: 350px;
   margin-right: 10px;
+  position: fixed;
+  top: 0;
+  right: 320px;
+  z-index: 10;
 }
 
 /* =====================================

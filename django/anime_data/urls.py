@@ -5,7 +5,9 @@ from . import views
 
 router  = routers.DefaultRouter()
 router.register('animedata', views.AnimeDataViewSet)
+router.register('animedatadetail', views.AnimeDetailViewSet)
 router.register('animeids', views.AnimeIdViewSet)
+router.register('titlesuggest', views.AnimeTitleSuggestViewSet)
 router.register('genredata', views.GenreDataViewSet)
 router.register('characterdata', views.CharacterDataViewSet)
 router.register('persondata', views.PersonDataViewSet)

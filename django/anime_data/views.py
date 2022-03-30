@@ -9,6 +9,7 @@ from anime_data.models.CharacterData import CharacterData
 from anime_data.models.EpisodesData import EpisodesData
 from anime_data.models.PersonData import PersonData
 from anime_data.models.StaffsData import StaffsData
+from users.models import CustomUser
 
 import glob
 import shutil
@@ -18,7 +19,7 @@ from django_filters.widgets import CSVWidget
 from rest_framework import viewsets
 from rest_framework.response import Response
 
-from .serializer import AnimeDataSerializer, CharacterDataSerializer, PersonDataSerializer, AnimeIdSerializer, GenreDataSerializer
+from .serializer import AnimeDataSerializer, CharacterDataSerializer, PersonDataSerializer, AnimeIdSerializer, GenreDataSerializer, AnimeTitleSuggestSerializer, AnimeDetailSerializer
 
 from anime_data.functions import driver, All_Genre
 
@@ -33,6 +34,8 @@ class AnimeDataFilter(filters.FilterSet):
         field_name="annictId", lookup_expr='lte')  # 〇〇以下
     # filter => title
     title = filters.CharFilter(
+        field_name="title", lookup_expr='exact')  # 完全一致
+    title_contains = filters.CharFilter(
         field_name="title", lookup_expr='contains')  # 部分一致
     titleEn = filters.CharFilter(
         field_name="titleEn", lookup_expr='contains')  # 部分一致
@@ -108,11 +111,33 @@ class AnimeDataViewSet(viewsets.ModelViewSet):
     serializer_class = AnimeDataSerializer
     filter_class = AnimeDataFilter
 
+    # GET
+    def get_seriesAnime(self, request, pk=None):
+        result = {}
+        if pk:
+            result = self.queryset.filter(seriesList=pk)
+        return result
+
     # PATCH
     def partial_update(self, request, pk=None):
         queryset = self.queryset.get(id=pk)
         validated_data = request.data.copy()
-        # remove(削除)
+        
+        # favorite_count
+        if validated_data.get('favorite_count_plus', ''):
+            if self.request.user.id is None:
+                raise ValueError("please account login")
+            queryset.favorite_count.add(
+                CustomUser.objects.get(id=self.request.user.id))
+            return Response(f"いいねの加算が完了しました。")
+        if validated_data.get('favorite_count_minus', ''):
+            if self.request.user.id is None:
+                raise ValueError("please account login")
+            queryset.favorite_count.remove(
+                CustomUser.objects.get(id=self.request.user.id))
+            return Response(f"いいねの減算が完了しました。")
+
+        # Genre remove(削除)
         if validated_data.get('remove', '') == "true":
             if validated_data.get('genre', ''):
                 genre = GenreData.objects.get(genre=request.data['genre'])
@@ -124,7 +149,7 @@ class AnimeDataViewSet(viewsets.ModelViewSet):
                         f"{validated_data['genre']} is not included in the animedata.")
                 queryset.genres.remove(genre)
                 return Response(f"ジャンル '{validated_data['genre']}' の削除が完了しました。")
-        # add (追加) create (作成)
+        # Genre add (追加) create (作成)
         else:
             if validated_data.get('genre', ''):
                 genre = GenreData.objects.get(genre=validated_data['genre'])
@@ -139,16 +164,24 @@ class AnimeDataViewSet(viewsets.ModelViewSet):
         return Response("リクエストが正しくありません")
 
 
-    def get_seriesAnime(self, request, pk=None):
-        result = {}
-        if pk:
-            result = self.queryset.filter(seriesList=pk)
-        return result
+class AnimeDetailViewSet(viewsets.ModelViewSet):
+    queryset = AnimeData.objects.order_by('?').all()
+    serializer_class = AnimeDetailSerializer
 
 
 class AnimeIdViewSet(viewsets.ModelViewSet):
     queryset = AnimeData.objects.order_by('id').all()
     serializer_class = AnimeIdSerializer
+
+
+class AnimeTitleSuggestViewSet(viewsets.ModelViewSet):
+    queryset = AnimeData.objects.order_by('-watchersCount').all()
+    serializer_class = AnimeTitleSuggestSerializer
+
+    def get_queryset(self):
+        title = self.request.GET.get("title")
+        queryset = self.queryset.filter(title__icontains=title)
+        return queryset
 
 
 class GenreDataViewSet(viewsets.ModelViewSet):

@@ -12,13 +12,11 @@ headerLayout */
 
 .headerItemsWrapper {
     width: 275px;
-    height: 40vh;
     display: flex;
-    justify-content: space-between;
     flex-direction: column;
     color: #000;
-    font-size: 22px;
-    padding-left: 12px;
+    gap: 15px;
+    font-size: 21px;
     padding-right: 12px;
 }
 
@@ -28,8 +26,20 @@ headerLayout */
 }
 
 .headerItem a {
-    display: flex;
-    gap: 5px;
+    display: inline;
+    gap: 15px;
+    padding: 7px 15px 10px 15px;
+    border-radius: 35px;
+    transition: 0.15s;
+}
+
+.headerItem img {
+    margin-right: 15px;
+    vertical-align: middle;
+}
+
+.headerItem a:hover {
+    background-color: rgba(0, 0, 0, 0.3);
 }
 
 .headerItem .active {
@@ -38,18 +48,30 @@ headerLayout */
 
 .tentativeLogo {
     font-size: 29px;
+    margin-bottom: 15px;
 }
 
-.tweetItem {
-    width: 226px;
-    min-height: 52px;
-    filter: drop-shadow(1px 2px 10px rgba(29, 155, 240, 0.2));
-    color: #fff;
-    font-size: 18px;
+.rightContents {
+    padding: 15px;
+    border-radius: 16px;
+    margin-top: 20px;
+}
+
+.rightContents .contentTitle {
+    font-size: 17px;
     font-weight: bold;
-    text-align: center;
-    padding-top: 13px;
-    border-radius: 26px;
-    background-color: rgb(29, 155, 240);
-    margin-top: 12px;
+}
+
+.streamingNameWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+    margin-left: 5px;
+}
+
+.streamingName {
+    font-size: 18px;
+    color: #42C2FF;
+    font-weight: 500;
 }

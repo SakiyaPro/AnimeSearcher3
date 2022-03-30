@@ -2,24 +2,36 @@
 検索バー */
 
 .searchForm {
-    font-weight: 100;
-    font-size: 14px;
+    font-weight: 400;
+    font-size: 16.2px;
     margin: 4px 0;
-    position: fixed;
+    position: relative;
     z-index: 10;
 }
 
 .searchBar {
-    width: 350px;
     height: 46px;
-    padding-left: 20px;
+    padding-left: 54px;
     border-radius: 23px;
     border: 1px solid rgb(239, 243, 244);
     background-color: rgb(239, 243, 244);
 }
 
+.searchBar::placeholder {
+    color: rgba(25, 40, 60, 0.95);
+    font-weight: 300;
+    letter-spacing: -1px;
+}
+
 .searchBar:focus {
     outline: none;
+    color: #000;
     background-color: #fff;
     border: 1px solid rgb(29, 155, 240);
+}
+
+.searchIcon {
+    position: absolute;
+    top: 13px;
+    left: 20px;
 }

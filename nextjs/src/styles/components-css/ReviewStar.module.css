@@ -6,8 +6,18 @@
     font-size: 22px;
 }
 
-.reviewStarWrapper {
+.noReviewStarWrapper:hover span {
     color: #ffcf32;
+}
+
+.reviewStarWrapper {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.reviewStarWrapper:hover .star5_rating {
+    text-decoration: 1px underline #333;
 }
 
 .star5_rating {
@@ -21,7 +31,12 @@
 }
 
 .star5_rating:before, .star5_rating:after {
+    font-size: 22px;
     content: '★★★★★';
+}
+
+.star5_rating:hover .star5_rating:after {
+    text-decoration: underline;
 }
 
 .star5_rating:after {
@@ -33,6 +48,11 @@
     white-space: nowrap;
     color: #ffcf32;
     /* イエローカラー 自由に設定化 */
+}
+
+.starText {
+    font-size: 15px;
+    color: #333;
 }
 
 /* 星5 */

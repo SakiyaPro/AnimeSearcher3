@@ -21,7 +21,7 @@ class ReviewAnimeInline(admin.StackedInline):
 class CustomUserAdmin(UserAdmin):
     inlines = [ProfileInline]
     fieldsets = (
-        (None, {"fields": ("username", "password")}),
+        (None, {"fields": ("username", "password",)}),
         # PersonalInfo == 編集可能項目
         (_("Personal info"), {
             "fields": ("first_name", "last_name", "email")}),

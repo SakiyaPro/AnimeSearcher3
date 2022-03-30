@@ -36,9 +36,8 @@ class AnimeData(TimeStampedModel):
     watchersCount = IntegerField(
         "Annict視聴者数", null=True, blank=True)  # GoodRate出来上がるまでの指標
     # ------------MyAPI---------------------------------------------------------
-    goodCount = PositiveIntegerField("Good Count", default=0)
-    badCount = PositiveIntegerField("bad Count", default=0)
-    image = ImageField(upload_to='anime/thumbnail')
+    image = ImageField(
+        default='/django/media/anime/thumbnail/NoImageサンプル画像.jpg', upload_to='anime/thumbnail')
     story = TextField("あらすじ", null=True, blank=True)
     genres = models.ManyToManyField(GenreData, blank=True)
     # --------------------------------------------------------------------------

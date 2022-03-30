@@ -1,15 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from '../../styles/components-css/ReviewStar.module.css'
+import ReviewPostCenter from './ReviewPostCenter'
 
-export default function ReviewStar(datarate) {
-    let data = Object.values(datarate).map((review, i) => {
-        if (review === null) {
-            return
-        }
-    })
+export default function ReviewStar({ reviewanime_set, animeTitle }) {
+    const [display, setDisplay] = useState(false);
+
+    let data = reviewanime_set.map((review) => review["star"]);
+    data = data.reduce((sum, element) => sum + element, 0) / reviewanime_set.length;
     if (data < 0.1) {
         data = 0
-        console.log(data);
     } else if (0.1 <= data && data <= 0.9) {
         data = 0.5
     } else if (0.9 < data && data <= 1.4) {
@@ -31,18 +30,35 @@ export default function ReviewStar(datarate) {
     } else if (4.9 < data && data <= 5) {
         data = 5
     }
+
     return (
-        <>
-            {!data ?
-                <span className={`${styles.noReviewStarWrapper}`}>
-                    <span>☆☆☆☆☆</span>
-                </span> :
-                <span className={`${styles.reviewStarWrapper}`}>
-                    <span className={`${styles.star5_rating}`} datarate={data}></span><span>({Object.values(datarate)})</span>
-                </span>
+        <div>
+            <button onClick={() => setDisplay(true)}>
+                {!data ?
+                    <span className={`${styles.noReviewStarWrapper}`}>
+                        <span>☆☆☆☆☆</span>
+                    </span> :
+                    <span className={`${styles.reviewStarWrapper}`}>
+                        <span className={`${styles.star5_rating}`} datarate={data}></span><span>{data}</span>
+                    </span>
+                }
+            </button>
+            {
+                display &&
+                <>
+                    <div onClick={() => setDisplay(false)} className="displayBackground" >
+                    </div>
+                    <div className="reviewPostBackground" >
+                        <div className="reviewPostDisableButton">
+                            <button onClick={() => setDisplay(false)} className="button-decoration1">
+                                <img src="/image/systemIcon/system/disable_icon.png" width="13px" height="13px" />
+                            </button>
+                            <div>レビュー投稿</div>
+                        </div>
+                        <ReviewPostCenter animeTitle={animeTitle} />
+                    </div>
+                </>
             }
-
-        </>
-
+        </div>
     )
 }

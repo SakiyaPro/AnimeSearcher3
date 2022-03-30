@@ -1,0 +1,120 @@
+.tagWrapper {
+    display: flex;
+    gap: 15px;
+    font-size: 14px;
+    font-weight: bold;
+    color: rgba(83, 100, 113, 0.85);
+    align-items: center;
+    padding-left: 55px;
+    position: relative;
+}
+
+.tagWrapper .tag:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.addButton {
+    position: absolute;
+    left: 30px;
+    top: -1px;
+}
+
+.addButton:hover {
+    opacity: 0.7;
+}
+
+.activeAddButton .desableButton {
+    width: 34px;
+    height: 34px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+
+.activeAddButton .desableButton:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.activeAddButton {
+    background-color: #fff;
+    width: 600px;
+    max-width: 80vw;
+    height: auto;
+    max-height: 90vh;
+    color: #444;
+    font-size: 16px;
+    border-radius: 16px;
+    background-color: #fff;
+    padding-top: 16px;
+    padding-left: 16px;
+    padding-right: 16px;
+    position: fixed;
+    top: 5%;
+    left: calc(55% - 800px/2);
+    z-index: 9999;
+}
+
+.activeAddButton .contentWrapper {
+    display: flex;
+    margin-bottom: 40px;
+}
+
+
+.contentTop {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    color: #333;
+    font-weight: bold;
+}
+
+.contentWrapper .text {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+
+.currentTagWrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: rgb(29, 155, 240);
+    font-weight: 400;
+}
+
+.currentTagWrapper .tag {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    background-color: rgba(29, 155, 240, 0.05);
+    padding: 2px;
+}
+
+.addTagWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    font-weight: 400;
+}
+
+.addTagWrapper .tag {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    background-color: rgba(64, 64, 64, 0.05);
+    padding: 2px;
+}
+
+.iconWrapper {
+    display: flex;
+    gap: 5px;
+}
+
+.iconWrapper .smallBlueText {
+    font-size: 14px;
+}
