@@ -4,6 +4,7 @@ WORKDIR /usr/src/nextjs
 
 # Alpineで Linuxコマンド apt は使えないので、apk を使用
 COPY ./package.json /usr/src/nextjs/
+RUN npm update npm
 RUN npm install
 
 COPY . /usr/src/nextjs/

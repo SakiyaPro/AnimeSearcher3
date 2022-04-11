@@ -19,7 +19,7 @@ export default function PopularAnime({ popularData, allGenre }) {
         return () => {
             window.removeEventListener('beforeunload', window.scrollTo({ top: sessionStorage.getItem(router.pathname), behavior: "smooth" }))
         };
-    }, [])
+    }, [router.pathname])
 
     return (
         <>

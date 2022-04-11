@@ -1,50 +1,55 @@
 version: '3.7'
 
 services:
+    django:
+            container_name: django
+
+            build: ./django
+
+            command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py collectstatic --no-input --clear && uwsgi --socket :8000 --http :8001  --module config.wsgi --py-autoreload 1 -b 32768"
+
+            volumes:
+                - ./django:/usr/src/django
+                - django_static:/django/static
+                - django_media:/django/media
+
+            environment:
+                # 1ならデバックモード
+                - DEBUG=0
+                # setting.pyに記載されているSECRET_KEYを記入
+                - SECRET_KEY=django-insecure--w@!)fvdh72o8-wuwpa_(c00g(ew4t-t*#ghk+uwn^n%0fhce6
+
     nextjs:
         container_name: nextjs
 
         build: ./nextjs
 
-        command: npm run dev
+        command: bash -c "npm run build && npm run start"
 
         volumes:
             - ./nextjs:/usr/src/nextjs
 
-        ports:
-            - 3000:3000
-
         depends_on:
-          - django
-
-    django:
-        container_name: django
-
-        build: ./django
-
-        command: uwsgi --socket :8000 --http :8001  --module config.wsgi --py-autoreload 1 -b 32768
-
-        volumes:
-            - ./django:/usr/src/django
-
-        environment:
-            # 1ならデバックモード
-            - DEBUG=0
-            # setting.pyに記載されているSECRET_KEYを記入
-            - SECRET_KEY=django-insecure--w@!)fvdh72o8-wuwpa_(c00g(ew4t-t*#ghk+uwn^n%0fhce6
-
-        ports:
-            - 8000:8000
+            - django
+            - nginx
 
     nginx:
-        image: nginx:1.13
         container_name: nginx
+
+        build: ./nginx
+
         ports:
-        - "80:80"
+            - 80:80
+
         volumes:
-        - ./nginx/conf:/etc/nginx/conf.d
-        - ./nginx/uwsgi_params:/etc/nginx/uwsgi_params
-        - ./django/static:/usr/src/django/app/static
-        - ./django/media:/usr/src/django/app/media
+            - ./nginx/conf:/etc/nginx/conf.d
+            - ./nginx/uwsgi_params:/etc/nginx/uwsgi_params
+            - django_static:/django/static
+            - django_media:/django/media
+
         depends_on:
-        - nextjs
+            - django
+
+volumes:
+    django_static:
+    django_media:

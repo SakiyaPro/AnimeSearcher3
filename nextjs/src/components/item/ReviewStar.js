@@ -51,7 +51,7 @@ export default function ReviewStar({ reviewanime_set, animeTitle }) {
                     <div className="reviewPostBackground" >
                         <div className="reviewPostDisableButton">
                             <button onClick={() => setDisplay(false)} className="button-decoration1">
-                                <img src="/image/systemIcon/system/disable_icon.png" width="13px" height="13px" />
+                                <img src="/image/systemIcon/system/disable_icon.png" width="13px" height="13px" alt="" />
                             </button>
                             <div>レビュー投稿</div>
                         </div>

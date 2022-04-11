@@ -12,7 +12,7 @@ export default function ReviewSectionItem({ review }) {
         if (`${review.user.id}` !== Cookies.get('user_id')) {
             setRedirectURL(`/account/otherUser/${review.user.id}`)
         }
-    }, [])
+    }, [review.user.id])
 
     return (
         <div>
@@ -22,7 +22,7 @@ export default function ReviewSectionItem({ review }) {
                         as={redirectURL}
                         passhref="true">
                         <a>
-                            <img src={review.user.profile.user_icon} />
+                            <img src={review.user.profile.user_icon} alt="" />
                         </a>
                     </Link>
                 </div>
@@ -47,7 +47,7 @@ export default function ReviewSectionItem({ review }) {
                     {
                         review.anime.image &&
                         <div className="imageWrapper">
-                            <img src={review.anime.image} width="200px" />
+                            <img src={review.anime.image} width="200px" alt="" />
                         </div>
                     }
                 </div>

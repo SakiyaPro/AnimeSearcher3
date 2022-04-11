@@ -17,7 +17,7 @@ export default function AnimeDetail({ anime, reviewData, allGenre }) {
     return (
         <>
             <div className="sectionTop detailSectionTop">
-                <button onClick={() => router.back()} className="button-decoration1"><img src="/image/systemIcon/system/allow_icon(left).png" width="13px" height="13px" /></button>
+                <button onClick={() => router.back()} className="button-decoration1"><img src="/image/systemIcon/system/allow_icon(left).png" width="13px" height="13px" alt="" /></button>
                 <p className="sectionName">戻る</p>
             </div>
             <section className="section detailSection">
@@ -28,7 +28,7 @@ export default function AnimeDetail({ anime, reviewData, allGenre }) {
                             <p>{anime.title}{anime.media === 'MOVIE' ? ' （映画）' : (anime.media === 'OVA' ? ' （OVA）' : '')}</p>
                             <BarGraph animeId={anime.id} reviewanime_set={anime.reviewanime_set} />
                             <div className="imageWrapper detailImageWrapper" >
-                                <img src={anime.image} />
+                                <img src={anime.image} alt={anime.title} />
                             </div>
                             <div className="modified">最終更新日： <span>{conversionStrDate(anime.modified)}</span></div>
                         </div>
@@ -60,7 +60,6 @@ export async function getStaticPaths() {
             animeId: `${obj.id}`
         },
     }))
-    // 事前ビルドしたいパスをpathsとして渡す fallbackについては後述
     return { paths, fallback: false }
 }
 

@@ -1,4 +1,4 @@
-import React from "react";
+/* import React from "react";
 import Link from "next/link";
 import { Logo } from "../item/Logo";
 import styles from "../../styles/layout.module.css";
@@ -61,3 +61,4 @@ export default function Layout(props) {
         </div>
     );
 }
+ */

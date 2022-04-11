@@ -1,10 +1,12 @@
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls import url
 from . import settings
 from django.contrib.staticfiles.urls import static
 from anime_data.urls import router as anime_data_router
 from users.urls import router as users_router
 from anime_data import views as anime_data_views
+from django.views.static import serve
 
 
 urlpatterns = [
@@ -18,7 +20,8 @@ urlpatterns = [
 
     path('animeDataCreate/', anime_data_views.CreateData),
     path('animeImageCreate/', anime_data_views.CreateAnimeDataImage),
-    path('animeGenreCreate/', anime_data_views.CreateGenre)
+    path('animeGenreCreate/', anime_data_views.CreateGenre),
 ]
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

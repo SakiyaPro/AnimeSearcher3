@@ -184,7 +184,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 # 本番環境で静的ファイルを保存する先の指定
-STATIC_ROOT = os.path.join(BASE_DIR, 'app/static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # 静的ファイルを開発環境で読み込むための設定
 STATIC_URL = '/static/'
 

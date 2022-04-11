@@ -26,7 +26,7 @@ export default function NowSeason({ nowSeasonData, allGenre }) {
         return () => {
             window.removeEventListener('beforeunload', window.scrollTo({ top: sessionStorage.getItem(router.pathname), behavior: "smooth" }))
         };
-    }, [])
+    }, [router.pathname])
 
     /* SwiperCore.use([Pagination, Navigation])
     const images = [

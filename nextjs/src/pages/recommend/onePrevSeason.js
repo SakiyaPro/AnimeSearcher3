@@ -22,7 +22,7 @@ export default function OnePrevSeason({ onePrevSeasonData, allGenre }) {
         return () => {
             window.removeEventListener('beforeunload', window.scrollTo({ top: sessionStorage.getItem(router.pathname), behavior: "smooth" }))
         };
-    }, [])
+    }, [router.pathname])
 
     return (
         <>

@@ -7,13 +7,13 @@ export default function LoginRequest({ setDisplay }) {
         <div className={`${styles.activeAddButton}`}>
             <div className={`${styles.contentTop}`}>
                 <button className="button-decoration1" onClick={() => setDisplay(false)}>
-                    <img src="/image/systemIcon/system/disable_icon.png" width="13px" height="13px" />
+                    <img src="/image/systemIcon/system/disable_icon.png" width="13px" height="13px" alt="" />
                 </button>
                 <div>アカウント作成のお願い</div>
             </div>
             <div className={`${styles.contentWrapper}`}>
                 <div>
-                    <img src="https://iconbu.com/wp-content/uploads/2019/11/%E5%B7%A5%E4%BA%8B%E4%B8%AD.png" width="60px" />
+                    <img src="https://iconbu.com/wp-content/uploads/2019/11/%E5%B7%A5%E4%BA%8B%E4%B8%AD.png" width="60px" alt="" />
                 </div>
                 <div className={`${styles.text}`}>
                     <p>申し訳ございません。</p>

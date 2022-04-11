@@ -1,5 +1,6 @@
 module.exports = {
   experimental: {
-    scrollRestoration: true
-  }
+    scrollRestoration: true,
+    staticPageGenerationTimeout: 30000,
+  },
 }

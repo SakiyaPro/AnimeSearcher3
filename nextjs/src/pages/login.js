@@ -14,6 +14,10 @@ export default function Login(props) {
     const [errorState, setErrorState] = useState({})
     const loginRetention = useRef()
 
+    useEffect(() => {
+        console.log(loginRetention.current.checked);
+    }, [loginRetention.current?.checked])
+
     // アカウント作成関数
     const accountRegist = async formEvent => {
         formEvent.preventDefault()
@@ -64,6 +68,10 @@ export default function Login(props) {
             Cookies.set("user_id", res_token.user.pk)
             Cookies.set("access_token", res_token.access_token);
             Cookies.set("refresh_token", res_token.refresh_token);
+            console.log(loginRetention.current.checked);
+            if (loginRetention.current.checked) {
+                Cookies.set("loginRetention", "true")
+            }
             router.replace("/account/private");
         } catch (error) {
             const errorMassage = error.response.data
@@ -108,7 +116,7 @@ export default function Login(props) {
                         }
                         <br />
 
-                        <input type="checkbox" ref={loginRetention} id="checkbox-1-1" className={`${styles.customCheckbox}`} />
+                        <input type="checkbox" defaultChecked={true} ref={loginRetention} id="checkbox-1-1" className={`${styles.customCheckbox}`} />
                         <label htmlFor="checkbox-1-1">ログイン状態を保持</label>
 
                         <button className={`${styles.signin}`} >

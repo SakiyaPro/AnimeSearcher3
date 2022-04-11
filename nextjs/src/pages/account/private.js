@@ -31,41 +31,44 @@ export default function Private() {
     // エラー文状態管理
     const [error, setError] = useState({})
 
-    useEffect(async () => {
-        if (Cookies.get("access_token")) {
-            try {
-                const res = await (await axios.get(
-                    `${process.env.NEXT_PUBLIC_DJANGO_URL}users/user/`, {
-                    headers: {
-                        Authorization: `JWT ${Cookies.get("access_token")}`,
-                    }
-                })).data.results[0]
-                console.log(res.favorite_anime);
-                setUser(res)
-                setProfile(res.profile)
-                localStorage.setItem("user_icon", profile.user_icon)
-                setReviewAnime(res.reviewanime_set)
-                setSaveUsername(user.username)
-                setSaveSelfIntroduction(profile.self_introduction)
-            } catch (error) {
-                //アクセストークンの再取得
-                refresh_access_token()
+    useEffect(() => {
+        const asyncEffect = async () => {
+            if (Cookies.get("access_token")) {
+                try {
+                    const res = await(await axios.get(
+                        `${process.env.NEXT_PUBLIC_DJANGO_URL}users/user/`, {
+                        headers: {
+                            Authorization: `JWT ${Cookies.get("access_token")}`,
+                        }
+                    })).data.results[0]
+                    setUser(res)
+                    setProfile(res.profile)
+                    localStorage.setItem("user_icon", profile.user_icon)
+                    setReviewAnime(res.reviewanime_set)
+                    setSaveUsername(user.username)
+                    setSaveSelfIntroduction(profile.self_introduction)
+                } catch (error) {
+                    //アクセストークンの再取得
+                    refresh_access_token()
 
-                const res = await (await axios.request(
-                    `${process.env.NEXT_PUBLIC_DJANGO_URL}users/user/`, {
-                    method: "GET",
-                    headers: {
-                        Authorization: `JWT ${Cookies.get("access_token")}`,
-                    }
-                })).data.results[0]
-                setUser(res)
-                setProfile(res.profile)
-                localStorage.setItem("user_icon", res.profile.user_icon)
-                setReviewAnime(res.reviewanime_set)
-                setSaveUsername(res.username)
-                setSaveSelfIntroduction(res.profile.self_introduction)
+                    const res = await(await axios.request(
+                        `${process.env.NEXT_PUBLIC_DJANGO_URL}users/user/`, {
+                        method: "GET",
+                        headers: {
+                            Authorization: `JWT ${Cookies.get("access_token")}`,
+                        }
+                    })).data.results[0]
+                    setUser(res)
+                    setProfile(res.profile)
+                    localStorage.setItem("user_icon", res.profile.user_icon)
+                    setReviewAnime(res.reviewanime_set)
+                    setSaveUsername(res.username)
+                    setSaveSelfIntroduction(res.profile.self_introduction)
+                }
             }
         }
+        asyncEffect()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     // プロフィール画像状態管理
@@ -138,9 +141,12 @@ export default function Private() {
 
     //ログアウト処理
     const logout = () => {
+        Cookies.remove("user_id");
         Cookies.remove("access_token");
         Cookies.remove("refresh_token");
+        Cookies.remove("loginRetention")
         localStorage.removeItem("profile")
+        localStorage.removeItem("user_icon")
         localStorage.removeItem("review_anime")
         router.replace("/login");
     }
@@ -151,20 +157,20 @@ export default function Private() {
         <Auth>
             <section className="section">
                 <div className="sectionTop">
-                    <button onClick={() => history.back()} className="button-decoration1"><img src="/image/systemIcon/system/allow_icon(left).png" width="13px" height="13px" /></button>
+                    <button onClick={() => history.back()} className="button-decoration1"><img src="/image/systemIcon/system/allow_icon(left).png" width="13px" height="13px" alt="" /></button>
                     <p className="sectionName">マイプロフィール</p>
                     <button className={`${styles.logout}`} onClick={logout}>ログアウト</button>
                 </div>
                 <div className={`${styles.profileWrapper}`}>
                     <div>
                         <button>
-                            <img className={`${styles.user_backImage}`} src={profile?.user_backImage} />
+                            <img className={`${styles.user_backImage}`} src={profile?.user_backImage} alt="" />
                         </button>
                     </div>
                     <div className={`${styles.bottomProfileWrapper}`}>
                         <div className={`${styles.user_iconWrapper}`}>
                             <button>
-                                <img id="user_icon" className={`${styles.user_icon}`} src={profile?.user_icon} />
+                                <img id="user_icon" className={`${styles.user_icon}`} src={profile?.user_icon} alt="" />
                             </button>
                         </div>
                         <div className={`${styles.top}`}>
@@ -180,7 +186,7 @@ export default function Private() {
                                 <p>{profile?.self_introduction}</p>
                             </div>
                             <div className={`${styles.date_joined}`}>
-                                <img src="/image/systemIcon/system/calendar_icon(darkblue).png" width="22px" />
+                                <img src="/image/systemIcon/system/calendar_icon(darkblue).png" width="22px" alt="" />
                                 <span>{user_date_joined?.slice(0, user_date_joined.indexOf('月') + 1)}から利用しています。</span>
                             </div>
                         </div>
@@ -206,7 +212,7 @@ export default function Private() {
                 }
                 {
                     selectState === 2 &&
-                    user?.favorite_anime.map((favorite_anime, i) => {
+                    user?.favorite_anime?.map((favorite_anime, i) => {
                         return (
                             <div key={i} className="sectionItem favoriteItem">
                                 <p className="animeTitle">{favorite_anime.title}</p>
@@ -224,7 +230,7 @@ export default function Private() {
                         <div className={`${styles.editProfileTop}`}>
                             <div className={`${styles.topContent}`}>
                                 <button className="button-decoration1" onClick={() => setDisplay(false)}>
-                                    <img src="/image/systemIcon/system/disable_icon.png" width="13px" height="13px" />
+                                    <img src="/image/systemIcon/system/disable_icon.png" width="13px" height="13px" alt="" />
                                 </button>
                                 <p>プロフィールを編集</p>
                             </div>
@@ -235,14 +241,14 @@ export default function Private() {
                         <div className={`${styles.profileWrapper}`}>
                             <form className={`${styles.editForm}`}>
                                 <div>
-                                    <img className={`${styles.user_backImage}`} ref={editUserBackImage} src={profile?.user_backImage} />
+                                    <img className={`${styles.user_backImage}`} ref={editUserBackImage} src={profile?.user_backImage} alt="" />
                                     <label className={`${styles.backImageInput}`}>
                                         <input onChange={onChangeUserBackImage} type="file" accept="image/*" />
                                     </label>
                                 </div>
                                 <div className={`${styles.bottomProfileWrapper}`}>
                                     <div className={`${styles.user_iconWrapper}`}>
-                                        <img id="user_icon" className={`${styles.user_icon}`} ref={editUserIcon} src={profile?.user_icon} />
+                                        <img id="user_icon" className={`${styles.user_icon}`} ref={editUserIcon} src={profile?.user_icon} alt="" />
                                         <label className={`${styles.iconImageInput}`}>
                                             <input onChange={onChangeUserIcon} type="file" accept="image/*" />
                                         </label>

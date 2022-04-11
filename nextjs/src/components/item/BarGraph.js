@@ -15,13 +15,13 @@ export default function BarGraph({ animeId, reviewanime_set }) {
 
     useEffect(() => {
         setLoginState(login_request())
-    }, [login_request()])
+    }, [])
 
     useEffect(() => {
         if (postStar) {
             post_or_update_review(userReview, animeId, postStar)
         }
-    }, [postStar])
+    }, [userReview, animeId, postStar])
 
     // cssに指定している.bar_nameのwidthを指定する。
     const bar_name_width = "0px"
@@ -61,7 +61,7 @@ export default function BarGraph({ animeId, reviewanime_set }) {
             }
             setGraphParam(resultGraphParam)
         }
-    }, [])
+    }, [backgroundColor, fontColor, graphParam, reviewanime_set])
 
     const bar1width = graphParam["5"]
     const bar2width = graphParam["4"]

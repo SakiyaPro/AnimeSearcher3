@@ -17,11 +17,13 @@ export default function Layout2(props) {
     const [reviewPostDisplay, setReviewPostDisplay] = useState(false)
     const [searchResult, setSearchResult] = useState()
 
+    const loginRequest = login_request()
+
     useEffect(() => {
         setLoginState(login_request())
         setBEFORESEASON1(getSeasonAndYear(-3)[0])
         setBEFOREYEAR1(getSeasonAndYear(-3)[1])
-    }, [login_request()])
+    }, [loginRequest])
 
     const [src, setSrc] = useState()
 
@@ -32,13 +34,6 @@ export default function Layout2(props) {
             setSrc(["/image/systemIcon/system/active/login_icon.png", "/image/systemIcon/system/non-active/login_icon.png"])
         }
     }, [LoginState])
-
-    useEffect(() => {
-        console.log(searchResult);
-        if (searchResult) {
-            router.push({ pathname: '/search', query: { "searchResult": searchResult.title } })
-        }
-    }, [searchResult])
 
     //ログアウト処理
     const logout = () => {
@@ -61,11 +56,11 @@ export default function Layout2(props) {
                             <Link href="/" passhref="true">
                                 {router.pathname === "/" ?
                                     <a>
-                                        <img src="/image/systemIcon/system/active/home_icon.png" width="26px" />
+                                        <img src="/image/systemIcon/system/active/home_icon.png" width="26px" alt="" />
                                         <span className={`${styles.active}`}>ホーム</span>
                                     </a> :
                                     <a>
-                                        <img src="/image/systemIcon/system/non-active/home_icon.png" width="26px" />
+                                        <img src="/image/systemIcon/system/non-active/home_icon.png" width="26px" alt="" />
                                         <span>ホーム</span>
                                     </a>
                                 }
@@ -75,11 +70,11 @@ export default function Layout2(props) {
                             <Link href="/search" passhref="true">
                                 {router.pathname === "/search" ?
                                     <a>
-                                        <img src="/image/systemIcon/system/active/search_icon.png" width="26px" />
+                                        <img src="/image/systemIcon/system/active/search_icon.png" width="26px" alt="" />
                                         <span className={`${styles.active}`}>アニメを検索</span>
                                     </a> :
                                     <a>
-                                        <img src="/image/systemIcon/system/non-active/search_icon.png" width="26px" />
+                                        <img src="/image/systemIcon/system/non-active/search_icon.png" width="26px" alt="" />
                                         <span>アニメを検索</span>
                                     </a>
                                 }
@@ -89,11 +84,11 @@ export default function Layout2(props) {
                             <Link href="/recommend/nowSeason" passhref="true">
                                 {router.pathname === "/recommend/nowSeason" ?
                                     <a>
-                                        <img src="/image/systemIcon/system/active/recommend_icon.png" width="26px" />
+                                        <img src="/image/systemIcon/system/active/recommend_icon.png" width="26px" alt="" />
                                         <span className={`${styles.active}`}>今期アニメ</span>
                                     </a> :
                                     <a>
-                                        <img src="/image/systemIcon/system/non-active/recommend_icon.png" width="26px" />
+                                        <img src="/image/systemIcon/system/non-active/recommend_icon.png" width="26px" alt="" />
                                         <span>今期アニメ</span>
                                     </a>
                                 }
@@ -104,12 +99,12 @@ export default function Layout2(props) {
                                 <a>
                                     {router.pathname === "/recommend/onePrevSeason" ?
                                         <>
-                                            <img src="/image/systemIcon/system/active/recommend_icon.png" width="26px" />
+                                            <img src="/image/systemIcon/system/active/recommend_icon.png" width="26px" alt="" />
                                             <span className={`${styles.active}`}>{BEFOREYEAR1} {conversionSeasonName(BEFORESEASON1)}アニメ</span>
                                         </>
                                         :
                                         <>
-                                            <img src="/image/systemIcon/system/non-active/recommend_icon.png" width="26px" />
+                                            <img src="/image/systemIcon/system/non-active/recommend_icon.png" width="26px" alt="" />
                                             <span>{BEFOREYEAR1} {conversionSeasonName(BEFORESEASON1)}アニメ</span>
                                         </>
                                     }
@@ -120,11 +115,11 @@ export default function Layout2(props) {
                             <Link href="/recommend/popularAnime" passhref="true">
                                 {router.pathname === "/recommend/popularAnime" ?
                                     <a>
-                                        <img src="/image/systemIcon/system/active/recommend_icon.png" width="26px" />
+                                        <img src="/image/systemIcon/system/active/recommend_icon.png" width="26px" alt="" />
                                         <span className={`${styles.active}`}>人気アニメ</span>
                                     </a> :
                                     <a>
-                                        <img src="/image/systemIcon/system/non-active/recommend_icon.png" width="26px" />
+                                        <img src="/image/systemIcon/system/non-active/recommend_icon.png" width="26px" alt="" />
                                         <span>人気アニメ</span>
                                     </a>
                                 }
@@ -133,7 +128,7 @@ export default function Layout2(props) {
                         <div onClick={() => sessionStorage.setItem(router.pathname, window.scrollY)} className={`${styles.headerItem}`}>
                             <Link href="/account/private" passhref="true">
                                 <a>
-                                    <img src={router.pathname === "/account/private" | router.pathname === "/login" ? src && src[0] : src && src[1]} width="26px" />
+                                    <img src={router.pathname === "/account/private" | router.pathname === "/login" ? src && src[0] : src && src[1]} width="26px" alt="" />
                                     <span className={router.pathname === "/account/private" | router.pathname === "/login" && `${styles.active}`}>
                                         {LoginState ? "プロフィール" : "ログイン"}
                                     </span>
@@ -160,7 +155,7 @@ export default function Layout2(props) {
                                 <div className="reviewPostBackground" >
                                     <div className="reviewPostDisableButton">
                                         <button onClick={() => setReviewPostDisplay(false)} className="button-decoration1">
-                                            <img src="/image/systemIcon/system/disable_icon.png" width="13px" height="13px" />
+                                            <img src="/image/systemIcon/system/disable_icon.png" width="13px" height="13px" alt="" />
                                         </button>
                                         <div>レビュー投稿</div>
                                     </div>

@@ -16,12 +16,12 @@ export default function AnimeSectionItem({ anime }) {
     const [display, setDisplay] = useState(false)
     useEffect(() => {
         setLoginState(login_request())
-    }, [login_request()])
+    }, [])
 
     useEffect(() => {
         setFavoriteCountState(anime.favorite_count.map(user => user.id).includes(parseInt(Cookies.get("user_id"), 10)))
         setFavoriteCount(anime.favorite_count.length + anime.watchersCount)
-    }, [])
+    }, [anime.favorite_count, anime.watchersCount])
 
     const plusFavoriteCount = async () => {
         refresh_access_token()
@@ -55,7 +55,7 @@ export default function AnimeSectionItem({ anime }) {
                         </Link>
                         <ReviewStar animeTitle={anime.title} reviewanime_set={anime.reviewanime_set} />
                         <div className="imageWrapper" >
-                            <img src={anime.image} width={504} />
+                            <img src={anime.image} width={504} alt={anime.title} />
                         </div>
                     </div>
                 </article>
@@ -64,7 +64,7 @@ export default function AnimeSectionItem({ anime }) {
                 <div className="sectionBottomItem" >
                     <div>
                         <button className="btn1">
-                            <img src="/image/systemIcon/system/balloon_icon.png" width="18px" height="18px" />
+                            <img src="/image/systemIcon/system/balloon_icon.png" width="18px" height="18px" alt="" />
                             <span>
                                 {
                                     // コメントがある場合のみカウントする
@@ -77,12 +77,12 @@ export default function AnimeSectionItem({ anime }) {
                         {
                             favoriteCountState ?
                                 <button onClick={() => { LoginState && minusFavoriteCount(), LoginState && setFavoriteCountState(!favoriteCountState), LoginState && setFavoriteCount(favoriteCount - 1), !LoginState && setDisplay(true) }} className="btn2">
-                                    <img src="/image/systemIcon/system/favo_icon(pink).png" />
+                                    <img src="/image/systemIcon/system/favo_icon(pink).png" alt="" />
                                     <span style={{ color: "#D83A56" }}>{favoriteCount}</span>
                                 </button>
                                 :
                                 <button onClick={() => { LoginState && plusFavoriteCount(), LoginState && setFavoriteCountState(!favoriteCountState), LoginState && setFavoriteCount(favoriteCount + 1), !LoginState && setDisplay(true) }} className="btn2">
-                                    <img src="/image/systemIcon/system/favo_icon.png" />
+                                    <img src="/image/systemIcon/system/favo_icon.png" alt="" />
                                     <span>{favoriteCount}</span>
                                 </button>
                         }

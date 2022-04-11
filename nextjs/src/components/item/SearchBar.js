@@ -10,11 +10,14 @@ export default function SearchBar({ size, setSearchResult,  }) {
     const search_title = useRef()
 
     // 検索サジェスト機能
-    useEffect(async () => {
-        if (keyword === '') return setSearchSuggest()
-        setKeyword(keyword)
-        const res = await (await axios.get(`${process.env.NEXT_PUBLIC_DJANGO_URL}api/titlesuggest/?title=${keyword}`)).data.results
-        setSearchSuggest(res)
+    useEffect(() => {
+        const asyncEffect = async () => {
+            if (keyword === '') return setSearchSuggest()
+            setKeyword(keyword)
+            const res = await (await axios.get(`${process.env.NEXT_PUBLIC_DJANGO_URL}api/titlesuggest/?title=${keyword}`)).data.results
+            setSearchSuggest(res)
+        }
+        asyncEffect()
     }, [keyword, composition])
 
     const getSearchResult = async () => {
@@ -39,7 +42,7 @@ export default function SearchBar({ size, setSearchResult,  }) {
             <form onSubmit={getSearchResult} method="get" action="#" className={`${styles.searchForm}`}>
                 <input className={`${styles.searchBar}`} onChange={handleChange} onCompositionUpdate={compositionChange}
                     ref={search_title} type="text" size={size ? size : 26} placeholder="アニメを検索" />
-                <img className={`${styles.searchIcon}`} src="/image/systemIcon/system/search_icon.png" width="21px" />
+                <img className={`${styles.searchIcon}`} src="/image/systemIcon/system/search_icon.png" width="21px" alt="" />
             </form>
             {
                 searchSuggest &&

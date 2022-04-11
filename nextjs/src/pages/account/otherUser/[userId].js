@@ -3,7 +3,7 @@ import styles from '../../../styles/private.module.css'
 import ReviewSectionItem from '../../../components/item/ReviewSectionItem'
 import axios from 'axios'
 
-export default function otherUserProfile({ reviewData }) {
+export default function OtherUserProfile({ reviewData }) {
     const [user, setUser] = useState()
     const [reviewAnime, setReviewAnime] = useState()
     const [selectState, setSelectState] = useState(1)
@@ -11,7 +11,8 @@ export default function otherUserProfile({ reviewData }) {
     useEffect(() => {
         setUser(reviewData[0].user)
         setReviewAnime(reviewData)
-    }, [])
+        console.log(reviewData);
+    }, [reviewData])
 
     const user_date_joined = user?.date_joined.replace('-', '年').replace('-', '月')
 
@@ -19,19 +20,19 @@ export default function otherUserProfile({ reviewData }) {
         <div>
             <section className="section">
                 <div className="sectionTop">
-                    <button onClick={() => history.back()} className="button-decoration1"><img src="/image/systemIcon/system/allow_icon(left).png" width="13px" height="13px" /></button>
+                    <button onClick={() => history.back()} className="button-decoration1"><img src="/image/systemIcon/system/allow_icon(left).png" width="13px" height="13px" alt="" /></button>
                     <p className="sectionName">{user && user.username}さんのプロフィール</p>
                 </div>
                 <div className={`${styles.profileWrapper}`}>
                     <div>
                         <button>
-                            <img className={`${styles.user_backImage}`} src={user?.profile.user_backImage} />
+                            <img className={`${styles.user_backImage}`} src={user?.profile.user_backImage} alt="" />
                         </button>
                     </div>
                     <div className={`${styles.bottomProfileWrapper}`}>
                         <div className={`${styles.user_iconWrapper}`}>
                             <button>
-                                <img id="user_icon" className={`${styles.user_icon}`} src={user?.profile.user_icon} />
+                                <img id="user_icon" className={`${styles.user_icon}`} src={user?.profile.user_icon} alt="" />
                             </button>
                         </div>
                         <div className={`${styles.top}`}>
@@ -44,7 +45,7 @@ export default function otherUserProfile({ reviewData }) {
                                 <p>{user?.profile.self_introduction}</p>
                             </div>
                             <div className={`${styles.date_joined}`}>
-                                <img src="/image/systemIcon/system/calendar_icon(darkblue).png" width="22px" />
+                                <img src="/image/systemIcon/system/calendar_icon(darkblue).png" width="22px" alt="" />
                                 <span>{user_date_joined?.slice(0, user_date_joined.indexOf('月') + 1)}から利用しています。</span>
                             </div>
                         </div>
@@ -68,6 +69,16 @@ export default function otherUserProfile({ reviewData }) {
                         )
                     })
                 }
+                {
+                    selectState === 2 &&
+                    user?.favorite_anime?.map((favorite_anime, i) => {
+                        return (
+                            <div key={i} className="sectionItem favoriteItem">
+                                <p className="animeTitle">{favorite_anime.title}</p>
+                            </div>
+                        )
+                    })
+                }
             </section>
         </div>
     )
@@ -82,7 +93,6 @@ export async function getStaticPaths() {
             userId: `${obj.id}`
         },
     }))
-    // 事前ビルドしたいパスをpathsとして渡す fallbackについては後述
     return { paths, fallback: false }
 }
 

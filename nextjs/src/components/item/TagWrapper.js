@@ -17,7 +17,7 @@ export default function TagWrapper({ anime, allgenre }) {
         <>
             <div className={`${styles.tagWrapper}`}>
                 <button onClick={() => { setDisplay(true) }} className={`${styles.addButton}`}>
-                    <img src="/image/systemIcon/system/plus_icon(blue) .png" width="17px" />
+                    <img src="/image/systemIcon/system/plus_icon(blue) .png" width="17px" alt="" />
                 </button>
                 <p className={`${styles.tag}`}>{anime.seasonYear}年 {conversionSeasonName(anime.seasonName)}アニメ</p>
                 {anime.genres.map((data, i) => {
@@ -33,7 +33,7 @@ export default function TagWrapper({ anime, allgenre }) {
                         <div className={`${styles.activeAddButton}`}>
                             <div className={`${styles.contentTop}`}>
                                 <button onClick={() => setDisplay(!display)} className="button-decoration1">
-                                    <img src="/image/systemIcon/system/disable_icon.png" width="13px" height="13px" />
+                                    <img src="/image/systemIcon/system/disable_icon.png" width="13px" height="13px" alt="" />
                                 </button>
                                 <div>ジャンルタグ追加</div>
                             </div>
@@ -41,13 +41,13 @@ export default function TagWrapper({ anime, allgenre }) {
                                 <div className={`${styles.text}`}>
                                     <div className={`${styles.currentTagWrapper}`}>
                                         <div className={`${styles.iconWrapper}`}>
-                                            <img src="/image/systemIcon/system/label_icon.png" width="20px" />
+                                            <img src="/image/systemIcon/system/label_icon.png" width="20px" alt="" />
                                             <p className={`${styles.smallBlueText}`}>現在タグ:</p>
                                         </div>
                                         {anime.genres.map((data, i) => {
                                             return (
                                                 <div key={i} onClick={() => remove_genre(anime.id, data.genre)} className={`${styles.tag}`}>
-                                                    <img src="/image/systemIcon/system/minus_icon(blue).png" width="13px" />
+                                                    <img src="/image/systemIcon/system/minus_icon(blue).png" width="13px" alt="" />
                                                     <p>{data.genre}</p>
                                                 </div>
                                             )
@@ -55,13 +55,13 @@ export default function TagWrapper({ anime, allgenre }) {
                                     </div>
                                     <div className={`${styles.addTagWrapper}`}>
                                         <div className={`${styles.iconWrapper}`}>
-                                            <img src="/image/systemIcon/system/label_icon(black).png" width="20px" />
+                                            <img src="/image/systemIcon/system/label_icon(black).png" width="20px" alt="" />
                                             <p className={`${styles.smallBlueText}`}>追加タグ:</p>
                                         </div>
                                         {addTag.map((genre, i) => {
                                             return (
                                                 <div key={i} onClick={() => update_genre(anime.id, genre)} className={`${styles.tag}`}>
-                                                    <img src="/image/systemIcon/system/plus_icon(333).png" width="13px" />
+                                                    <img src="/image/systemIcon/system/plus_icon(333).png" width="13px" alt="" />
                                                     <p>{genre}</p>
                                                 </div>
                                             )

@@ -11,7 +11,7 @@ export default function Home({ reviewData }) {
 
     useEffect(() => {
         setLoginState(login_request())
-    }, [login_request])
+    }, [])
 
     return (
         <>

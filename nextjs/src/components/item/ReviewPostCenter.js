@@ -25,17 +25,20 @@ export default function ReviewPostCenter({ animeTitle }) {
             setKeyword(animeTitle)
             review_title.current.value = animeTitle
         }
-    }, [])
+    }, [animeTitle])
 
     useEffect(() => {
         console.log(review_title.current?.value);
     }, [review_title])
 
     // 検索サジェスト機能
-    useEffect(async () => {
-        if (keyword === '') return setSearchSuggest()
-        const res = await (await axios.get(`${process.env.NEXT_PUBLIC_DJANGO_URL}api/titlesuggest/?title=${keyword}`)).data.results
-        setSearchSuggest(res)
+    useEffect(() => {
+        const asyncEffect = async () => {
+            if (keyword === '') return setSearchSuggest()
+            const res = await (await axios.get(`${process.env.NEXT_PUBLIC_DJANGO_URL}api/titlesuggest/?title=${keyword}`)).data.results
+            setSearchSuggest(res)
+        }
+        asyncEffect()
     }, [keyword, composition])
 
     const revalidate_keyword = async () => {
@@ -52,9 +55,12 @@ export default function ReviewPostCenter({ animeTitle }) {
         return false
     }
 
-    useEffect(async () => {
-        setRevalidate(await revalidate_keyword().then(res => res))
-    }, [review_title.current?.value, postStar])
+    useEffect(() => {
+        const asyncEffect = async() => {
+            setRevalidate(await revalidate_keyword().then(res => res))
+        }
+        asyncEffect()
+    }, [review_title.current?.value, () => revalidate_keyword, postStar])
 
     const handleChange = async (e) => {
         setKeyword(() => e.target.value);
@@ -66,7 +72,7 @@ export default function ReviewPostCenter({ animeTitle }) {
     return (
         <div className="sectionReviewItem">
             <div className="user_icon">
-                <img src={userIcon} />
+                <img src={userIcon} alt="" />
             </div>
             <article className="centerArticle">
                 <div className="textArea">

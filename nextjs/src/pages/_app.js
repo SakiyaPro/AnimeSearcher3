@@ -27,14 +27,10 @@ export default function MyApp({ Component, pageProps }) {
 
   return (
     <>
+      <Head>
+        <title> AnimeSearcher </title>
+      </Head>
       <Layout2>
-        <Head><title> AnimeSearcher </title>
-          <meta name="description" content="おすすめアニメを検索！" />
-          <link rel="icon" href="/image/favicon/favicon.png" />
-          <link rel="preconnect" href="https://fonts.googleapis.com" />
-          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-          <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700;900&family=Outfit&display=swap" rel="stylesheet" />
-        </Head>
         <Component {...pageProps} />
       </Layout2>
     </>

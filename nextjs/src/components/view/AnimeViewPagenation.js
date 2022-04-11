@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+/* import React, { useState, useEffect } from 'react';
 import styles from '../../styles/components-css/AnimeViewPagenation.module.css'
 import ThumbnailSimple from '../item/ThumbnailSimple';
 
@@ -36,13 +36,13 @@ export default function AnimeViewPagenation({ animes, width }) {
     return (
         <div className={`${styles.pagenationWrapper}`}>
             <div className={`${styles.pagenation}`}>
-                {/* <button onClick={() => handleChange(-1)} className={`${styles.beforePageButton}`}></button> */}
+                <button onClick={() => handleChange(-1)} className={`${styles.beforePageButton}`}></button>
                 {Array.from(Array(pageCount), (v, k) => k + 1).map(pageNumber => {
                     return (
                         <button onClick={() => pageChange(pageNumber)} className={`${styles.pageNumber} ${page === pageNumber && ` ${styles.activePage}`}`} key={pageNumber}>{pageNumber}</button>
                     )
                 })}
-                {/* <button onClick={() => handleChange(+1)} className={`${styles.afterPageButton}`}></button> */}
+                <button onClick={() => handleChange(+1)} className={`${styles.afterPageButton}`}></button>
             </div>
             <div className={`${styles.viewAnimeWrapper}`}>
                 {displayedItems.map((anime, index) => {
@@ -56,3 +56,4 @@ export default function AnimeViewPagenation({ animes, width }) {
         </div>
     )
 }
+ */

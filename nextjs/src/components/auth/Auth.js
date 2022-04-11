@@ -13,7 +13,7 @@ export default function Auth({ children }) {
         if (!access_token) {
             router.replace("/login");
         }
-    }, [])
+    }, [access_token, router])
 
     //何もなければ次へ（そのまま処理）
     return children;

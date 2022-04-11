@@ -18,10 +18,11 @@ class ProfileSubSerializer(serializers.ModelSerializer):
 
 class CustomUserSubSerializer(serializers.ModelSerializer):
     profile = ProfileSubSerializer()
+    favorite_anime = AnimeDataSerializer(many=True)
 
     class Meta:
         model = CustomUser
-        fields = ('id', 'username', 'date_joined', 'profile')
+        fields = ('id', 'username', 'date_joined', 'profile', 'favorite_anime')
 
 
 class ReviewAnimeSerializer(serializers.ModelSerializer):
