@@ -1,4 +1,0 @@
-FROM nginx:1.13
-
-COPY ./conf/ /etc/nginx/conf.d/
-COPY ./uwsgi_params /etc/nginx/

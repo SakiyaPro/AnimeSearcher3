@@ -447,10 +447,9 @@ main (right) */
 
 .rightWrapper {
   width: 350px;
-  margin-right: 10px;
+  margin-left: 650px;
   position: fixed;
   top: 0;
-  right: 320px;
   z-index: 10;
 }
 

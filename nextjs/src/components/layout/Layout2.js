@@ -49,8 +49,12 @@ export default function Layout2(props) {
             <header className={router.pathname === "/detail/[animeId]" ? "header detailHeader" : "header"}>
                 <div className={`${styles.headerWrapper}`}>
                     <div onClick={() => sessionStorage.setItem(router.pathname, window.scrollY)} className={`${styles.headerItemsWrapper}`}>
-                        <div className={`${styles.headerItem} ${styles.tentativeLogo}`}>
-                            ロ
+                        <div className={`${styles.tentativeLogo}`}>
+                            <Link href="/" passhref="true">
+                                <a>
+                                    <img src="/image/Logo/AnimeSearcher_logo(colorful).png" width="150px" alt="サイトロゴ" />
+                                </a>
+                            </Link>
                         </div>
                         <div onClick={() => sessionStorage.setItem(router.pathname, window.scrollY)} className={`${styles.headerItem}`}>
                             <Link href="/" passhref="true">

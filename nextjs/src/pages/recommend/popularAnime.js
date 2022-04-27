@@ -48,7 +48,6 @@ export async function getStaticProps() {
     const allGenre = await (getAllGenre()).then(async res => await res.map(data => data.genre));
 
     return {
-        props: { popularData, allGenre },
-        revalidate: 50000,
+        props: { popularData, allGenre }, revalidate: 1,
     }
 }

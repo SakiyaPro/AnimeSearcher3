@@ -7,6 +7,7 @@ from anime_data.urls import router as anime_data_router
 from users.urls import router as users_router
 from anime_data import views as anime_data_views
 from django.views.static import serve
+from django.views.generic import TemplateView
 
 
 urlpatterns = [
@@ -14,6 +15,10 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('dj-rest-auth/', include('dj_rest_auth.urls')),
     path('dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')),
+    path('account-confirm-email/(?P&lt;key&gt;[-:\w]+)/$', TemplateView.as_view(),
+         name='account_confirm_email'),
+
+    path('account-confirm-email/', include('allauth.urls')),  # 追加
 
     path('api/', include(anime_data_router.urls)),
     path('users/', include(users_router.urls)),

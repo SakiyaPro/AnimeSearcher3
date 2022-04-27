@@ -1,0 +1,39 @@
+version: '3.7'
+
+services:
+    django:
+        image: 303647508310.dkr.ecr.ap-northeast-1.amazonaws.com/animegatari-backend-django:latest
+
+        container_name: django
+
+        build:
+            context: ./django
+            dockerfile: ./Dockerfile.build
+
+        volumes:
+            - ./django:/usr/src/django
+            - django_static:/usr/src/django/static
+            - django_media:/usr/src/django/media
+
+        expose:
+            - "8001"
+
+    nginx:
+        image: 303647508310.dkr.ecr.ap-northeast-1.amazonaws.com/animegatari-backend-nginx:latest
+
+        container_name: django-nginx
+
+        build: ./django-nginx
+
+        ports:
+            - 80:80
+
+        volumes:
+            - ./django-nginx/conf:/etc/nginx/conf.d
+            - ./django-nginx/uwsgi_params:/etc/nginx/uwsgi_params
+            - django_static:/usr/src/django/static
+            - django_media:/usr/src/django/media
+
+volumes:
+    django_static:
+    django_media:

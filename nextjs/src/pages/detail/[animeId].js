@@ -2,7 +2,7 @@ import React from 'react'
 import { useRouter } from 'next/router'
 import { getDetailAnimeData } from '../../lib/getAnimeData'
 import { getAllGenre } from '../../lib/getGenreData'
-import {  conversionStrDate } from '../../utils/functions'
+import { conversionStrDate } from '../../utils/functions'
 import styles from '../../styles/anime_detail.module.css'
 import BarGraph from '../../components/item/BarGraph'
 
@@ -63,10 +63,10 @@ export async function getStaticPaths() {
     return { paths, fallback: false }
 }
 
-export async function getStaticProps({ params, context }) {
+export async function getStaticProps({ params }) {
     const anime = await getDetailAnimeData(params.animeId, { offset: 0 })
     const reviewData = await (await axios.get(`${process.env.NEXT_PUBLIC_DJANGO_URL}users/review_anime/?anime_id=${anime.id}`)).data.results
     const allGenre = await (getAllGenre()).then(async res => await res.map(data => data.genre));
 
-    return { props: { anime, reviewData, allGenre } }
+    return { props: { anime, reviewData, allGenre }, revalidate: 1 }
 }

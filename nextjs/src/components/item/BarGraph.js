@@ -61,7 +61,7 @@ export default function BarGraph({ animeId, reviewanime_set }) {
             }
             setGraphParam(resultGraphParam)
         }
-    }, [backgroundColor, fontColor, graphParam, reviewanime_set])
+    }, [])
 
     const bar1width = graphParam["5"]
     const bar2width = graphParam["4"]

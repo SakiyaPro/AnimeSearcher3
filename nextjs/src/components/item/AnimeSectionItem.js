@@ -8,7 +8,6 @@ import Cookies from 'js-cookie';
 import { refresh_access_token, login_request } from '../../utils/functions';
 
 export default function AnimeSectionItem({ anime }) {
-    console.log(anime);
     const router = useRouter()
     const [LoginState, setLoginState] = useState()
     const [favoriteCountState, setFavoriteCountState] = useState(false)

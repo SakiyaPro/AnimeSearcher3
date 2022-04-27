@@ -27,10 +27,6 @@ export default function ReviewPostCenter({ animeTitle }) {
         }
     }, [animeTitle])
 
-    useEffect(() => {
-        console.log(review_title.current?.value);
-    }, [review_title])
-
     // 検索サジェスト機能
     useEffect(() => {
         const asyncEffect = async () => {

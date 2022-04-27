@@ -1,0 +1,29 @@
+version: '3.7'
+
+services:
+    nextjs:
+        image: 303647508310.dkr.ecr.ap-northeast-1.amazonaws.com/animegatari-frontend-nextjs:latest
+
+        container_name: nextjs
+
+        build:
+            context: ./nextjs
+            dockerfile: ./Dockerfile.build
+
+        volumes:
+            - ./nextjs:/usr/src/nextjs
+
+
+    nginx:
+        image: 303647508310.dkr.ecr.ap-northeast-1.amazonaws.com/animegatari-frontend-nginx:latest
+
+        container_name: nextjs-nginx
+
+        build: ./nextjs-nginx
+
+        ports:
+            - 80:80
+
+        volumes:
+            - ./nextjs-nginx/conf:/etc/nginx/conf.d
+

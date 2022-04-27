@@ -84,7 +84,7 @@ export default function OtherUserProfile({ reviewData }) {
     )
 }
 
-export async function getStaticPaths() {
+/* export async function getStaticPaths() {
     // animeId をすべて取得
     const res = await (await axios.get(`${process.env.NEXT_PUBLIC_DJANGO_URL}users/userIds/?format=json&limit=100000`)).data.results
     // params に animeId を指定
@@ -94,10 +94,11 @@ export async function getStaticPaths() {
         },
     }))
     return { paths, fallback: false }
-}
+} */
 
-export async function getStaticProps({ params, context }) {
-    const reviewData = await (await axios.get(`${process.env.NEXT_PUBLIC_DJANGO_URL}users/review_anime/?user_id=${params.userId}`)).data.results
+export async function getServerSideProps({ params, query }) {
+    const reviewData = await (await axios.get(`${process.env.NEXT_PUBLIC_DJANGO_URL}users/review_anime/?user_id=${query.userId
+        }`)).data.results
 
     return { props: { reviewData } }
 }

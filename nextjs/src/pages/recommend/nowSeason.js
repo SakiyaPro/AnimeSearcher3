@@ -95,7 +95,6 @@ export async function getStaticProps() {
     const allGenre = await (getAllGenre()).then(async res => await res.map(data => data.genre));
 
     return {
-        props: { nowSeasonData, allGenre },
-        revalidate: 50000,
+        props: { nowSeasonData, allGenre }, revalidate: 1,
     };
 };

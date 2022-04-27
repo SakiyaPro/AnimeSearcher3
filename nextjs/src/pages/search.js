@@ -19,9 +19,9 @@ export default function Search({ allGenre }) {
         setBEFOREYEAR1(getSeasonAndYear(-3)[1])
     }, [])
 
-    useEffect(() => {
+    /* useEffect(() => {
         console.log(`検索結果: ${searchResult}`);
-    }, [searchResult])
+    }, [searchResult]) */
 
     return (
         <>
@@ -62,12 +62,11 @@ export default function Search({ allGenre }) {
     )
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
     // アニメデータ取得
     const allGenre = await (getAllGenre()).then(async res => await res.map(data => data.genre));
 
     return {
         props: { allGenre },
-        revalidate: 50000,
     };
 };

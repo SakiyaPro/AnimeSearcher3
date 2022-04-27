@@ -1,7 +1,0 @@
-version: '3.7'
-services:
-  web:
-    image: 303647508310.dkr.ecr.us-west-2.amazonaws.com/animegatari-django:latest
-    ports:
-      - 80:80
-    command: "bundle exec puma -p 80"

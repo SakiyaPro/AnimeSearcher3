@@ -9,6 +9,8 @@ WORKDIR /usr/src/django
 ENV PYTHONDONTWRITEBYTECODE 1
 # Pythonが標準入出力をバッファリングすることを防ぐ
 ENV PYTHONUNBUFFERED 1
+ENV DEBUG 0
+ENV SECRET_KEY django-insecure--w@!)fvdh72o8-wuwpa_(c00g(ew4t-t*#ghk+uwn^n%0fhce6
 
 # Pipenvをインストール
 RUN pip install --upgrade setuptools pip \
@@ -37,4 +39,10 @@ RUN pipenv install --skip-lock --system --dev
 # ホストのカレントディレクトリ（現在はappディレクトリ）を作業ディレクトリにコピー
 COPY . /usr/src/django/
 
-CMD ["uwsgi", "--socket", ":8000", "--http", ":8001", "--module", "config.wsgi", "--py-autoreload", "1", "-b", "32768"]
+VOLUME ./media/ /usr/src/django/media/
+
+# 複数コマンド実行
+COPY ./startup.sh /startup.sh
+RUN chmod 744 /startup.sh
+
+CMD [ "/startup.sh" ]

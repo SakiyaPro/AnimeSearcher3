@@ -1,6 +1,8 @@
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.contrib.auth.models import AbstractUser
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 from core_models.models import TimeStampedModel
 from anime_data.models.AnimeData import AnimeData
@@ -57,3 +59,11 @@ class Profile(models.Model):
         "ユーザー背景画像", default="user/backImage/デフォルト背景画像.jpg", upload_to="user/backImage", blank=True, null=False)
     self_introduction = models.CharField(
         "自己紹介", max_length=512, default="", blank=True, null=True)
+
+
+@receiver(post_save, sender=CustomUser)
+def create_profile(sender, **kwargs):
+    """ 新ユーザー作成時に空のprofileも作成する """
+    if kwargs['created']:
+        user_profile = Profile.objects.get_or_create(
+            user=kwargs['instance'])

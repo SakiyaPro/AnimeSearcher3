@@ -1,4 +1,0 @@
-build:
-  docker:
-    django: django/DockerFile
-    nextjs: nextjs/DockerFile
