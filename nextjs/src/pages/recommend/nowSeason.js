@@ -40,6 +40,11 @@ export default function NowSeason({ nowSeasonData, allGenre }) {
         <>
             <div className="sectionTop">
                 <Link href="/recommend/nowSeason"><a className="sectionName" passhref="true" >今期アニメ</a></Link>
+                <div>
+                    <button className="threeDots">
+                        <img src="/image/systemIcon/system/three-dots.png" width="23x" alt="メニュー" />
+                    </button>
+                </div>
             </div>
             <section className="section">
                 {
@@ -95,6 +100,6 @@ export async function getStaticProps() {
     const allGenre = await (getAllGenre()).then(async res => await res.map(data => data.genre));
 
     return {
-        props: { nowSeasonData, allGenre }, revalidate: 1,
+        props: { nowSeasonData, allGenre },
     };
 };

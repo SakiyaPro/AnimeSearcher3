@@ -15,10 +15,10 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('dj-rest-auth/', include('dj_rest_auth.urls')),
     path('dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')),
-    path('account-confirm-email/(?P&lt;key&gt;[-:\w]+)/$', TemplateView.as_view(),
-         name='account_confirm_email'),
 
-    path('account-confirm-email/', include('allauth.urls')),  # 追加
+    path('account-confirm-email/(?P<key>[-:\w]+)/$', TemplateView.as_view(),
+         name='account_confirm_email'),
+    path('account-confirm-email/', include('allauth.urls')),
 
     path('api/', include(anime_data_router.urls)),
     path('users/', include(users_router.urls)),

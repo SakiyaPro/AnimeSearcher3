@@ -22,13 +22,16 @@ services:
 
         build: ./django
 
-        command: python -u manage.py runserver 0.0.0.0:8000
+        command: bash -c "python manage.py makemigrations && python manage.py migrate && python -u manage.py runserver 0.0.0.0:8000"
 
         volumes:
             - ./django:/usr/src/django
 
         env_file:
             - django-docker-compose.env
+
+        environment:
+            - DEBUG=1
 
         ports:
             - 8000:8000

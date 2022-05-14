@@ -4,21 +4,20 @@ services:
     django:
             container_name: django
 
-            build: ./django
+            build:
+                context: ./django
+                dockerfile: ./Dockerfile.build
 
             command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py collectstatic --no-input --clear && uwsgi --socket :8001 --module config.wsgi --py-autoreload 1 -b 32768"
 
             volumes:
                 - ./django:/usr/src/django
-                - django_static:/django/static
-                - django_media:/django/media
+                - django_static:/usr/src/django/static
+                - django_media:/usr/src/django/media
 
-            environment:
-                # 1ならデバックモード
-                - DEBUG=0
-                # setting.pyに記載されているSECRET_KEYを記入
-                - SECRET_KEY=django-insecure--w@!)fvdh72o8-wuwpa_(c00g(ew4t-t*#ghk+uwn^n%0fhce6
-                
+            env_file:
+            - django-docker-compose.env
+
 
             expose:
                 - "8001"
@@ -26,7 +25,9 @@ services:
     nextjs:
         container_name: nextjs
 
-        build: ./nextjs
+        build:
+            context: ./nextjs
+            dockerfile: ./Dockerfile.build
 
         command: bash -c "npm run build && npm run start"
 
@@ -37,24 +38,44 @@ services:
             - django
             - nginx
 
-    nginx:
-        container_name: nginx
+    django-nginx:
+        container_name: django-nginx
 
-        build: ./nginx
+        build: ./django-nginx
 
         ports:
             - 80:80
 
         volumes:
-            - ./nginx/conf:/etc/nginx/conf.d
-            - ./nginx/uwsgi_params:/etc/nginx/uwsgi_params
-            - django_static:/django/static
-            - django_media:/django/media
+            - ./django-nginx/conf:/etc/nginx/conf.d
+            - ./django-nginx/uwsgi_params:/etc/nginx/uwsgi_params
+            - django_static:/usr/src/django/static
+            - django_media:/usr/src/django/media
 
         depends_on:
             - django
+
+    nextjs-nginx:
+        container_name: nextjs-nginx
+
+        build: ./nextjs-nginx
+
+        ports:
+            - 80:80
+
+        volumes:
+            - ./nextjs-nginx/conf:/etc/nginx/conf.d
+
+    database:
+        image: mysql
+        command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci --default_authentication_plugin=mysql_native_password
+        volumes:
+            - mysql:/var/lib/mysql
+        env_file:
+            - database-docker-compose.env
 
 
 volumes:
     django_static:
     django_media:
+    mysql:

@@ -14,7 +14,7 @@ class CustomUser(AbstractUser):
         'username', max_length=150, unique=True, blank=True, null=True)
     email = models.EmailField('email', unique=True)
     favorite_anime = models.ManyToManyField(
-        AnimeData, related_name="favorite_count", blank=True, null=True)
+        AnimeData, related_name="favorite_count", blank=True)
 
     # username認証からemail認証に変更
     USERNAME_FIELD = 'email'

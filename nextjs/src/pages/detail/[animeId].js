@@ -68,5 +68,5 @@ export async function getStaticProps({ params }) {
     const reviewData = await (await axios.get(`${process.env.NEXT_PUBLIC_DJANGO_URL}users/review_anime/?anime_id=${anime.id}`)).data.results
     const allGenre = await (getAllGenre()).then(async res => await res.map(data => data.genre));
 
-    return { props: { anime, reviewData, allGenre }, revalidate: 1 }
+    return { props: { anime, reviewData, allGenre } }
 }

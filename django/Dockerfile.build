@@ -16,7 +16,7 @@ ENV SECRET_KEY django-insecure--w@!)fvdh72o8-wuwpa_(c00g(ew4t-t*#ghk+uwn^n%0fhce
 RUN pip install --upgrade setuptools pip \
     && pip install pipenv \
     && apt update \
-    && apt install -y sqlite3 unzip wget vim gnupg2 gcc tk uwsgi
+    && apt install -y sqlite3 unzip wget vim gnupg2 gcc tk uwsgi default-libmysqlclient-dev default-mysql-client
 
 #google-chrome
 RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \

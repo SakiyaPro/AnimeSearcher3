@@ -102,17 +102,31 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
-}
+
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': os.environ.get('MYSQL_DATABASE', ''),
+            'USER': os.environ.get('MYSQL_USER', ''),
+            'PASSWORD': os.environ.get('MYSQL_PASSWORD', ''),
+            'HOST': 'animegatari-db.cfk9rdtjmzed.ap-northeast-1.rds.amazonaws.com',
+            'PORT': '3306',
+            'OPTIONS': {'charset': 'utf8mb4'},
+        }
+    }
 
 SIMPLE_JWT = {
-    #トークンをJWTに設定
+    # トークンをJWTに設定
     'AUTH_HEADER_TYPES': ('JWT'),
-    #トークンの持続時間の設定
+    # トークンの持続時間の設定
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=2),
 }

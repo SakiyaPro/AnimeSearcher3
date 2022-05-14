@@ -1,5 +1,5 @@
 from django.db import models
-from django.db.models.fields import IntegerField, TextField
+from django.db.models.fields import IntegerField, TextField, CharField
 
 from core_models.models import TimeStampedModel
 
@@ -9,7 +9,7 @@ class PersonData(TimeStampedModel):
     ''' 声優の詳細情報
     '''
     annictId = IntegerField("AnnictId", unique=True)
-    name = TextField("声優名", unique=True)
+    name = CharField("声優名", unique=True, max_length=191)
     nameEn = TextField("声優名EN", null=True, blank=True)
     nameKana = TextField("声優名かな", null=True, blank=True)
     nickname = TextField("ニックネーム", null=True, blank=True)

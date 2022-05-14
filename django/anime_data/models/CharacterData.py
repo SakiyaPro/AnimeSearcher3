@@ -1,5 +1,5 @@
 from django.db import models
-from django.db.models.fields import IntegerField, TextField
+from django.db.models.fields import IntegerField, TextField, CharField
 
 from core_models.models import TimeStampedModel
 from .models_validations.models_validations import *
@@ -9,7 +9,7 @@ from anime_data.models.AnimeSeriesData import AnimeSeriesData
 class CharacterData(TimeStampedModel):
     # ------------AnnictAPI searchCharacters-------------------------------------------
     annictId = IntegerField("AnnictId", unique=True)
-    name = TextField("キャラ名", null=True, blank=True)
+    name = CharField("キャラ名", null=True, blank=True, max_length=191)
     nameEn = TextField("キャラ名EN", null=True, blank=True)
     nameKana = TextField("キャラ名かな", null=True, blank=True)
     nickname = TextField("ニックネーム", null=True, blank=True)

@@ -41,6 +41,6 @@ export async function getStaticProps() {
     const reviewData = await (await axios.get(`${process.env.NEXT_PUBLIC_DJANGO_URL}users/review_anime/`)).data.results
 
     return {
-        props: { reviewData, revalidate: 1 },
+        props: { reviewData, },
     }
 }

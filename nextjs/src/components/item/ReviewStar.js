@@ -1,9 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styles from '../../styles/components-css/ReviewStar.module.css'
 import ReviewPostCenter from './ReviewPostCenter'
+import LoginRequest from '../view/LoginRequest';
+import { login_request } from '../../utils/functions';
 
 export default function ReviewStar({ reviewanime_set, animeTitle }) {
     const [display, setDisplay] = useState(false);
+    const [LoginState, setLoginState] = useState()
+
+    useEffect(() => {
+        setLoginState(login_request())
+    }, [])
 
     let data = reviewanime_set.map((review) => review["star"]);
     data = data.reduce((sum, element) => sum + element, 0) / reviewanime_set.length;
@@ -44,7 +51,15 @@ export default function ReviewStar({ reviewanime_set, animeTitle }) {
                 }
             </button>
             {
-                display &&
+                display && !LoginState &&
+                <>
+                    <div onClick={() => setDisplay(false)} className="displayBackground" >
+                    </div>
+                    <LoginRequest setDisplay={setDisplay} />
+                </>
+            }
+            {
+                display && LoginState &&
                 <>
                     <div onClick={() => setDisplay(false)} className="displayBackground" >
                     </div>

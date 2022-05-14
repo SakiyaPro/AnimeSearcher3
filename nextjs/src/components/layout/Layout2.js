@@ -49,23 +49,16 @@ export default function Layout2(props) {
             <header className={router.pathname === "/detail/[animeId]" ? "header detailHeader" : "header"}>
                 <div className={`${styles.headerWrapper}`}>
                     <div onClick={() => sessionStorage.setItem(router.pathname, window.scrollY)} className={`${styles.headerItemsWrapper}`}>
-                        <div className={`${styles.tentativeLogo}`}>
-                            <Link href="/" passhref="true">
-                                <a>
-                                    <img src="/image/Logo/AnimeSearcher_logo(colorful).png" width="150px" alt="サイトロゴ" />
-                                </a>
-                            </Link>
-                        </div>
                         <div onClick={() => sessionStorage.setItem(router.pathname, window.scrollY)} className={`${styles.headerItem}`}>
                             <Link href="/" passhref="true">
                                 {router.pathname === "/" ?
                                     <a>
                                         <img src="/image/systemIcon/system/active/home_icon.png" width="26px" alt="" />
-                                        <span className={`${styles.active}`}>ホーム</span>
+                                        <span className={`${styles.active}`}>最新レビュー</span>
                                     </a> :
                                     <a>
                                         <img src="/image/systemIcon/system/non-active/home_icon.png" width="26px" alt="" />
-                                        <span>ホーム</span>
+                                        <span>最新レビュー</span>
                                     </a>
                                 }
                             </Link>
@@ -176,6 +169,13 @@ export default function Layout2(props) {
                 </div>
                 <div className="rightWrapper">
                     <div>
+                        <div className={`${styles.tentativeLogo}`}>
+                            <Link href="/" passhref="true">
+                                <a>
+                                    <img src="/image/Logo/AnimeSearcher_logo(colorful).png" width="150px" alt="サイトロゴ" />
+                                </a>
+                            </Link>
+                        </div>
                         <div className={`${styles.rightContents}`}>
                             <div className={`${styles.streamingNameWrapper}`}>
                                 <a href="https://anime.dmkt-sp.jp/animestore/" className={`${styles.streamingName}`} target="_blank" rel="noopener noreferrer">ｄアニメストア</a>

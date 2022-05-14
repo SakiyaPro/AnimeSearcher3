@@ -1,6 +1,6 @@
 from core_models.models import TimeStampedModel
 from django.db import models
-from django.db.models.fields import IntegerField, TextField, PositiveIntegerField
+from django.db.models.fields import IntegerField, TextField, CharField
 from django.db.models.fields.files import ImageField
 
 # from taggit.managers import TaggableManager
@@ -21,7 +21,7 @@ class GenreData(TimeStampedModel):
 class AnimeData(TimeStampedModel):
     # --------AnnictAPI searchWorks-------------------------------------
     annictId = IntegerField("AnnictId", unique=True)
-    title = TextField("タイトル", unique=True)
+    title = CharField("タイトル", unique=True, max_length=255)
     titleEn = TextField("タイトルEN", null=True, blank=True)
     titleKana = TextField("タイトルかな", null=True, blank=True)
     titleRo = TextField("タイトルRO", null=True, blank=True)
