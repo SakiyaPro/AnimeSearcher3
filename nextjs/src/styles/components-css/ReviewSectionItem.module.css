@@ -1,16 +1,14 @@
 .reviewCenterArticle {
-    padding-top: 15px;
-    margin-left: 30px;
-    margin-right: 30px;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding:15px 20px 0px 20px;
+    position: relative;
 }
 
 .reviewContent {
-    display: flex;
-    justify-content: space-between;
-}
-
-.reviewContent img {
-    border-radius: 5px;
+    width: 95%;
+    margin:55px 0px 0px 40px;
 }
 
 .reviewModified {
@@ -22,4 +20,48 @@
 .reviewModified:hover {
     cursor: pointer;
     text-decoration: underline;
+}
+
+/* ======================================
+userBox */
+
+.userBox {
+  display: flex;
+  height: 20px;
+  align-items: top;
+  gap: 10px;
+  position: absolute;
+  top: 10px;
+  left: 0px;
+}
+
+.userSideInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.user_icon img {
+  width: 48px;
+  height: 48px;
+  cursor: pointer;
+  background-color: #fff;
+  border-radius: 50%;
+}
+
+.user_icon img:hover {
+  opacity: 0.7;
+}
+
+.userBox .user_name {
+  display: flex;
+  gap: 20px;
+  font-size: 1.05rem;
+  font-weight: bold;
+  max-height: 20px;
+}
+
+.userBox .user_name span:hover {
+  cursor: pointer;
+  text-decoration: 0.5px underline;
 }

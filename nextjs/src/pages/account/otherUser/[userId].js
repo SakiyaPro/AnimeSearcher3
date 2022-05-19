@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import styles from '../../../styles/private.module.css'
 import ReviewSectionItem from '../../../components/item/ReviewSectionItem'
 import axios from 'axios'
+import ReviewStarSimple from '../../../components/item/ReviewStarSimple'
 
 export default function OtherUserProfile({ reviewData }) {
     const [user, setUser] = useState()
@@ -11,7 +12,6 @@ export default function OtherUserProfile({ reviewData }) {
     useEffect(() => {
         setUser(reviewData[0].user)
         setReviewAnime(reviewData)
-        console.log(reviewData);
     }, [reviewData])
 
     const user_date_joined = user?.date_joined.replace('-', '年').replace('-', '月')
@@ -19,22 +19,19 @@ export default function OtherUserProfile({ reviewData }) {
     return (
         <div>
             <section className="section">
-                <div className="sectionTop">
-                    <button onClick={() => history.back()} className="button-decoration1"><img src="/image/systemIcon/system/allow_icon(left).png" width="13px" height="13px" alt="" /></button>
-                    <p className="sectionName">{user && user.username}さんのプロフィール</p>
-                </div>
                 <div className={`${styles.profileWrapper}`}>
-                    <div>
+                    <div className={`${styles.user_backImage}`}>
                         <button>
-                            <img className={`${styles.user_backImage}`} src={user?.profile.user_backImage} alt="" />
+                            {/* <img src={user?.profile.user_backImage} alt="" /> */}
+                            <img src='https://i.pinimg.com/originals/00/dc/bb/00dcbbc08e4c7a77a269770a4cccd0a4.jpg' alt="" />
                         </button>
-                    </div>
-                    <div className={`${styles.bottomProfileWrapper}`}>
                         <div className={`${styles.user_iconWrapper}`}>
-                            <button>
-                                <img id="user_icon" className={`${styles.user_icon}`} src={user?.profile.user_icon} alt="" />
+                            <button className={`${styles.user_icon}`}>
+                                <img id="user_icon" src={user?.profile.user_icon} alt="" />
                             </button>
                         </div>
+                    </div>
+                    <div className={`${styles.bottomProfileWrapper}`}>
                         <div className={`${styles.top}`}>
                         </div>
                         <div className={`${styles.infomation}`}>
@@ -52,19 +49,32 @@ export default function OtherUserProfile({ reviewData }) {
                     </div>
                     <div className={`${styles.selectButtonWrapper}`}>
                         <div className={`${styles.selectButton}`}>
-                            <button className={`${selectState === 1 && styles.active}`} onClick={() => setSelectState(1)}>レビューしたアニメ</button>
+                            <button className={`${selectState === 1 && styles.active}`} onClick={() => setSelectState(1)}>レビューアニメ</button>
                         </div>
                         <div className={`${styles.selectButton}`}>
-                            <button className={`${selectState === 2 && styles.active}`} onClick={() => setSelectState(2)}>いいねしたアニメ</button>
+                            <button className={`${selectState === 2 && styles.active}`} onClick={() => setSelectState(2)}>お気に入りアニメ</button>
                         </div>
                     </div>
                 </div>
                 {
                     selectState === 1 &&
                     reviewAnime?.map((review, i) => {
+                        console.log(review);
                         return (
-                            <div key={i} className="sectionItem">
-                                <ReviewSectionItem review={review} />
+                            <div className={`${styles.sectionItemWrapper}`}>
+                                <div key={i} className={`${styles.sectionItem}`}>
+                                    <div className={`${styles.itemImage}`}>
+                                        {/* <img src={review.anime.image} alt={review.anime.title} /> */}
+                                        <img src={"https://cs1.animestore.docomo.ne.jp/anime_kv/img/11/37/5/11375_1_9_8b.png?1551176232000"} />
+                                    </div>
+                                    <div className={`${styles.itemInfo}`}>
+                                        <p>{review.anime.title}</p>
+                                        <p>{user?.username}さんの評価： <span className={`${styles.star}`}>★{review.star}</span></p>
+                                    </div>
+                                    {
+                                        <span className={`${styles.moreInfo}`}>続きを読む</span>
+                                    }
+                                </div>
                             </div>
                         )
                     })

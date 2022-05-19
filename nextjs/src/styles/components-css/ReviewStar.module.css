@@ -3,7 +3,7 @@
 
 .noReviewStarWrapper {
     color: #CCCCCC;
-    font-size: 22px;
+    font-size: 1.2rem;
 }
 
 .noReviewStarWrapper:hover span {
@@ -31,7 +31,7 @@
 }
 
 .star5_rating:before, .star5_rating:after {
-    font-size: 22px;
+    font-size: 1.2rem;
     content: '★★★★★';
 }
 

@@ -8,7 +8,7 @@
 }
 
 .bar_box {
-    width: calc(100% - 20px);
+    width: calc(100% - 10px);
     display: flex;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.02);
@@ -18,25 +18,11 @@
 }
 
 .bar_box .bar_name {
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: 400;
-    min-width: 170px;
     text-align: left;
     position: absolute;
-    right: 200px;
-    z-index: 10;
-}
-
-.bar_box .bar_name::after {
-    display: inline-block;
-    content: '';
-    background-image: url("/image/systemIcon/system/plus_icon(333).png");
-    width: 15px;
-    height: 15px;
-    background-size: contain;
-    position: absolute;
-    top: 2px;
-    left: -20px;
+    left: 20px;
     z-index: 10;
 }
 
@@ -46,7 +32,7 @@
 
 .voteText::after {
     content: attr(text);
-    font-size: 19px;
+    font-size: 1.2rem;
     font-weight: 400;
     position: absolute;
     top: 5px;

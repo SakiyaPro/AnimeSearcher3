@@ -15,43 +15,32 @@ export default function ReviewSectionItem({ review }) {
     }, [review.user.id])
 
     return (
-        <div>
-            <div className="userBox">
-                <div className="user_icon">
-                    <Link href={redirectURL}
-                        as={redirectURL}
-                        passhref="true">
-                        <a>
-                            <img src={review.user.profile.user_icon} alt="" />
-                        </a>
-                    </Link>
+            <div className={`${styles.reviewCenterArticle}`}>
+                <div className={`${styles.userBox}`}>
+                    <div className={`${styles.user_icon}`}>
+                        <Link href={redirectURL}
+                            as={redirectURL}
+                            passhref="true">
+                            <a>
+                                <img src={review.user.profile.user_icon} alt="" />
+                            </a>
+                        </Link>
+                    </div>
+                    <div className={`${styles.userSideInfo}`}>
+                        <div className={`${styles.user_name}`}>
+                            <Link href={redirectURL} as={redirectURL} passhref="true">
+                                <a>
+                                    <span>{review.user.username}</span>
+                                </a>
+                            </Link>
+                            <div className={`${styles.reviewModified}`}>{conversionStrDate(review.modified)}</div>
+                        </div>
+                        <ReviewStarSimple star={review.star} />
+                    </div>
                 </div>
-                <div className="user_name">
-                    <Link href={redirectURL} as={redirectURL} passhref="true">
-                        <a>
-                            <span>{review.user.username}</span>
-                        </a>
-                    </Link>
-                    <div className={`${styles.reviewModified}`}>{conversionStrDate(review.modified)}</div>
+                <div className={`${styles.reviewContent}`}>
+                    <p>ああああああああああああああああああああああああああああ</p>
                 </div>
             </div>
-            <article className={`centerArticle ${styles.reviewCenterArticle}`}>
-                <div className="content">
-                    <Link href='/detail/[animeId]' as={`/detail/${review.anime.id}`} passhref="true">
-                        <a className="animeTitle">
-                            <h1>{review.anime.title}</h1>
-                        </a>
-                    </Link>
-                    <ReviewStarSimple star={review.star} />
-                    {review.comment && <p>{review.comment}</p>}
-                    {
-                        review.anime.image &&
-                        <div className="imageWrapper">
-                            <img src={review.anime.image} width="200px" alt="" />
-                        </div>
-                    }
-                </div>
-            </article>
-        </div>
     )
 }

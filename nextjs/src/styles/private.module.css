@@ -1,12 +1,35 @@
-.profileWrapper {}
+.profileWrapper {
+    width: 100%;
+    max-width: 600px;
+}
 
 .profileWrapper img {
     object-fit: cover;
 }
 
 .profileWrapper .user_backImage {
-    width: 598px;
+    position: relative;
+}
+
+.profileWrapper .user_backImage img {
+    width: 100vw;
+    max-width: 600px;
     height: 199.33px;
+}
+
+.profileWrapper .user_backImage .user_iconWrapper {
+    position: absolute;
+    bottom: -71px;
+    left: 17px;
+    z-index: 10;
+}
+
+.user_iconWrapper .user_icon img {
+    width: 142px;
+    height: 142px;
+    background-color: #fff;
+    border: 4px solid var(--bg-color);
+    border-radius: 50%;
 }
 
 .bottomProfileWrapper {
@@ -14,22 +37,7 @@
     position: relative;
 }
 
-.bottomProfileWrapper .user_iconWrapper {
-    position: absolute;
-    top: -72px;
-    left: 17px;
-}
-
-.bottomProfileWrapper .user_icon {
-    width: 142px;
-    height: 142px;
-    background-color: #fff;
-    border: 4px solid #fff;
-    border-radius: 50%;
-}
-
 .bottomProfileWrapper .top {
-    width: 566px;
     height: 68.61px;
     display: flex;
     justify-content: flex-end;
@@ -53,7 +61,7 @@
 
 .infomation .user_name {
     font-weight: bold;
-    font-size: 22px;
+    font-size: 1.3rem;
     margin-top: 4px;
     margin-bottom: 12px;
 }
@@ -67,21 +75,19 @@
     display: flex;
     align-items: center;
     gap: 5px;
-    font-size: 15px;
+    font-size: 1rem;
     color: rgb(83, 100, 113);
     font-weight: 100;
 }
 
 .selectButtonWrapper {
     display: flex;
-    justify-content: space-around;
     color: rgb(83, 100, 113);
     font-weight: 300;
-    border-bottom: 1px solid rgb(239, 243, 244);
 }
 
 .selectButtonWrapper .selectButton {
-    position: relative
+    position: relative;
 }
 
 .selectButtonWrapper .selectButton:hover {
@@ -89,16 +95,16 @@
 }
 
 .selectButton button {
-    padding: 16px 32px;
+    padding: 16px 0px 16px 32px;
 }
 
 .selectButtonWrapper .active {
-    color: #000;
+    color: #fff;
     font-weight: bold;
 }
 
 .selectButtonWrapper .active:after {
-    width: calc(100% - 64px);
+    width: calc(100% - 30px);
     margin-left: 32px;
     height: 4px;
     content: "";
@@ -113,7 +119,7 @@
 /* ===============================
 マイプロフィール編集 */
 .editProfileWrapper {
-    font-size: 20px;
+    font-size: 1.4rem;
     background-color: #fff;
     padding-top: 10px;
     border-radius: 16px;
@@ -139,7 +145,7 @@
 }
 
 .editProfileTop .saveButton {
-    font-size: 17px;
+    font-size: 1.1rem;
     padding: 5px 15px;
     color: #fff;
     border: #000;
@@ -226,6 +232,51 @@
     left: 26px;
 }
 
+
+/* =====================================
+sectionItem */
+
+.sectionItemWrapper {
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+}
+
+.sectionItem {
+    display: flex;
+    gap: 10px;
+    margin: 20px 32px;
+    position: relative;
+}
+
+.sectionItem .itemImage img {
+    width: 200px;
+}
+
+.sectionItem .itemInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.sectionItem .itemInfo p:nth-child(2) {
+    font-size: 0.9rem;
+    color: var(--str-light_color);
+}
+
+.itemInfo .star {
+    color: var(--str-star_color);
+}
+
+.moreInfo {
+    color: var(--str-accent-color);
+    position: absolute;
+    bottom: 0;
+    left: 220px;
+}
+
+
 /* ================================
 react-moveable 設定項目
 (画像をサイト上で自由に操作できるツール)*/
@@ -249,4 +300,32 @@ react-moveable 設定項目
 
 .logout:hover {
     opacity: 0.7;
+}
+
+@media screen and (max-width: 600px) {
+    .profileWrapper .user_backImage img {
+        width: 100vw;
+        max-width: 600px;
+        height: calc(100vw * 0.4);
+    }
+
+    .profileWrapper .user_backImage .user_iconWrapper {
+        position: absolute;
+        bottom: -50px;
+        left: 17px;
+        z-index: 10;
+    }
+
+    .user_iconWrapper .user_icon img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .bottomProfileWrapper .top {
+        height: 46px;
+    }
+
+    .sectionItem .itemImage img {
+        width: 140px;
+    }
 }

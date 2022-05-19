@@ -46,104 +46,17 @@ export default function Layout2(props) {
 
     return (
         <>
-            <header className={router.pathname === "/detail/[animeId]" ? "header detailHeader" : "header"}>
-                <div className={`${styles.headerWrapper}`}>
-                    <div onClick={() => sessionStorage.setItem(router.pathname, window.scrollY)} className={`${styles.headerItemsWrapper}`}>
-                        <div onClick={() => sessionStorage.setItem(router.pathname, window.scrollY)} className={`${styles.headerItem}`}>
-                            <Link href="/" passhref="true">
-                                {router.pathname === "/" ?
-                                    <a>
-                                        <img src="/image/systemIcon/system/active/home_icon.png" width="26px" alt="" />
-                                        <span className={`${styles.active}`}>最新レビュー</span>
-                                    </a> :
-                                    <a>
-                                        <img src="/image/systemIcon/system/non-active/home_icon.png" width="26px" alt="" />
-                                        <span>最新レビュー</span>
-                                    </a>
-                                }
-                            </Link>
-                        </div>
-                        <div onClick={() => sessionStorage.setItem(router.pathname, window.scrollY)} className={`${styles.headerItem}`}>
-                            <Link href="/search" passhref="true">
-                                {router.pathname === "/search" ?
-                                    <a>
-                                        <img src="/image/systemIcon/system/active/search_icon.png" width="26px" alt="" />
-                                        <span className={`${styles.active}`}>アニメを検索</span>
-                                    </a> :
-                                    <a>
-                                        <img src="/image/systemIcon/system/non-active/search_icon.png" width="26px" alt="" />
-                                        <span>アニメを検索</span>
-                                    </a>
-                                }
-                            </Link>
-                        </div>
-                        <div onClick={() => sessionStorage.setItem(router.pathname, window.scrollY)} className={`${styles.headerItem}`}>
-                            <Link href="/recommend/nowSeason" passhref="true">
-                                {router.pathname === "/recommend/nowSeason" ?
-                                    <a>
-                                        <img src="/image/systemIcon/system/active/recommend_icon.png" width="26px" alt="" />
-                                        <span className={`${styles.active}`}>今期アニメ</span>
-                                    </a> :
-                                    <a>
-                                        <img src="/image/systemIcon/system/non-active/recommend_icon.png" width="26px" alt="" />
-                                        <span>今期アニメ</span>
-                                    </a>
-                                }
-                            </Link>
-                        </div>
-                        <div onClick={() => sessionStorage.setItem(router.pathname, window.scrollY)} className={`${styles.headerItem}`}>
-                            <Link href="/recommend/onePrevSeason" passhref="true">
-                                <a>
-                                    {router.pathname === "/recommend/onePrevSeason" ?
-                                        <>
-                                            <img src="/image/systemIcon/system/active/recommend_icon.png" width="26px" alt="" />
-                                            <span className={`${styles.active}`}>{BEFOREYEAR1} {conversionSeasonName(BEFORESEASON1)}アニメ</span>
-                                        </>
-                                        :
-                                        <>
-                                            <img src="/image/systemIcon/system/non-active/recommend_icon.png" width="26px" alt="" />
-                                            <span>{BEFOREYEAR1} {conversionSeasonName(BEFORESEASON1)}アニメ</span>
-                                        </>
-                                    }
-                                </a>
-                            </Link>
-                        </div>
-                        <div onClick={() => sessionStorage.setItem(router.pathname, window.scrollY)} className={`${styles.headerItem}`}>
-                            <Link href="/recommend/popularAnime" passhref="true">
-                                {router.pathname === "/recommend/popularAnime" ?
-                                    <a>
-                                        <img src="/image/systemIcon/system/active/recommend_icon.png" width="26px" alt="" />
-                                        <span className={`${styles.active}`}>人気アニメ</span>
-                                    </a> :
-                                    <a>
-                                        <img src="/image/systemIcon/system/non-active/recommend_icon.png" width="26px" alt="" />
-                                        <span>人気アニメ</span>
-                                    </a>
-                                }
-                            </Link>
-                        </div>
-                        <div onClick={() => sessionStorage.setItem(router.pathname, window.scrollY)} className={`${styles.headerItem}`}>
-                            <Link href="/account/private" passhref="true">
-                                <a>
-                                    <img src={router.pathname === "/account/private" | router.pathname === "/login" ? src && src[0] : src && src[1]} width="26px" alt="" />
-                                    <span className={router.pathname === "/account/private" | router.pathname === "/login" && `${styles.active}`}>
-                                        {LoginState ? "プロフィール" : "ログイン"}
-                                    </span>
-                                </a>
-                            </Link>
-                        </div>
-                        <div>
-                            <button className="tweetItem" onClick={() => setReviewPostDisplay(true)}>レビューする</button>
-                        </div>
-                    </div>
+            <div className="sectionTop">
+                <div className="ground">
+                    <Link href="/" passhref="true"><a className="sectionName"><img src="/image/Logo/AnimeSearcher_logo(colorful).png" height="30vh" /></a></Link>
                 </div>
-            </header>
+            </div>
             <main className={router.pathname === "/detail/[animeId]" ? "main detailMain" : "main"}>
-                <div className={`mainWrapper ${router.pathname.match(/^\/detail\//) && "detailMainWrapper"}`}>
-                    <div className={`centerWrapper ${router.pathname.match(/^\/detail\//) && "detailCenterWrapper"}`}>
+                <div className={`mainWrapper`}>
+                    <div className={`centerWrapper`}>
                         {props.children}
                     </div>
-                    {
+                    {/* {
                         LoginState ?
                             reviewPostDisplay &&
                             <>
@@ -151,9 +64,9 @@ export default function Layout2(props) {
                                 </div>
                                 <div className="reviewPostBackground" >
                                     <div className="reviewPostDisableButton">
-                                        <button onClick={() => setReviewPostDisplay(false)} className="button-decoration1">
+                                        <bu tton onClick={() => setReviewPostDisplay(false)} className="button-decoration1">
                                             <img src="/image/systemIcon/system/disable_icon.png" width="13px" height="13px" alt="" />
-                                        </button>
+                                        </bu>
                                         <div>レビュー投稿</div>
                                     </div>
                                     <ReviewPostCenter />
@@ -165,30 +78,52 @@ export default function Layout2(props) {
                                 </div>
                                 <LoginRequest setDisplay={setReviewPostDisplay} />
                             </>
-                    }
-                </div>
-                <div className="rightWrapper">
-                    <div>
-                        <div className={`${styles.tentativeLogo}`}>
-                            <Link href="/" passhref="true">
-                                <a>
-                                    <img src="/image/Logo/AnimeSearcher_logo(colorful).png" width="150px" alt="サイトロゴ" />
-                                </a>
-                            </Link>
-                        </div>
-                        <div className={`${styles.rightContents}`}>
-                            <div className={`${styles.streamingNameWrapper}`}>
-                                <a href="https://anime.dmkt-sp.jp/animestore/" className={`${styles.streamingName}`} target="_blank" rel="noopener noreferrer">ｄアニメストア</a>
-                                <a href="https://www.netflix.com/jp/browse/genre/7424" className={`${styles.streamingName}`} target="_blank" rel="noopener noreferrer">NETFLIX</a>
-                                <a href="https://www.amazon.co.jp/Amazon-Video/b?ie=UTF8&node=2351649051" className={`${styles.streamingName}`} target="_blank" rel="noopener noreferrer">PrimeVideo</a>
-                                <a href="https://video.unext.jp/freeword?query=%E3%82%A2%E3%83%8B%E3%83%A1" className={`${styles.streamingName}`} target="_blank" rel="noopener noreferrer">U-NEXT</a>
-                                <a href="https://fod.fujitv.co.jp/genre/anime" className={`${styles.streamingName}`} target="_blank" rel="noopener noreferrer">FOD</a>
-                            </div>
-                        </div>
-                    </div>
+                    } */}
                 </div>
             </main>
-            <footer></footer>
+            <footer className={`${styles.footerWrapper}`}>
+                <div className={`${styles.footerContent}`}>
+                    <Link href="/recommend/nowSeason" passhref="true">
+                        {router.pathname === "/" ?
+                            <a>
+                                <img src="/image/systemIcon/system/active/recommend_icon.png" alt="" />
+                                <span className={`${styles.active}`}>探索</span>
+                            </a> :
+                            <a>
+                                <img src="/image/systemIcon/system/non-active/recommend_icon.png" alt="" />
+                                <span>探索</span>
+                            </a>
+                        }
+                    </Link>
+                </div>
+                <div className={`${styles.footerContent}`}>
+                    <Link href="/search" passhref="true">
+                        {router.pathname === "/aaa" ?
+                            <a>
+                                <img src="/image/systemIcon/system/active/search_icon.png" alt="" />
+                                <span className={`${styles.active}`}>検索</span>
+                            </a> :
+                            <a>
+                                <img src="/image/systemIcon/system/non-active/search_icon.png" alt="" />
+                                <span>検索</span>
+                            </a>
+                        }
+                    </Link>
+                </div>
+                <div className={`${styles.footerContent}`}>
+                    <Link href="/account/private" passhref="true">
+                        <a>
+                            <img src={router.pathname === "/account/private" | router.pathname === "/login" ? src && src[0] : src && src[1]} alt="" />
+                            <span className={router.pathname === "/account/private" | router.pathname === "/login" && `${styles.active}`}>
+                                {LoginState ? "プロフィール" : "ログイン"}
+                            </span>
+                        </a>
+                    </Link>
+                </div>
+                {/* <div>
+                            <button className="tweetItem" onClick={() => setReviewPostDisplay(true)}>レビューする</button>
+                        </div> */}
+            </footer>
         </>
     )
 }
