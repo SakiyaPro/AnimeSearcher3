@@ -47,7 +47,7 @@ https://anime-wo-kataru.com
 
 ## AWS(インフラ)構成図
 
-![AWS構成図](./Desktop Screenshot 2022.05.26 - 11.29.36.70.png)
+![AWS構成図](https://github.com/SakiyaPro/AnimeSearcher3/blob/main/Desktop%20Screenshot%202022.05.26%20-%2011.29.36.70.png)
 
 ## 機能一覧
 
