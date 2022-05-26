@@ -9,7 +9,7 @@
 
 https://anime-wo-kataru.com
 
-![Test Image 1](./DesktopScreenshot2022.05.26-11.38.32.01.png)
+![あにめ大革命スクリーンショット](./Desktop Screenshot 2022.05.26 - 11.38.32.01.png)
 
 ## 使用技術
 ・Windows
