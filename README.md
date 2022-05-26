@@ -2,19 +2,30 @@
 
 ## 概要
 アプリケーション名は「あにめ大革命」と命名しました。
+
 あにめ大革命は、「見やすい」「使いやすい」「レビューしやすい」をコンセプトに制作しているアニメレビューサイトです。
+
 レスポンシブデザインにも対応しているので下記URLから御覧ください。
+
 https://anime-wo-kataru.com
-![あにめ大革命スクリーンショット](/Desktop Screenshot 2022.05.26 - 11.38.32.01.png)
+
+![あにめ大革命スクリーンショット](Desktop Screenshot 2022.05.26 - 11.38.32.01.png)
 
 ## 使用技術
 ・Windows
+
     ○ Ubuntu 20.04 (Linuxディストリビューション)
+    
 ・Python 3.9
+
     ○ Django 3.2
-・JavaScript 
+    
+・JavaScript
+
     ○ Next.js 12.0.4
+    
 ・ESLint 7.32.0
+
 ・MySQL 8系
 ・Docker 4.2.0
 ・AWS
@@ -29,7 +40,8 @@ https://anime-wo-kataru.com
     ○ GraphQL
 
 ## AWS(インフラ)構成図
-![AWS構成図](/Desktop Screenshot 2022.05.26 - 11.29.36.70.png)
+
+![AWS構成図](Desktop Screenshot 2022.05.26 - 11.29.36.70.png)
 
 ## 機能一覧
 ・ユーザー登録 / ログイン機能
