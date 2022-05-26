@@ -7,6 +7,8 @@
 
 レスポンシブデザインにも対応しているので下記URLから御覧ください。
 
+※ サイト自体は随時制作中のため、ユーザー提供は７月頃を予定しています。
+
 https://anime-wo-kataru.com
 
 ![あにめ大革命スクリーンショット](https://github.com/SakiyaPro/AnimeSearcher3/blob/main/Desktop%20Screenshot%202022.05.26%20-%2011.38.32.01.png)
