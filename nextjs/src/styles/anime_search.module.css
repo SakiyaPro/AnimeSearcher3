@@ -1,0 +1,238 @@
+.resultWrapper {
+    width: 100%;
+    max-width: 1200px;
+    gap: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 60px auto 40px auto;
+}
+
+.resultWrapper .tags {
+    margin: 10px 0px 0px 18px
+}
+
+.resultItem {
+    background-color: rgba(255, 255, 255, 1);
+    filter: drop-shadow(0px 15px 10px rgba(0, 0, 0, .2));
+    border-radius: 16px;
+    position: relative;
+    transition: all .15s;
+}
+
+.resultItem:hover {
+    transform: scale(1.1);
+}
+
+.resultKeyword {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto 10px auto;
+}
+
+.resultTitle {
+    width: 100%;
+    font-size: 1.6rem;
+    font-weight: 500;
+    letter-spacing: 0.3rem;
+    margin-top: 20px;
+    text-align: center;
+    filter: drop-shadow(1px 1px 1px #ddd);
+    position: fixed;
+    top: 7vh;
+    left: 50%;
+    transform: translate(-50%, 0);
+    z-index: 51;
+}
+
+/* =================================
+section Content */
+
+.section {
+    display: flex;
+    flex-direction: column;
+    filter: drop-shadow(1px 1px 1px #555);
+    margin-bottom: 10vh;
+}
+
+.section .content {
+    width: 98%;
+    max-width: 1000px;
+    background-color: rgba(255, 255, 255, .1);
+    margin: 0 auto;
+}
+
+.section .content:nth-child(2) {
+    padding-bottom: 20px;
+}
+
+.content .contentTitle {
+    color: #fff;
+    font-size: 1.3rem;
+    font-weight: 500;
+    letter-spacing: 0.3rem;
+    background-color: #222;
+    padding: 1.4rem 1.9rem;
+}
+
+.content .contentInfo {
+    font-size: 1.2rem;
+    padding: 1.4rem 1.9rem;
+}
+
+.content .contentInfo .items {
+    display: flex;
+    flex-wrap: wrap;
+    font-weight: 500;
+    gap: 1.9rem;
+    align-items: center;
+}
+
+.items .button {
+    position: relative;
+}
+
+
+.items .button img {
+    width: 8rem;
+    height: 8rem;
+    object-fit: cover;
+    border-radius: 50%;
+    opacity: .9;
+    transition: all .1s;
+}
+
+.items .button img:hover {
+    opacity: 1;
+    transform: scale(1.2);
+}
+
+.items .button .tagName {
+    width: 100%;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-shadow: 1px 1px 1px #000;
+    text-align: center;
+    letter-spacing: 0.3rem;
+    position: absolute;
+    top: 7rem;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+.items .button .genreName {
+    letter-spacing: 0.2rem;
+    font-size: 1rem;
+}
+
+/* ============================
+放送年度*/
+
+.broadcast {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.broadcastResult {
+    justify-content: center;
+    gap: 10px;
+    margin: 0 auto;
+    width: 100vw;
+    padding: 10px 0;
+    background-color: rgba(255, 255, 255, .5);
+    position: fixed;
+    top: 80px;
+    z-index: 51;
+}
+
+.broadcast .year, .broadcast .season {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.broadcast .inputArea {
+    position: relative;
+}
+
+.broadcast input {
+    background-color: #fff;
+    height: 2rem;
+    border: 1px solid #000;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.broadcast .year input {
+    width: 5rem;
+}
+
+.broadcast .season input {
+    width: 8rem;
+}
+
+.broadcast input:focus {
+    outline: none;
+}
+
+.broadcast input::placeholder {
+    font-size: 1rem;
+    font-weight: 300;
+}
+
+.broadcast .suggest {
+    max-height: 8rem;
+    text-align: center;
+    background-color: #fff;
+    padding: 2px 0px 8px 0px;
+    position: absolute;
+    top: 2rem;
+    left: 50%;
+    transform: translate(-50%, 0);
+    z-index: 10;
+}
+
+.broadcast .year .suggest {
+    width: 5rem;
+    overflow-y: scroll;
+}
+
+.broadcast .season .suggest {
+    width: 8rem;
+    font-size: 1.1rem;
+}
+
+.broadcast .searchButton {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-weight: 400;
+    font-size: 1.1rem;
+    color: #222;
+    padding: 7px 10px 7px 7px;
+}
+
+.broadcast .searchButton:hover {
+    background-color: rgba(0, 0, 0, .1);
+}
+
+.broadcast .searchButton img {
+    width: 1.3rem;
+}
+
+
+@media screen and (max-width: 1000px) {
+    .items .button img {
+        opacity: 1;
+    }
+
+    .resultItem:hover {
+        transform: scale(1);
+    }
+
+    .broadcastResult {
+        top: 0px;
+    }
+}

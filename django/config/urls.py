@@ -16,7 +16,7 @@ urlpatterns = [
     path('dj-rest-auth/', include('dj_rest_auth.urls')),
     path('dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')),
 
-    path('account-confirm-email/(?P<key>[-:\w]+)/$', TemplateView.as_view(),
+    path('account-confirm-email/<str>', TemplateView.as_view(),
          name='account_confirm_email'),
     path('account-confirm-email/', include('allauth.urls')),
 
@@ -27,6 +27,7 @@ urlpatterns = [
     path('animeImageCreate/', anime_data_views.CreateAnimeDataImage),
     path('animeGenreCreate/', anime_data_views.CreateGenre),
 ]
+
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

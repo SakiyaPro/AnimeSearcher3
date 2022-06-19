@@ -1,0 +1,4 @@
+{% load i18n %}
+{% autoescape off %}
+{% blocktrans %}【本人確認のお願い】AnimeSearcher仮登録完了{% endblocktrans %}
+{% endautoescape %}

@@ -1,0 +1,20 @@
+{% extends "account/email/base_message.txt" %}
+{% load account %}
+{% load i18n %}
+
+{% block content %}{% autoescape off %}{% user_display user as user_display %}{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}
+AnimeSearcher anime-wo-kataru.com へようこそ！
+
+{{ user_display }} 様、アカウント登録ありがとうございます！
+
+現在は仮登録状態であるため、下記URLより本人確認をお願いします。
+{{ activate_url }}
+
+
+本人確認完了後、AnimeSearcherへのログインが可能になります！
+
+それでは、良いアニメライフを^_^
+
+
+※本メールに心当たりのない場合は、無視してください。アカウント登録が完了することはありません。
+{% endblocktrans %}{% endautoescape %}{% endblock %}

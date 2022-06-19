@@ -1,17 +1,22 @@
 :root {
-  --bg-color: #111;
+  --bg-color: #fff;
+  --border-color: rgb(239, 243, 244);
+  --str-base-color: #222;
   --str-accent-color: rgb(29, 155, 240);
   --str-light_color: #ccc;
   --str-star_color: #ffcf32;
-  --swiper-pagination-bullet-inactive-color: #fff;
+  --swiper-pagination-bullet-inactive-color: #000;
 }
 
 html {
-  font-size: 15px;
+  font-size: 16px;
 }
+
 body {
-  color: #fff;
+  color: var(--str-base-color);
   background-color: var(--bg-color);
+  background: url('https://beiz.jp/images_M/wallpaper/wallpaper_00002.jpg');
+  background-size: cover;
   font-family: 'Noto Sans JP', メイリオ, sans-serif;
   font-size: 1rem;
   font-weight: 400;
@@ -26,12 +31,9 @@ body {
   z-index: 10;
 }
 
-.main {
-  height: 100%;
-}
-
 .mainWrapper {
   width: 100%;
+  padding-top: 100px;
   position: relative;
 }
 
@@ -41,16 +43,19 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 6vh 0 13vh 0;
 }
 
 .section .sectionTitle {
-  font-size: 1.2rem;
+  font-size: 1.5rem;
+  font-weight: bold;
   vertical-align: middle;
-  margin: 10px 0 20px 0;
+  letter-spacing: 10px;
+  margin: 10px 0 30px 0;
+  position: relative;
 }
+
 .section .sectionTitle img {
-  vertical-align:baseline;
+  vertical-align: baseline;
 }
 
 .detailSection {
@@ -67,7 +72,7 @@ a {
 }
 
 p {
-  word-wrap:break-word;
+  word-wrap: break-word;
 }
 
 textarea {
@@ -146,9 +151,11 @@ textarea:focus {
 }
 
 .searchSuggest {
+  padding: 8px 16px;
   color: #444;
   background-color: #fff;
-  font-size: 85rem;
+  font-size: 0.85rem;
+  position: relative;
 }
 
 /* ============================================
@@ -210,7 +217,7 @@ SectionReviewItem */
   display: inline;
   color: rgb(29, 155, 240);
   font-size: 1rem;
-  font-weight: 300;
+  font-weight: 500;
 }
 
 .animeTitle:hover {
@@ -247,8 +254,6 @@ main(center) */
 
 .centerWrapper {
   width: 100%;
-  max-width: 1000px;
-  min-height: 100vh;
   margin: 0 auto;
 }
 
@@ -258,18 +263,14 @@ main(center) */
 
 .sectionTop {
   width: 100%;
-  height: 6vh;
-  min-height: 40px;
+  height: 58px;
   display: flex;
   gap: 20px;
   justify-content: space-between;
   align-items: center;
   margin: 0 auto;
   cursor: pointer;
-  background-color: rgba(0,0,0, 0.8);
-  backdrop-filter: blur(12px);
-  background: linear-gradient(rgba(255,255,255,0.18), rgba(30,30,30,0.5) 70%);
-  border-bottom: 1px solid #eee;
+  backdrop-filter: blur(100px);
   position: fixed;
   top: 0;
   left: 0;
@@ -285,7 +286,7 @@ main(center) */
   margin: 0 auto;
   position: absolute;
   left: 0;
-  right:0;
+  right: 0;
 }
 
 .detailSectionTop {
@@ -294,56 +295,33 @@ main(center) */
   gap: 10px;
 }
 
-
 .favoriteItem {
   text-align: center;
 }
 
-.detailSectionItem {
-  font-size: 1.3rem;
-  font-weight: 300;
-  border-bottom: 1px solid rgb(239, 243, 244);
-  position: relative;
-}
-
-.sectionItem:hover {
-  background-color: rgba(0, 0, 0, 0.03);
-}
-
-.sectionBottomItem {
-  display: flex;
-  color: rgb(83, 100, 113);
-  font-size: 0.9rem;
-  font-weight: 100;
-  gap: 30px;
-  align-items: center;
-  margin-bottom: 15px;
-  margin-left: 3px;
-}
-
-.sectionBottomItem .btn1 {
+.btn1 {
   display: flex;
   gap: 5px;
 }
 
-.sectionBottomItem .btn1 img {
+.btn1 img {
   width: 18px;
 }
 
-.sectionBottomItem .btn1:hover {
+.btn1:hover {
   filter: invert(72%) sepia(26%) saturate(6428%) hue-rotate(1deg) brightness(105%) contrast(102%);
 }
 
-.sectionBottomItem .btn2 {
+.btn2 {
   display: flex;
   gap: 5px;
 }
 
-.sectionBottomItem .btn2 img {
+.btn2 img {
   width: 18px;
 }
 
-.sectionBottomItem .btn2:hover {
+.btn2:hover {
   filter: invert(11%) sepia(100%) saturate(5170%) hue-rotate(293deg) brightness(100%) contrast(130%);
 }
 
@@ -353,46 +331,6 @@ main(center) */
   padding-left: 16px;
   padding-right: 16px;
 }
-
-.centerArticle .content {
-  display: flex;
-  gap: 15px;
-  font-weight: 300;
-  margin-left: 6%;
-}
-
-.centerArticle .content .imageWrapper {
-  margin-top: 12px;
-}
-
-.centerWrapper .infoWrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.centerArticle .viewContent {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-}
-
-.centerArticle .content .imageWrapper img {
-  width: 180px;
-  height: 120px;
-  object-fit: cover;
-  border-radius: 16px;
-  border: 1px solid rgb(239, 243, 244);
-}
-
-.detailImageWrapper {
-  background: linear-gradient(#e66465, #9198e5);
-}
-
-.detailImageWrapper img {
-  width: 100%;
-}
-
 
 /* ======================================
 main (right) */
@@ -404,6 +342,7 @@ main (right) */
   top: 0;
   z-index: 10;
 }
+
 
 /* =====================================
 スクロールバー */
@@ -424,6 +363,16 @@ main (right) */
 
 @media screen and (max-width: 600px) {
   html {
-    font-size: 12px;
+    font-size: 15px;
+  }
+
+  .mainWrapper{
+    padding-top: 20px;
+  }
+}
+
+@media screen and (max-width: 300px) {
+  html {
+    font-size: 13px;
   }
 }

@@ -3,7 +3,7 @@
 
 .noReviewStarWrapper {
     color: #CCCCCC;
-    font-size: 1.2rem;
+    font-size: 1.9rem;
 }
 
 .noReviewStarWrapper:hover span {
@@ -26,12 +26,10 @@
     display: inline-block;
     white-space: nowrap;
     color: #CCCCCC
-        /* グレーカラー 自由に設定化 */
-        /*font-size: 30px; フォントサイズ 自由に設定化 */
 }
 
 .star5_rating:before, .star5_rating:after {
-    font-size: 1.2rem;
+    font-size: 1.7rem;
     content: '★★★★★';
 }
 
@@ -51,61 +49,72 @@
 }
 
 .starText {
-    font-size: 15px;
+    font-size: 1.6rem;
     color: #333;
 }
 
 /* 星5 */
 .star5_rating[datarate="5"]:after {
     width: 100%;
+    height: 100%;
 }
 
 /* 星4.5 */
 .star5_rating[datarate="4.5"]:after {
     width: 90%;
+    height: 100%;
 }
 
 /* 星4 */
 .star5_rating[datarate="4"]:after {
     width: 80%;
+    height: 100%;
 }
 
 /* 星3.5 */
 .star5_rating[datarate="3.5"]:after {
     width: 70%;
+    height: 100%;
 }
 
 /* 星3 */
 .star5_rating[datarate="3"]:after {
     width: 60%;
+    height: 100%;
 }
 
 /* 星2.5 */
 .star5_rating[datarate="2.5"]:after {
     width: 50%;
+    height: 100%;
 }
 
 /* 星2 */
 .star5_rating[datarate="2"]:after {
     width: 40%;
+    height: 100%;
 }
 
 /* 星1.5 */
 .star5_rating[datarate="1.5"]:after {
     width: 30%;
+    height: 100%;
 }
 
 /* 星1 */
 .star5_rating[datarate="1"]:after {
     width: 20%;
+    height: 100%;
 }
 
 /* 星0.5 */
 .star5_rating[datarate="0.5"]:after {
     width: 10%;
+    height: 100%;
 }
 
 /* 星0 */
 .star5_rating[datarate="0"]:after {
     width: 0%;
+    height: 100%;
 }

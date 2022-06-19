@@ -5,19 +5,11 @@
     font-weight: bold;
     color: rgba(83, 100, 113, 0.85);
     align-items: center;
-    padding-left: 25px;
-    position: relative;
 }
 
 .tagWrapper .tag:hover {
     cursor: pointer;
     text-decoration: underline;
-}
-
-.addButton {
-    position: absolute;
-    left: 0px;
-    top: -1px;
 }
 
 .addButton:hover {

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import styles from '../../../styles/anime_recommend.module.css';
 import { getWatchersData } from "../../../lib/getAnimeData";
 import { getAllGenre } from '../../../lib/getGenreData';
 import { getSeasonAndYear, conversionSeasonName } from "../../../utils/functions";
@@ -23,20 +24,26 @@ export default function PopularAnime({ popularData, allGenre }) {
 
     return (
         <>
-            <div className="sectionTop">
-                <Link href="/recommend/popularAnime" passhref="true"><a className="sectionName">人気アニメ</a></Link>
-            </div>
-            <section className="section">
-                {
-                    popularData?.map((anime, i) => {
-                        return (
-                            <div key={i} className="sectionItem">
-                                <TagWrapper anime={anime} allgenre={allGenre} />
-                                <AnimeSectionItem anime={anime} />
-                            </div>
-                        )
-                    })
-                }
+            <section className={`${styles.section}`}>
+                <div className={`${styles.content}`}>
+                    <div className={`${styles.contentTitle}`}>
+                        <h2>人気のアニメ</h2>
+                    </div>
+                    <div className={`${styles.sectionItemWrapper}`}>
+                        {
+                            popularData?.map((anime, i) => {
+                                return (
+                                    <div key={i} className={`${styles.sectionItem}`}>
+                                        <div className={`${styles.tags}`}>
+                                            <TagWrapper anime={anime} allgenre={allGenre} />
+                                        </div>
+                                        <AnimeSectionItem anime={anime} />
+                                    </div>
+                                )
+                            })
+                        }
+                    </div>
+                </div>
             </section>
         </>
     )

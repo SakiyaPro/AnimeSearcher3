@@ -11,7 +11,7 @@ export default function Auth({ children }) {
     //access_tokenがtrueじゃなければ/loginへ
     useEffect(() => {
         if (!access_token) {
-            router.replace("/login");
+            router.replace("/account/login");
         }
     }, [access_token, router])
 

@@ -1,14 +1,21 @@
+.swiper-wrapper {
+    transition-timing-function: linear;
+}
+
 .swipperWrapper {
     width: 100%;
-    max-width: 1000px;
     margin: 0 auto 4vh auto;
 }
 
 .swiperSlideWrapper {
-    height: 200px;
+    height: 300px;
 }
 
 .swiperSlide {
+    width: 300px;
+    height: 250px;
+    background-color: rgba(255, 255, 255, 1);
+    box-shadow: 2px 2px 4px #000;
     position: relative;
 }
 
@@ -17,34 +24,32 @@
 }
 
 .swiperSlide .image img {
-    width: 240px;
-    padding: 5px;
-    filter: contrast(0.7);
+    width: 300px;
+    filter: contrast(0.95);
 }
 
 .image .imageMaskX {
     width: 100%;
     max-width: 240px;
     height: calc(250px *9 /16);
-    background: linear-gradient(-8deg, #111 0%,rgba(0,0,0,0) 25%, rgba(0,0,0,0) 75%, #111);
     position: absolute;
     top: 0;
     left: 0;
 }
 
 .swiperSlide .title {
-    width: 200px;
+    width: 250px;
+    color: var(--str-accent-color);
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    font-weight: 600;
-    font-size: 0.85rem;
-    filter: drop-shadow(1px 1px 2px #000);
+    font-weight: 500;
+    font-size: 1rem;
     padding: 2px 5px;
     position: absolute;
-    top: 8px;
-    left: 10px;
+    top: 180px;
+    left: 5px;
 }
 
 .swiperSlide .title:hover {
@@ -55,49 +60,17 @@
 .reviewStar {
     width: 240px;
     padding-bottom: 2px;
-    filter: drop-shadow(1px 1px 2px #000);
-    position:absolute;
-    right: -80px;
-    top: 108px;
-    z-index:3;
+    filter: drop-shadow(1px 1px 1px #444);
+    position: absolute;
+    left: 10px;
+    top: 140px;
+    z-index: 3;
 }
 
-@media  screen and (max-width: 600px) {
+@media screen and (max-width: 600px) {
     .swipperWrapper {
         width: 100%;
-        max-width: 1000px;
         margin: 0 auto 3vh auto;
-    }
-
-    .swiperSlideWrapper {
-        height: 140px;
-    }
-
-    .swiperSlide {
-        position: relative;
-    }
-
-    .swiperSlide .image img {
-        width: 140px;
-    }
-
-    .swiperSlide .title {
-        width: 125px;
-        font-size: 0.85rem;
-        vertical-align: bottom;
-        padding: 2px 5px;
-        top:5px;
-        left: 2px;
-    }
-
-    .swiperSlide .title:hover {
-        text-decoration: underline;
-    }
-
-
-    .reviewStar {
-        top: 80px;
-        left: 24px;
     }
 
 }

@@ -3,10 +3,6 @@ import Link from "next/link";
 import { useRouter } from 'next/router'
 import styles from '../../styles/layout2.module.css'
 import { getSeasonAndYear, conversionSeasonName, login_request } from '../../utils/functions';
-import ReviewPostCenter from '../item/ReviewPostCenter';
-import LoginRequest from '../view/LoginRequest'
-
-import SearchBar from '../item/SearchBar';
 
 export default function Layout2(props) {
     const router = useRouter();
@@ -14,8 +10,6 @@ export default function Layout2(props) {
     const [LoginState, setLoginState] = useState()
     const [BEFORESEASON1, setBEFORESEASON1] = useState()
     const [BEFOREYEAR1, setBEFOREYEAR1] = useState()
-    const [reviewPostDisplay, setReviewPostDisplay] = useState(false)
-    const [searchResult, setSearchResult] = useState()
 
     const loginRequest = login_request()
 
@@ -46,9 +40,40 @@ export default function Layout2(props) {
 
     return (
         <>
-            <div className="sectionTop">
-                <div className="ground">
-                    <Link href="/" passhref="true"><a className="sectionName"><img src="/image/Logo/AnimeSearcher_logo(colorful).png" height="30vh" /></a></Link>
+            <div className={`${styles.navigation}`}>
+                <div className={`${styles.items}`}>
+                    <div className={`${styles.item}`}>
+                        <Link href="/" passhref="true">
+                            <a>
+                                <img src="/image/systemIcon/system/icons8-ホームページ-32.png" alt="ホームアイコン" />
+                                <span>ホーム</span>
+                            </a>
+                        </Link>
+                    </div>
+                    <div className={`${styles.item}`}>
+                        <Link href="#" passhref="true">
+                            <a>
+                                <img src="/image/systemIcon/system/icons8-王冠-50.png" alt="ランキングアイコン" />
+                                <span>ランキング</span>
+                            </a>
+                        </Link>
+                    </div>
+                    <div className={`${styles.item}`}>
+                        <Link href="/anime/search" passhref="true">
+                            <a>
+                                <img src="/image/systemIcon/system/icons8-検索-64.png" alt="検索アイコン" />
+                                <span>検索</span>
+                            </a>
+                        </Link>
+                    </div>
+                    <div className={`${styles.item}`}>
+                        <Link href="/account/private" passhref="true">
+                            <a>
+                                <img src="/image/systemIcon/system/icons8-性中立ユーザー-50.png" alt="ログインアイコン" />
+                                <span>ログイン</span>
+                            </a>
+                        </Link>
+                    </div>
                 </div>
             </div>
             <main className={router.pathname === "/detail/[animeId]" ? "main detailMain" : "main"}>
@@ -56,74 +81,8 @@ export default function Layout2(props) {
                     <div className={`centerWrapper`}>
                         {props.children}
                     </div>
-                    {/* {
-                        LoginState ?
-                            reviewPostDisplay &&
-                            <>
-                                <div onClick={() => setReviewPostDisplay(false)} className="displayBackground" >
-                                </div>
-                                <div className="reviewPostBackground" >
-                                    <div className="reviewPostDisableButton">
-                                        <bu tton onClick={() => setReviewPostDisplay(false)} className="button-decoration1">
-                                            <img src="/image/systemIcon/system/disable_icon.png" width="13px" height="13px" alt="" />
-                                        </bu>
-                                        <div>レビュー投稿</div>
-                                    </div>
-                                    <ReviewPostCenter />
-                                </div>
-                            </> :
-                            reviewPostDisplay &&
-                            <>
-                                <div onClick={() => setReviewPostDisplay(false)} className="displayBackground" >
-                                </div>
-                                <LoginRequest setDisplay={setReviewPostDisplay} />
-                            </>
-                    } */}
                 </div>
             </main>
-            <footer className={`${styles.footerWrapper}`}>
-                <div className={`${styles.footerContent}`}>
-                    <Link href="/recommend/nowSeason" passhref="true">
-                        {router.pathname === "/" ?
-                            <a>
-                                <img src="/image/systemIcon/system/active/recommend_icon.png" alt="" />
-                                <span className={`${styles.active}`}>探索</span>
-                            </a> :
-                            <a>
-                                <img src="/image/systemIcon/system/non-active/recommend_icon.png" alt="" />
-                                <span>探索</span>
-                            </a>
-                        }
-                    </Link>
-                </div>
-                <div className={`${styles.footerContent}`}>
-                    <Link href="/search" passhref="true">
-                        {router.pathname === "/aaa" ?
-                            <a>
-                                <img src="/image/systemIcon/system/active/search_icon.png" alt="" />
-                                <span className={`${styles.active}`}>検索</span>
-                            </a> :
-                            <a>
-                                <img src="/image/systemIcon/system/non-active/search_icon.png" alt="" />
-                                <span>検索</span>
-                            </a>
-                        }
-                    </Link>
-                </div>
-                <div className={`${styles.footerContent}`}>
-                    <Link href="/account/private" passhref="true">
-                        <a>
-                            <img src={router.pathname === "/account/private" | router.pathname === "/login" ? src && src[0] : src && src[1]} alt="" />
-                            <span className={router.pathname === "/account/private" | router.pathname === "/login" && `${styles.active}`}>
-                                {LoginState ? "プロフィール" : "ログイン"}
-                            </span>
-                        </a>
-                    </Link>
-                </div>
-                {/* <div>
-                            <button className="tweetItem" onClick={() => setReviewPostDisplay(true)}>レビューする</button>
-                        </div> */}
-            </footer>
         </>
     )
 }

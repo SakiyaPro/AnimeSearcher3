@@ -35,7 +35,7 @@ export default function Private() {
         const asyncEffect = async () => {
             if (Cookies.get("access_token")) {
                 try {
-                    const res = await(await axios.get(
+                    const res = await (await axios.get(
                         `${process.env.NEXT_PUBLIC_DJANGO_URL}users/user/`, {
                         headers: {
                             Authorization: `JWT ${Cookies.get("access_token")}`,
@@ -51,7 +51,7 @@ export default function Private() {
                     //アクセストークンの再取得
                     refresh_access_token()
 
-                    const res = await(await axios.request(
+                    const res = await (await axios.request(
                         `${process.env.NEXT_PUBLIC_DJANGO_URL}users/user/`, {
                         method: "GET",
                         headers: {
@@ -148,133 +148,172 @@ export default function Private() {
         localStorage.removeItem("profile")
         localStorage.removeItem("user_icon")
         localStorage.removeItem("review_anime")
-        router.replace("/login");
+        router.replace("/account/login");
     }
 
     const user_date_joined = user?.date_joined.replace('-', '年').replace('-', '月')
 
+    useEffect(() => {
+        console.log(reviewAnime?.length);
+    }, [])
+
     return (
         <Auth>
-            <section className="section">
-                <div className="sectionTop">
-                    <button onClick={() => history.back()} className="button-decoration1"><img src="/image/systemIcon/system/allow_icon(left).png" width="13px" height="13px" alt="" /></button>
-                    <p className="sectionName">マイプロフィール</p>
+            <div className={`${styles.wrapper}`}>
+                {/* <button className={`${styles.logout}`} onClick={logout}>ログアウト</button> */}
+                {/* <div className={`${styles.sectionTop}`}>
+                    <div className={`${styles.sectionName}`}>
+                        <button onClick={() => history.back()} className="button-decoration1"><img src="/image/systemIcon/system/allow_icon(left).png" width="13px" height="13px" alt="" /></button>
+                        <p>マイプロフィール</p>
+                    </div>
                     <button className={`${styles.logout}`} onClick={logout}>ログアウト</button>
                 </div>
-                <div className={`${styles.profileWrapper}`}>
-                    <div>
-                        <button>
-                            <img className={`${styles.user_backImage}`} src={profile?.user_backImage} alt="" />
-                        </button>
-                    </div>
-                    <div className={`${styles.bottomProfileWrapper}`}>
-                        <div className={`${styles.user_iconWrapper}`}>
+                <section>
+                    <div className={`${styles.profileWrapper}`}>
+                        <div className={`${styles.user_backImage}`}>
                             <button>
-                                <img id="user_icon" className={`${styles.user_icon}`} src={profile?.user_icon} alt="" />
+                                <img src={profile?.user_backImage} alt="" />
                             </button>
-                        </div>
-                        <div className={`${styles.top}`}>
-                            <div>
-                                <button className={`${styles.editProfileButton}`} onClick={() => setDisplay(true)}>プロフィールを編集</button>
+                            <div className={`${styles.user_iconWrapper}`}>
+                                <button className={`${styles.user_icon}`}>
+                                    <img id="user_icon" src={profile?.user_icon} alt="" />
+                                </button>
                             </div>
                         </div>
-                        <div className={`${styles.infomation}`}>
-                            <div className={`${styles.user_name}`}>
-                                <p>{user?.username}</p>
+                        <div className={`${styles.bottomProfileWrapper}`}>
+                            <div className={`${styles.top}`}>
+                                <div>
+                                    <button className={`${styles.editProfileButton}`} onClick={() => setDisplay(true)}>プロフィールを編集</button>
+                                </div>
                             </div>
-                            <div className={`${styles.self_introduction}`}>
-                                <p>{profile?.self_introduction}</p>
+                            <div className={`${styles.infomation}`}>
+                                <div className={`${styles.user_name}`}>
+                                    <p>{user?.username}</p>
+                                </div>
+                                <div className={`${styles.self_introduction}`}>
+                                    <p>{profile?.self_introduction}</p>
+                                </div>
+                                <div className={`${styles.date_joined}`}>
+                                    <img src="/image/systemIcon/system/calendar_icon(darkblue).png" width="22px" alt="" />
+                                    <span>{user_date_joined?.slice(0, user_date_joined.indexOf('月') + 1)}から利用しています。</span>
+                                </div>
                             </div>
-                            <div className={`${styles.date_joined}`}>
-                                <img src="/image/systemIcon/system/calendar_icon(darkblue).png" width="22px" alt="" />
-                                <span>{user_date_joined?.slice(0, user_date_joined.indexOf('月') + 1)}から利用しています。</span>
+                        </div>
+                        <div className={`${styles.selectButtonWrapper}`}>
+                            <div className={`${styles.selectButton}`}>
+                                <button className={`${selectState === 1 && styles.active}`} onClick={() => setSelectState(1)}>レビューしたアニメ（{reviewAnime?.length}）</button>
+                            </div>
+                            <div className={`${styles.selectButton}`}>
+                                <button className={`${selectState === 2 && styles.active}`} onClick={() => setSelectState(2)}>いいねしたアニメ（{user?.favorite_anime.length}）</button>
                             </div>
                         </div>
                     </div>
-                    <div className={`${styles.selectButtonWrapper}`}>
-                        <div className={`${styles.selectButton}`}>
-                            <button className={`${selectState === 1 && styles.active}`} onClick={() => setSelectState(1)}>レビューしたアニメ（{reviewAnime?.length}）</button>
+                    {
+                        selectState === 1 &&
+                        reviewAnime?.map((review, i) => {
+                            return (
+                                <div key={i} className="sectionItem">
+                                    <ReviewSectionItem review={review} />
+                                </div>
+                            )
+                        })
+                    }
+                    {
+                        selectState === 2 &&
+                        user?.favorite_anime?.map((favorite_anime, i) => {
+                            return (
+                                <div key={i} className="sectionItem favoriteItem">
+                                    <p className="animeTitle">{favorite_anime.title}</p>
+                                </div>
+                            )
+                        })
+                    }
+                </section>
+                {
+                    display &&
+                    <>
+                        <div onClick={() => setDisplay(false)} className="displayBackground" >
                         </div>
-                        <div className={`${styles.selectButton}`}>
-                            <button className={`${selectState === 2 && styles.active}`} onClick={() => setSelectState(2)}>いいねしたアニメ（{user?.favorite_anime.length}）</button>
+                        <div className={`${styles.editProfileWrapper}`}>
+                            <div className={`${styles.editProfileTop}`}>
+                                <div className={`${styles.topContent}`}>
+                                    <button className="button-decoration1" onClick={() => setDisplay(false)}>
+                                        <img src="/image/systemIcon/system/disable_icon.png" width="13px" height="13px" alt="" />
+                                    </button>
+                                    <p>プロフィールを編集</p>
+                                </div>
+                                <button onClick={() => editProfile()} className={`${styles.saveButton}`}>
+                                    保存
+                                </button>
+                            </div>
+                            <div className={`${styles.profileWrapper}`}>
+                                <form className={`${styles.editForm}`}>
+                                    <div className={`${styles.user_backImage}`}>
+                                        <img ref={editUserBackImage} src={profile?.user_backImage} alt="" />
+                                        <label className={`${styles.backImageInput}`}>
+                                            <input onChange={onChangeUserBackImage} type="file" accept="image/*" />
+                                        </label>
+                                        <div className={`${styles.user_iconWrapper}`}>
+                                            <div className={`${styles.user_icon}`} >
+                                                <img id="user_icon" ref={editUserIcon} src={profile?.user_icon} alt="" />
+                                            </div>
+                                            <label className={`${styles.iconImageInput}`}>
+                                                <input onChange={onChangeUserIcon} type="file" accept="image/*" />
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div className={`${styles.bottomProfileWrapper}`}>
+                                        <div className={`${styles.top}`}>
+                                        </div>
+                                        <div className={`${styles.editInfomation}`}>
+                                            {error?.username &&
+                                                <p className="errorMassage">{error.username}</p>
+                                            }
+                                            <div className={`${styles.editContent}`}>
+                                                <span>名前</span>
+                                                <input onChange={(e) => setSaveUsername(e.target.value)} ref={editUsername} defaultValue={user?.username} />
+                                            </div>
+                                            <div className={`${styles.editContent}`}>
+                                                <span>自己紹介</span>
+                                                <textarea onChange={(e) => { e.target.value ? setSaveSelfIntroduction(e.target.value) : setSaveSelfIntroduction(""); }}
+                                                    onCompositionUpdate={(e) => { e.target.value ? setSaveSelfIntroduction(e.target.value) : setSaveSelfIntroduction("") }} ref={editSelfIntroduction} defaultValue={profile?.self_introduction}></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </>
+                } */}
+            </div>
+
+            <div className={`${styles.mainContent}`}>
+                <div className={`${styles.top}`}>
+                    <h2 className={`${styles.username}`}>{user?.username}</h2>
+                    <div className={`${styles.profileFrame}`}>
+                        <div className={`${styles.backImage}`}>
+                            <img src={profile?.user_backImage} alt="" />
+                        </div>
+                        <div className={`${styles.user_icon}`}>
+                            <img id="user_icon" src={profile?.user_icon} alt="" />
+                        </div>
+                        <div className={`${styles.info}`}>
+                            <p>レビューしたアニメ　{reviewAnime?.length ? `${reviewAnime?.length}作品` : "0作品"}</p>
+                            <p>いいねしたアニメ　　{user?.favorite_anime.length}作品</p>
                         </div>
                     </div>
                 </div>
-                {
-                    selectState === 1 &&
-                    reviewAnime?.map((review, i) => {
-                        return (
-                            <div key={i} className="sectionItem">
-                                <ReviewSectionItem review={review} />
+                <div className={`${styles.recommend}`}>
+                    <h2>おすすめしたいアニメ</h2>
+                    <div className={`${styles.playlist}`}>
+                        <div className={`${styles.animeFrame}`}>
+                            <div className={`${styles.thumbnail}`}>
                             </div>
-                        )
-                    })
-                }
-                {
-                    selectState === 2 &&
-                    user?.favorite_anime?.map((favorite_anime, i) => {
-                        return (
-                            <div key={i} className="sectionItem favoriteItem">
-                                <p className="animeTitle">{favorite_anime.title}</p>
-                            </div>
-                        )
-                    })
-                }
-            </section>
-            {
-                display &&
-                <>
-                    <div onClick={() => setDisplay(false)} className="displayBackground" >
-                    </div>
-                    <div className={`${styles.editProfileWrapper}`}>
-                        <div className={`${styles.editProfileTop}`}>
-                            <div className={`${styles.topContent}`}>
-                                <button className="button-decoration1" onClick={() => setDisplay(false)}>
-                                    <img src="/image/systemIcon/system/disable_icon.png" width="13px" height="13px" alt="" />
-                                </button>
-                                <p>プロフィールを編集</p>
-                            </div>
-                            <button onClick={() => editProfile()} className={`${styles.saveButton}`}>
-                                保存
-                            </button>
-                        </div>
-                        <div className={`${styles.profileWrapper}`}>
-                            <form className={`${styles.editForm}`}>
-                                <div>
-                                    <img className={`${styles.user_backImage}`} ref={editUserBackImage} src={profile?.user_backImage} alt="" />
-                                    <label className={`${styles.backImageInput}`}>
-                                        <input onChange={onChangeUserBackImage} type="file" accept="image/*" />
-                                    </label>
-                                </div>
-                                <div className={`${styles.bottomProfileWrapper}`}>
-                                    <div className={`${styles.user_iconWrapper}`}>
-                                        <img id="user_icon" className={`${styles.user_icon}`} ref={editUserIcon} src={profile?.user_icon} alt="" />
-                                        <label className={`${styles.iconImageInput}`}>
-                                            <input onChange={onChangeUserIcon} type="file" accept="image/*" />
-                                        </label>
-                                    </div>
-                                    <div className={`${styles.top}`}>
-                                    </div>
-                                    <div className={`${styles.editInfomation}`}>
-                                        {error?.username &&
-                                            <p className="errorMassage">{error.username}</p>
-                                        }
-                                        <div className={`${styles.editContent}`}>
-                                            <span>名前</span>
-                                            <input onChange={(e) => setSaveUsername(e.target.value)} ref={editUsername} defaultValue={user?.username} />
-                                        </div>
-                                        <div className={`${styles.editContent}`}>
-                                            <span>自己紹介</span>
-                                            <textarea onChange={(e) => { e.target.value ? setSaveSelfIntroduction(e.target.value) : setSaveSelfIntroduction(""); }}
-                                                onCompositionUpdate={(e) => { e.target.value ? setSaveSelfIntroduction(e.target.value) : setSaveSelfIntroduction("") }} ref={editSelfIntroduction} defaultValue={profile?.self_introduction}></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
+                            <button className={`${styles.playlistAddButton}`}>アニメを追加 +</button>
                         </div>
                     </div>
-                </>
-            }
+                </div>
+            </div>
         </Auth >
     );
 }

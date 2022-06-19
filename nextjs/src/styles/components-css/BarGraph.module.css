@@ -8,7 +8,7 @@
 }
 
 .bar_box {
-    width: calc(100% - 10px);
+    width: 40%;
     display: flex;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.02);
@@ -35,7 +35,8 @@
     font-size: 1.2rem;
     font-weight: 400;
     position: absolute;
-    top: 5px;
+    top: 50%;
+    transform: translate(0, -50%);
     right: 30px;
     animation: fade-in-text .4s 0.1s forwards;
 }
@@ -61,5 +62,12 @@
 
     100% {
         opacity: 1;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .bar_box {
+        width: 100%;
+        max-width: 600px;
     }
 }

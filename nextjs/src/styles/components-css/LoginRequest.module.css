@@ -1,3 +1,21 @@
+.activeAddButton {
+    background-color: #fff;
+    width: 600px;
+    max-width: 95vw;
+    height: auto;
+    color: #444;
+    font-size: 16px;
+    border-radius: 16px;
+    padding-top: 16px;
+    padding-left: 16px;
+    padding-right: 16px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -100%);
+    z-index: 9999;
+}
+
 .activeAddButton .desableButton {
     width: 34px;
     height: 34px;
@@ -11,36 +29,25 @@
     background-color: rgba(0, 0, 0, 0.1);
 }
 
-.activeAddButton {
-    background-color: #fff;
-    width: 600px;
-    max-width: 80vw;
-    height: auto;
-    max-height: 90vh;
-    color: #444;
-    font-size: 16px;
-    border-radius: 16px;
-    background-color: #fff;
-    padding-top: 16px;
-    padding-left: 16px;
-    padding-right: 16px;
-    position: fixed;
-    top: 5%;
-    left: calc(55% - 800px/2);
-    z-index: 9999;
-}
-
-.activeAddButton .contentWrapper {
-    display: flex;
-    margin-bottom: 40px;
-}
-
 .contentTop {
     display: flex;
     gap: 5px;
     align-items: center;
     color: #333;
     font-weight: bold;
+}
+
+.contentWrapper {
+    display: flex;
+    margin-bottom: 40px;
+}
+
+.contentWrapper .apologizeImage {
+}
+
+.contentWrapper .apologizeImage img {
+    width: 60px;
+    height: auto;
 }
 
 .contentWrapper .text {

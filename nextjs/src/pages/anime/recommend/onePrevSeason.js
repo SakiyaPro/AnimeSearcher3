@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import styles from '../../styles/anime_recommend.module.css'
+import styles from '../../../styles/anime_recommend.module.css'
 import { getSeasonData } from "../../../lib/getAnimeData";
 import { getAllGenre } from "../../../lib/getGenreData"
 import { getSeasonAndYear, conversionSeasonName } from "../../../utils/functions";
@@ -26,20 +26,26 @@ export default function OnePrevSeason({ onePrevSeasonData, allGenre }) {
 
     return (
         <>
-            <div className="sectionTop">
-                <Link href="/recommend/onePrevSeason" passhref="true"><a className="sectionName">{BEFOREYEAR1} {conversionSeasonName(BEFORESEASON1)}アニメ</a></Link>
-            </div>
-            <section className="section">
-                {
-                    onePrevSeasonData?.map((anime, i) => {
-                        return (
-                            <div key={i} className="sectionItem">
-                                <TagWrapper anime={anime} allgenre={allGenre} />
-                                <AnimeSectionItem anime={anime} />
-                            </div>
-                        )
-                    })
-                }
+            <section className={`${styles.section}`}>
+                <div className={`${styles.content}`}>
+                    <div className={`${styles.contentTitle}`}>
+                        <h2>{BEFOREYEAR1}年{conversionSeasonName(BEFORESEASON1)}アニメ</h2>
+                    </div>
+                    <div className={`${styles.sectionItemWrapper}`}>
+                        {
+                            onePrevSeasonData?.map((anime, i) => {
+                                return (
+                                    <div key={i} className={`${styles.sectionItem}`}>
+                                        <div className={`${styles.tags}`}>
+                                            <TagWrapper anime={anime} allgenre={allGenre} />
+                                        </div>
+                                        <AnimeSectionItem anime={anime} />
+                                    </div>
+                                )
+                            })
+                        }
+                    </div>
+                </div>
             </section>
         </>
     )

@@ -1,0 +1,14 @@
+.sectionTitleMoreInfo {
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-decoration: underline;
+    color: var(--str-accent-color);
+    letter-spacing: 0px;
+    margin: 0px 0px 0px 12px;
+}
+
+@media screen and (max-width: 600px) {
+    .sectionTitleMoreInfo {
+        margin: 0 0;
+    }
+}

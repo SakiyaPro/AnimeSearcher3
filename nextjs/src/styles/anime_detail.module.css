@@ -1,52 +1,44 @@
 .detailInfo {
     width: 100%;
-    max-width: 600px;
+    max-width: 1000px;
+    position: relative;
+    margin-top: 20px;
 }
 
 .detailInfo .animeImage {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
     position: absolute;
-    left:calc(100vw / 2);
-}
-
-.animeImage .imageMaskY {
-    width: 100%;
-    max-width: 250px;
-    height: calc(250px *9 /16);
-    background: linear-gradient(90deg,#111 0%,rgba(0,0,0,0) 30%, rgba(0,0,0,0) 98%, #111);
-    position: absolute;
-    top: 0;
     left: 0;
 }
 
-.animeImage .imageMaskX {
-    width: 100%;
-    max-width: 250px;
-    height: calc(250px *9 /16);
-    background: linear-gradient(bottom,#111 0%,rgba(0,0,0,0) 20%, rgba(0,0,0,0) 98%, #111);
-    position: absolute;
-    top: 0;
-    left: 0;
+.detailInfo .animeImage .thumbnail {
+    width: 40%;
+    filter: contrast(0.95);
 }
 
+.bottomContents {
+    width: 60%;
+    position: absolute;
+    right: 0;
+}
 
-.detailInfo .animeImage img {
-    width: 100%;
-    max-width: 250px;
-    filter: contrast(0.8);
+.viewContent {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
 }
 
 .animeTitle {
-    color: #fff;
-    filter: drop-shadow(1px 1px 2px #000);
     font-size: 1.3rem;
     font-weight: 600;
-    margin: 20px 0px 15px 10px;
+    margin: 10px 0px 15px 10px;
 }
 
 .switchInfo {
     display: flex;
     gap: 50px;
-    color: #eee;
     font-size: 1rem;
     font-weight: 400;
     border-radius: 5px;
@@ -81,33 +73,35 @@
 AnimeInfo */
 
 .animeInfo {
-    width: 100%;
-    max-width: 600px;
+    max-width: 700px;
     display: flex;
     flex-wrap: wrap;
+    color: #fff;
     gap: 10px;
     font-size: 0.9rem;
     font-weight: 300;
 }
 
-.animeInfo button {
+.animeInfo a {
     background-color: #333;
-    padding:8px 10px;
+    padding: 8px 10px;
     border-radius: 2px;
 }
 
-.animeInfo button:hover {
+.animeInfo a:hover {
     text-decoration: underline;
 }
 
 .noInfo {
     font-size: 0.8rem;
     font-weight: 100;
-    opacity: 0.5;
 }
 
 @media screen and (max-width: 600px) {
     .detailInfo {
+        background-color: #fff;
+        min-height: 100vh;
+        margin-top: 0;
         position: relative;
     }
 
@@ -117,7 +111,7 @@ AnimeInfo */
     }
 
 
-    .detailInfo .animeImage img {
+    .detailInfo .animeImage .thumbnail {
         width: 100%;
         max-width: 600px;
         filter: contrast(0.8);
@@ -132,9 +126,10 @@ AnimeInfo */
     }
 
     .detailInfo .bottomContents {
+        width: 100%;
         position: absolute;
         top: calc(100vw * 9 /30);
         z-index: 10;
-        background: linear-gradient(rgba(0,0,0,0) 0%, var(--bg-color) calc(100vw * 9 /40))
+        background: linear-gradient(rgba(0, 0, 0, 0) 0%, var(--bg-color) calc(100vw * 9 /40))
     }
 }

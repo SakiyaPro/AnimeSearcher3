@@ -7,7 +7,8 @@
 }
 
 .reviewContent {
-    width: 95%;
+    width: 60vw;
+    max-width: 500px;
     margin:55px 0px 0px 40px;
 }
 

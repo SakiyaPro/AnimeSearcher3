@@ -3,13 +3,15 @@
 
 .searchForm {
     font-weight: 400;
-    font-size: 16.2px;
+    font-size: 1rem;
     margin: 4px 0;
+    filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.2));
     position: relative;
-    z-index: 10;
 }
 
 .searchBar {
+    width: 80vw;
+    max-width: 960px;
     height: 46px;
     padding-left: 54px;
     border-radius: 23px;
@@ -34,4 +36,22 @@
     position: absolute;
     top: 13px;
     left: 20px;
+}
+
+@media screen and (max-width: 600px) {
+    .searchBar {
+        height: 40px;
+    }
+}
+
+@media screen and (max-width: 300px) {
+    .searchBar {
+        height: 30px;
+    }
+
+    .searchIcon {
+        width: 17px;
+        top: 50%;
+        transform: translate(0, -50%);
+    }
 }

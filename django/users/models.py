@@ -24,7 +24,7 @@ class CustomUser(AbstractUser):
         db_table = 'custom_users'
 
 
-# 投稿したレビューアニメ
+# レビューしたアニメ
 class ReviewAnime(TimeStampedModel):
     user = models.ForeignKey(
         CustomUser, verbose_name="ユーザー", on_delete=models.CASCADE, blank=True, null=True)
@@ -67,3 +67,23 @@ def create_profile(sender, **kwargs):
     if kwargs['created']:
         user_profile = Profile.objects.get_or_create(
             user=kwargs['instance'])
+
+
+# おすすめしたいアニメをまとめたグループ
+class RecommendAnimeGroup(models.Model):
+    group_title = models.CharField(
+        "グループ名", max_length=40, default="", blank=True, null=True)
+    description = models.CharField(
+        "グループ説明", max_length=512, default="", blank=True, null=True)
+
+
+# おすすめしたいアニメ
+class RecommendAnime(models.Model):
+    recommend_group = models.ForeignKey(
+        RecommendAnimeGroup, verbose_name="まとめるグループ", on_delete=models.CASCADE, null=True)
+    user = models.OneToOneField(
+        CustomUser, verbose_name="ユーザー", on_delete=models.CASCADE, null=True)
+    anime = models.OneToOneField(
+        ReviewAnime, verbose_name="おすすめしたいアニメ", on_delete=models.CASCADE, null=True)
+    recommend_point = models.CharField(
+        "おすすめポイント", max_length=512, default="", blank=True, null=True)

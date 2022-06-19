@@ -1,3 +1,172 @@
+/* ===========================
+背景 */
+
+.wrapper {
+    width: 100%;
+    height: 100vh;
+    background-color: #333;
+    position: fixed;
+    top: 0px;
+    z-index: -10;
+    /* width: 100%;
+    max-width: 600px;
+    min-height: 100vh;
+    border-left: 1px solid var(--border-color);
+    border-right: 1px solid var(--border-color);
+    background-color: #fff;
+    margin: 0 auto; */
+}
+
+/* ========================================
+メインコンテンツ */
+.mainContent {
+    width: 100%;
+    max-width: 1000px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+/* =============================
+プロフィール枠 */
+
+.top {
+    width: 95vw;
+    max-width: 400px;
+    margin: 5px auto 30px auto;
+}
+
+.top h2 {
+    font-size: 2.2rem;
+    text-align: center;
+    color: #fff;
+    background-color: #333;
+    margin-bottom: 20px;
+}
+
+.profileFrame {
+    width: 100%;
+    height: 300px;
+    background-color: #fff;
+    filter: drop-shadow(0px 2px 3px #111);
+    border-radius: 16px;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    position: relative;
+}
+
+.profileFrame .user_icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.profileFrame .user_icon img {
+    background-color: #fff;
+    width: 6rem;
+    border-radius: 50%;
+    border: 4px solid #fff;
+}
+
+.profileFrame .backImage img {
+    width: 100%;
+    height: 150px;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    object-fit: cover;
+    margin-bottom: 3.5rem;
+}
+
+.profileFrame .info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    color: #777;
+    margin-left: 40px;
+}
+
+.profileFrame .info p {
+    width: 70%;
+    text-align: left;
+}
+
+/* =============================
+おすすめアニメ枠 */
+
+.recommend {
+    width: 95vw;
+    max-width: 400px;
+    margin: 30px auto;
+}
+
+.recommend h2 {
+    color: #fff;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.playlist {
+    display: flex;
+}
+
+.playlist .animeFrame {
+    width: 100%;
+    height: 300px;
+    margin: 30px auto;
+    background-color: #fefefe;
+    filter: drop-shadow(0px 2px 3px #111);
+    border-radius: 16px;
+    border-top-left-radius: 32px;
+    border-top-right-radius: 32px;
+    position: relative;
+}
+
+.playlist .animeFrame:last-child {
+    opacity: 0.3
+}
+
+.playlistAddButton {
+    color: #fff;
+    padding: 16px;
+    border: 3px solid #fff;
+    border-radius: 8px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.animeFrame .thumbnail {
+    width: 100%;
+    height: calc(300px - 3rem);
+    background-color: #666;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+}
+
+
+.sectionTop {
+    width: 100%;
+    /* max-width: 598px; */
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 16px;
+}
+
+.sectionTop .sectionName {
+    display: flex;
+    gap: 10px;
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+
 .profileWrapper {
     width: 100%;
     max-width: 600px;
@@ -13,7 +182,7 @@
 
 .profileWrapper .user_backImage img {
     width: 100vw;
-    max-width: 600px;
+    max-width: 598px;
     height: 199.33px;
 }
 
@@ -25,10 +194,9 @@
 }
 
 .user_iconWrapper .user_icon img {
-    width: 142px;
-    height: 142px;
+    width: 80px;
+    filter: drop-shadow(0px 0px 8px #fff);
     background-color: #fff;
-    border: 4px solid var(--bg-color);
     border-radius: 50%;
 }
 
@@ -44,12 +212,14 @@
 }
 
 .top .editProfileButton {
-    width: 169px;
+    width: 100%;
+    max-width: 169px;
     height: 36px;
     color: #444;
-    font-size: 15px;
+    font-size: 1rem;
     font-weight: bold;
-    padding: 0px 0px 0px 14px;
+    text-align: center;
+    padding: 0px 10px;
     border: 1px solid rgb(207, 217, 222);
     border-radius: 18px;
 }
@@ -99,7 +269,7 @@
 }
 
 .selectButtonWrapper .active {
-    color: #fff;
+    color: var(--str-base-color);
     font-weight: bold;
 }
 
@@ -120,13 +290,16 @@
 マイプロフィール編集 */
 .editProfileWrapper {
     font-size: 1.4rem;
+    width: 95%;
+    max-width: 600px;
     background-color: #fff;
     padding-top: 10px;
     border-radius: 16px;
     font-weight: 400;
     position: fixed;
     top: 5%;
-    left: calc(55% - 800px/2);
+    left: 50%;
+    transform: translate(-50%, 0);
     z-index: 9999;
 }
 
@@ -167,7 +340,6 @@
 }
 
 .editForm label {
-    padding: 10px 40px;
     cursor: pointer;
     width: 50px;
     height: 50px;
@@ -175,20 +347,27 @@
     background-size: contain;
     background-image: url("/image/systemIcon/system/camera_icon.png");
     background-repeat: no-repeat;
-    filter: drop-shadow(1px 1px 1px #000);
+    filter: drop-shadow(0px 0px 1px #eee);
+}
+
+.editForm .user_backImage img {
+    width: 100%;
+    max-width: 600px;
 }
 
 .editForm .backImageInput {
     position: absolute;
-    top: 120px;
-    left: 270px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     z-index: 100000;
 }
 
 .editForm .iconImageInput {
     position: absolute;
-    top: 50px;
-    left: 45px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     z-index: 10001;
 }
 
@@ -198,19 +377,19 @@
 }
 
 .editInfomation input {
-    width: 530px;
+    width: 100%;
+    max-width: 530px;
     padding: 30px 5px 5px;
-    margin-left: 20px;
     border: 1px solid #555;
 }
 
 .editInfomation textarea {
     font-weight: 300;
     font-size: 16px;
-    width: 530px;
+    width: 100%;
+    max-width: 530px;
     height: 200px;
     padding: 30px 5px 5px;
-    margin-left: 20px;
     border: 1px solid #555;
     resize: none;
 }
@@ -291,7 +470,6 @@ react-moveable 設定項目
  */
 
 .logout {
-    margin-left: 220px;
     padding: 7px 15px;
     border-radius: 20px;
     background-color: #444;
@@ -304,9 +482,14 @@ react-moveable 設定項目
 
 @media screen and (max-width: 600px) {
     .profileWrapper .user_backImage img {
-        width: 100vw;
-        max-width: 600px;
+        width: calc(100vw - 2px);
+        max-width: 598px;
         height: calc(100vw * 0.4);
+    }
+
+    .editForm .user_backImage img {
+        width: 100%;
+        max-width: 598px;
     }
 
     .profileWrapper .user_backImage .user_iconWrapper {
@@ -327,5 +510,16 @@ react-moveable 設定項目
 
     .sectionItem .itemImage img {
         width: 140px;
+    }
+}
+
+@media screen and (max-width: 300px) {
+    .user_iconWrapper .user_icon img {
+        width: 70px;
+        height: 70px;
+    }
+
+    .top .editProfileButton {
+        height: 28px;
     }
 }

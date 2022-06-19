@@ -17,13 +17,19 @@ export default function OtherUserProfile({ reviewData }) {
     const user_date_joined = user?.date_joined.replace('-', '年').replace('-', '月')
 
     return (
-        <div>
+        <div className={`${styles.wrapper}`}>
+            <div className={`${styles.sectionTop}`}>
+                <div className={`${styles.sectionName}`}>
+                    <button onClick={() => history.back()} className="button-decoration1"><img src="/image/systemIcon/system/allow_icon(left).png" width="13px" height="13px" alt="" /></button>
+                    <p>{user?.username}さんのプロフィール</p>
+                </div>
+                <div></div>
+            </div>
             <section className="section">
                 <div className={`${styles.profileWrapper}`}>
                     <div className={`${styles.user_backImage}`}>
                         <button>
-                            {/* <img src={user?.profile.user_backImage} alt="" /> */}
-                            <img src='https://i.pinimg.com/originals/00/dc/bb/00dcbbc08e4c7a77a269770a4cccd0a4.jpg' alt="" />
+                            <img src={user?.profile.user_backImage} alt="" />
                         </button>
                         <div className={`${styles.user_iconWrapper}`}>
                             <button className={`${styles.user_icon}`}>
@@ -61,11 +67,10 @@ export default function OtherUserProfile({ reviewData }) {
                     reviewAnime?.map((review, i) => {
                         console.log(review);
                         return (
-                            <div className={`${styles.sectionItemWrapper}`}>
-                                <div key={i} className={`${styles.sectionItem}`}>
+                            <div key={i} className={`${styles.sectionItemWrapper}`}>
+                                <div className={`${styles.sectionItem}`}>
                                     <div className={`${styles.itemImage}`}>
-                                        {/* <img src={review.anime.image} alt={review.anime.title} /> */}
-                                        <img src={"https://cs1.animestore.docomo.ne.jp/anime_kv/img/11/37/5/11375_1_9_8b.png?1551176232000"} />
+                                        <img src={review.anime.image} alt={review.anime.title} />
                                     </div>
                                     <div className={`${styles.itemInfo}`}>
                                         <p>{review.anime.title}</p>
@@ -94,6 +99,13 @@ export default function OtherUserProfile({ reviewData }) {
     )
 }
 
+export async function getServerSideProps({ query }) {
+    const reviewData = await (await axios.get(`${process.env.NEXT_PUBLIC_DJANGO_URL}users/review_anime/?user_id=${query.userId
+        }`)).data.results
+
+    return { props: { reviewData } }
+}
+
 /* export async function getStaticPaths() {
     // animeId をすべて取得
     const res = await (await axios.get(`${process.env.NEXT_PUBLIC_DJANGO_URL}users/userIds/?format=json&limit=100000`)).data.results
@@ -104,11 +116,11 @@ export default function OtherUserProfile({ reviewData }) {
         },
     }))
     return { paths, fallback: false }
-} */
+}
 
-export async function getServerSideProps({ params, query }) {
+export async function getStaticProps({ params, query }) {
     const reviewData = await (await axios.get(`${process.env.NEXT_PUBLIC_DJANGO_URL}users/review_anime/?user_id=${query.userId
         }`)).data.results
 
     return { props: { reviewData } }
-}
+} */

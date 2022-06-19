@@ -3,16 +3,17 @@ import '../styles/globals.css'
 import 'swiper/css/bundle'
 
 import React, { useEffect } from "react";
+import { useRouter } from 'next/router';
 import { setGlobal } from "reactn"
-import { useRouter } from "next/router";
-import Head from "next/head";
 import Layout2 from '../components/layout/Layout2'
+import CustomHead from '../components/layout/CustomHead';
 import { getSeasonAndYear, login_request } from '../utils/functions';
 import { getAllGenre } from '../lib/getGenreData';
 
 
 export default function MyApp({ Component, pageProps }) {
-  const router = useRouter();
+  const router = useRouter()
+
   useEffect(() => {
     // global state
     setGlobal(() => {
@@ -27,9 +28,10 @@ export default function MyApp({ Component, pageProps }) {
 
   return (
     <>
-      <Head>
-        <title> AnimeSearcher </title>
-      </Head>
+      {
+        !(router.pathname.match(/\/anime\/detail.*/)) &&
+        <CustomHead />
+      }
       <Layout2>
         <Component {...pageProps} />
       </Layout2>

@@ -31,10 +31,10 @@ class AnimeData(TimeStampedModel):
     episodes = models.ManyToManyField(EpisodesData, blank=True)  # エピソード詳細
     episodesCount = IntegerField("総エピソード数", null=True, blank=True)
     seasonName = TextField("放送季節", null=True, blank=True)
-    seasonYear = IntegerField("放送年", null=True, blank=True)
+    seasonYear = IntegerField("放送年度", null=True, blank=True)
     seriesList = models.ManyToManyField(AnimeSeriesData, blank=True)  # シリーズ名
     watchersCount = IntegerField(
-        "Annict視聴者数", null=True, blank=True)  # GoodRate出来上がるまでの指標
+        "Annict視聴者数", null=True, blank=True)  # 視聴者数
     # ------------MyAPI---------------------------------------------------------
     image = ImageField(
         default='/django/media/anime/thumbnail/NoImageサンプル画像.jpg', upload_to='anime/thumbnail')
