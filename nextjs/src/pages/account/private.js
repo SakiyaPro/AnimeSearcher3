@@ -160,7 +160,6 @@ export default function Private() {
     return (
         <Auth>
             <div className={`${styles.wrapper}`}>
-                {/* <button className={`${styles.logout}`} onClick={logout}>ログアウト</button> */}
                 {/* <div className={`${styles.sectionTop}`}>
                     <div className={`${styles.sectionName}`}>
                         <button onClick={() => history.back()} className="button-decoration1"><img src="/image/systemIcon/system/allow_icon(left).png" width="13px" height="13px" alt="" /></button>
@@ -314,6 +313,8 @@ export default function Private() {
                     </div>
                 </div>
             </div>
+
+            <button className={`${styles.logout}`} onClick={logout}>ログアウト</button>
         </Auth >
     );
 }

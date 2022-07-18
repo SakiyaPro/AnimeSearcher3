@@ -1,37 +1,17 @@
 from anime_data.models.AnimeData import AnimeData
-from users.serializer import CustomUserIdSerializer, CustomUserSerializer, ProfileSerializer, ReviewAnimeSerializer
-from users.models import CustomUser, Profile, ReviewAnime
+from users.serializer import CustomUserIdSerializer, CustomUserSerializer, ProfileSerializer, RecommendAnimeGroupSerializer, RecommendAnimeSerializer, ReviewAnimeSerializer
+from users.models import CustomUser, Profile, RecommendAnime, ReviewAnime, RecommendAnimeGroup
 from django_filters import rest_framework as filters
 from rest_framework import viewsets, permissions
 from rest_framework.response import Response
 from rest_framework import status
-import json
+from django.utils.decorators import method_decorator
+from django.views.decorators.http import require_GET, require_POST
 
 
-class CustomUserViewSet(viewsets.ModelViewSet):
-    queryset = CustomUser.objects.all()
-    serializer_class = CustomUserSerializer
-    permission_classes = (permissions.IsAuthenticated,)
-
-    def get_queryset(self):
-        return CustomUser.objects.filter(id=self.request.user.id)
-
-    # PATCH
-    def partial_update(self, request, pk=None):
-        queryset = self.queryset.get(id=self.request.user.id)
-        validated_data = request.data.copy()
-        print(validated_data)
-
-        username = validated_data.get("username", None)
-
-        if username:
-            # 既に使用されている名前の場合は500を返す
-            if CustomUser.objects.exclude(id=pk).filter(username=username):
-                return Response({"username":"この名前は既に使用されています。"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-            queryset.username = username
-            queryset.save()
-        return Response(f"ユーザー情報を更新しました。")
-
+# ------------------------------------------------------------
+# ViewsFilter  -> URL Param
+# ------------------------------------------------------------
 
 class ReviewAnimeFilter(filters.FilterSet):
     # filter => user_id
@@ -60,13 +40,76 @@ class ReviewAnimeFilter(filters.FilterSet):
         return queryset
 
 
+# ------------------------------------------------------------
+# Views
+# ------------------------------------------------------------
+
+class CustomUserViewSet(viewsets.ModelViewSet):
+    """
+
+    目的 :  ユーザーの情報を取得する
+
+    シリアライザー :  CustomUserSerializer
+
+    field => [
+        'id',
+        'username',         # ユーザー名
+        'date_joined',      # 登録日時
+        'profile',          # プロフィール
+        'reviewanime_set',  # レビューアニメ
+        'favorite_anime'    # お気に入りアニメ
+    ]
+
+    """
+    queryset = CustomUser.objects.all()
+    serializer_class = CustomUserSerializer
+
+    def get_queryset(self):
+        "GET"
+        return self.queryset.filter(id=self.request.user.id)
+
+    def partial_update(self, request, pk=None):
+        "PATCH"
+        queryset = self.queryset.get(id=self.request.user.id)
+        validated_data = request.data.copy()
+        print(validated_data)
+
+        username = validated_data.get("username", None)
+
+        if username:
+            # 既に使用されている名前の場合は500を返す
+            if CustomUser.objects.exclude(id=pk).filter(username=username):
+                return Response({"username": "この名前は既に使用されています。"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            queryset.username = username
+            queryset.save()
+        return Response(f"ユーザー情報を更新しました。")
+
+
 class ReviewAnimeViewSet(viewsets.ModelViewSet):
+    """
+
+    目的 :  ユーザーがレビューしたアニメ情報を取得する
+
+    シリアライザー :  ReviewAnimeSerializer
+    フィルター     :  ReviewAnimeFilter
+
+    fields => [
+        'id',
+        'user',         # レビューユーザーの情報
+        'anime',        # レビューアニメの情報
+        'user_id',      # ユーザーID    ※ POST用
+        'anime_id',     # アニメID      ※ POST用
+        'star',         # 評価星
+        'comment'       # レビュー文
+    ]
+
+    """
     queryset = ReviewAnime.objects.all().order_by('-modified')
     serializer_class = ReviewAnimeSerializer
     filter_class = ReviewAnimeFilter
 
-    # POST
     def create(self, request):
+        "POST"
         if self.request.user.id is None:
             raise ValueError("please account login")
 
@@ -85,8 +128,8 @@ class ReviewAnimeViewSet(viewsets.ModelViewSet):
 
         return Response(f"アニメレビューを作成しました。")
 
-    # PATCH
     def partial_update(self, request, pk=None):
+        "PATCH"
         if self.request.user.id is None:
             ValueError("please account login")
 
@@ -106,15 +149,29 @@ class ReviewAnimeViewSet(viewsets.ModelViewSet):
 
 
 class ProfileViewSet(viewsets.ModelViewSet):
+    """
+
+    目的 :  ユーザーのプロフィール情報を取得する
+
+    シリアライザー :  ProfileSerializer
+
+    fields => [
+        'user',                 # ユーザー情報
+        'user_icon',            # アイコン
+        'user_backImage',       # 背景画像
+        'self_introduction'     # 自己紹介
+    ]
+
+    """
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
-    permission_classes = (permissions.IsAuthenticated,)
 
     def get_queryset(self):
+        "GET"
         return Profile.objects.filter(user=self.request.user)
 
-    # POST
     def create(self, request):
+        "POST"
         if self.request.user.id is None:
             raise ValueError("please account login")
 
@@ -124,8 +181,8 @@ class ProfileViewSet(viewsets.ModelViewSet):
 
         return Response(f"プロフィールを作成しました。")
 
-    # PATCH
     def partial_update(self, request, pk=None):
+        "PATCH"
         if self.request.user.id is None:
             ValueError("please account login")
 
@@ -152,5 +209,62 @@ class ProfileViewSet(viewsets.ModelViewSet):
 
 
 class CustomUserIdViewSet(viewsets.ModelViewSet):
+    """
+
+    目的 :  ユーザーのID情報をすべて取得する    ※ ISR用
+
+    シリアライザー :  CustomUserIdSerializer
+
+    fields => [
+        id         # user_id
+    ]
+
+    """
     queryset = CustomUser.objects.all()
     serializer_class = CustomUserIdSerializer
+
+
+class RecommendAnimeGroupViewSet(viewsets.ModelViewSet):
+    """
+
+    目的 :  RecommendAnimeViewSetのグループ情報を取得する
+
+    シリアライザー :  RecommendAnimeGroupSerializer
+
+    fields => [
+    ]
+
+    """
+    queryset = RecommendAnimeGroup.objects.all()
+    serializer_class = RecommendAnimeGroupSerializer
+
+
+class RecommendAnimeViewSet(viewsets.ModelViewSet):
+    """
+
+    目的 :  ユーザーがおすすめするアニメの情報を取得する
+
+    シリアライザー :  RecommendAnimeSerializer
+
+    fields => [
+    ]
+
+    """
+    queryset = RecommendAnime.objects.all()
+
+    serializer_class = RecommendAnimeSerializer
+
+    def create(self, request):
+        "POST"
+
+        # URLパラメータの情報をコピー
+        validated_data = request.data.copy()
+
+        # ログイン認証
+        if self.request.user.id is None:
+            raise ValueError("please account login")
+
+        # ログインユーザーのおすすめアニメ(複数)を取得
+        """ queryset.recommend_anime = """
+
+        return Response(f"プロフィールを更新しました。")

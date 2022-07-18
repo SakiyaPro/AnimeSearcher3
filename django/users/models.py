@@ -8,8 +8,14 @@ from core_models.models import TimeStampedModel
 from anime_data.models.AnimeData import AnimeData
 
 
-# カスタムユーザー
 class CustomUser(AbstractUser):
+    """
+    カスタムユーザーモデル
+
+    username        : str               # ユーザーの名前
+    email           : e-mail            # ユーザーのEメール
+    favorite_anime  : model(AnimeData)  # ユーザーのお気に入りアニメ
+    """
     username = models.CharField(
         'username', max_length=150, unique=True, blank=True, null=True)
     email = models.EmailField('email', unique=True)
@@ -24,8 +30,15 @@ class CustomUser(AbstractUser):
         db_table = 'custom_users'
 
 
-# レビューしたアニメ
 class ReviewAnime(TimeStampedModel):
+    """
+    ユーザーがレビューしたアニメを格納するモデル
+
+    user     : model(CustomUser)    # レビューしたユーザー
+    anime    : model(AnimeData)     # レビューしたアニメ
+    star     : int (1 - 5)          # 評価星
+    comment  : str                  # レビュー文
+    """
     user = models.ForeignKey(
         CustomUser, verbose_name="ユーザー", on_delete=models.CASCADE, blank=True, null=True)
     anime = models.ForeignKey(
@@ -49,8 +62,15 @@ class ReviewAnime(TimeStampedModel):
         return str(self.id) + '-' + self.anime.title + '　　' + self.user.username
 
 
-# ユーザープロフィール
 class Profile(models.Model):
+    """
+    ユーザープロフィールを格納するモデル
+
+    user      : model(CustomUser)
+    user_icon : image
+    user_backImage    : image
+    self_introduction : str
+    """
     user = models.OneToOneField(
         CustomUser, verbose_name="ユーザー", on_delete=models.CASCADE, null=True)
     user_icon = models.ImageField(
@@ -63,22 +83,36 @@ class Profile(models.Model):
 
 @receiver(post_save, sender=CustomUser)
 def create_profile(sender, **kwargs):
-    """ 新ユーザー作成時に空のprofileも作成する """
+    """
+    新ユーザー作成時に空のprofileも作成するオーバーライド(?)関数
+    """
     if kwargs['created']:
         user_profile = Profile.objects.get_or_create(
             user=kwargs['instance'])
 
 
-# おすすめしたいアニメをまとめたグループ
 class RecommendAnimeGroup(models.Model):
+    """
+    RecommendAnimeモデルをグループで紐づけするモデル
+
+    group_title   : str
+    description   : str
+    """
     group_title = models.CharField(
-        "グループ名", max_length=40, default="", blank=True, null=True)
+        "グループタイトル", max_length=40, default="", blank=True, null=True)
     description = models.CharField(
-        "グループ説明", max_length=512, default="", blank=True, null=True)
+        "グループ概要", max_length=512, default="", blank=True, null=True)
 
 
-# おすすめしたいアニメ
 class RecommendAnime(models.Model):
+    """
+    ユーザーがおすすめするアニメを格納するモデル
+
+    recommend_group : model(RecommendAnimeGroup)
+    user            : model(CustomUser)
+    anime           : model(ReviewAnime)
+    recommend_point : str
+    """
     recommend_group = models.ForeignKey(
         RecommendAnimeGroup, verbose_name="まとめるグループ", on_delete=models.CASCADE, null=True)
     user = models.OneToOneField(

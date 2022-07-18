@@ -13,12 +13,37 @@ from anime_data.models.StaffsData import StaffsData
 
 
 class GenreData(TimeStampedModel):
+    """
+    アニメジャンルマスタ
+
+    genre   : str    # ジャンル
+    """
     genre = models.CharField("アニメジャンル", max_length=50, unique=True)
 
     def __str__(self):
         return str(self.id) + '-' + self.genre
 
 class AnimeData(TimeStampedModel):
+    """
+    アニメマスタ
+
+    annictId        : int                       # AnnictId
+    title           : str                       # アニメタイトル
+    titleEn         : str                       # アニメタイトルEN
+    titleRo         : str                       # アニメタイトルRO
+    media           : str                       # 放送メディア
+    casts           : models(CastsData)         # 声優
+    staffs          : models(StaffsData)        # スタッフ・制作会社
+    episodes        : models(EpisodesData)      # エピソード情報
+    episodesCount   : int                       # エピソードの総数
+    seasonName      : str                       # 放送季節
+    seasonYear      : int                       # 放送年度
+    seriesList      : models(AnimeSeriesData)   # シリーズ名
+    watchersCount   : int                       # 視聴者数
+    image           : image                     # サムネイル画像
+    story           : str                       # あらすじ
+    genres          : models(GenreData)         # ジャンル
+    """
     # --------AnnictAPI searchWorks-------------------------------------
     annictId = IntegerField("AnnictId", unique=True)
     title = CharField("タイトル", unique=True, max_length=255)

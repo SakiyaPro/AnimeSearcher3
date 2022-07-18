@@ -24,19 +24,23 @@ from .serializer import AnimeDataSerializer, CharacterDataSerializer, PersonData
 from anime_data.functions import driver, All_Genre
 
 
+# ------------------------------------------------------------
+# ViewsFilter  -> URL Param
+# ------------------------------------------------------------
+
 # AnimeDataViewSetの対応するクエリ文字列
 class AnimeDataFilter(filters.FilterSet):
-    ### 複数の annictId を指定して、対応するアニメをフィルタリングするクエリ　※2022/5/24 使用未定
+    # 複数の annictId を指定して、対応するアニメをフィルタリングするクエリ　※2022/5/24 使用未定
     annictId_many = filters.CharFilter(
         field_name="annictId", method='filter_annictId_many')  # 何故か widget が数値を読み取らないので、method でゴリ押し
 
-    ### annictId の範囲を指定してフィルタリング
+    # annictId の範囲を指定してフィルタリング
     annictId_gte = filters.NumberFilter(
         field_name="annictId", lookup_expr='gte')  # ◯◯以上
     annictId_lte = filters.NumberFilter(
         field_name="annictId", lookup_expr='lte')  # 〇〇以下
 
-    ### タイトル検索
+    # タイトル検索
     title = filters.CharFilter(
         field_name="title", lookup_expr='exact')  # 完全一致
     title_contains = filters.CharFilter(
@@ -48,29 +52,29 @@ class AnimeDataFilter(filters.FilterSet):
     titleRo = filters.CharFilter(
         field_name="titleRo", lookup_expr='contains')  # 部分一致
 
-    ### キャスト・スタッフの名前でフィルタリング　※2022/5/24 使用未定
+    # キャスト・スタッフの名前でフィルタリング　※2022/5/24 使用未定
     casts = filters.AllValuesMultipleFilter(
         field_name="casts__name")
     staffs = filters.AllValuesMultipleFilter(
         field_name="staffs__name", lookup_expr='contains')
 
-    ### エピソード名やエピソード数でフィルタリング　※2022/5/24 使用未定
+    # エピソード名やエピソード数でフィルタリング　※2022/5/24 使用未定
     episodes = filters.CharFilter(
         field_name="episodes", lookup_expr='contains')  # 部分一致
     episodesCount_gte = filters.NumberFilter(
         field_name="episodesCount", lookup_expr='gte')  # ◯◯以上
 
-    ### 放送年度・季節でフィルタリング　※2022/5/24 使用未定
+    # 放送年度・季節でフィルタリング　※2022/5/24 使用未定
     seasonName = filters.CharFilter(
         field_name="seasonName", lookup_expr='contains')  # 部分一致
     seasonYear = filters.CharFilter(
         field_name="seasonYear", lookup_expr='contains')  # 部分一致
 
-    ### シリーズ名でフィルタリング　※2022/5/24 使用未定
+    # シリーズ名でフィルタリング　※2022/5/24 使用未定
     seriesList = filters.CharFilter(
         field_name="seriesList", lookup_expr='contains')  # 部分一致
 
-    ### 視聴者数でフィルタリング
+    # 視聴者数でフィルタリング
     watchersCount_max = filters.CharFilter(
         field_name="annictId", method='filter_watchersCount_max')
     watchersCount_lte = filters.NumberFilter(
@@ -78,11 +82,11 @@ class AnimeDataFilter(filters.FilterSet):
     watchersCount_gte = filters.NumberFilter(
         field_name="watchersCount", lookup_expr='gte')  # ◯◯以上
 
-    ### ジャンルでフィルタリング
+    # ジャンルでフィルタリング
     genres = filters.ModelMultipleChoiceFilter(
         field_name="genres__genre", to_field_name='genre', widget=CSVWidget,  queryset=GenreData.objects.all(), method='filter_genres')
 
-    ### FilterSetはフィールド名のフィルタリングを自動生成するため、ImageFieldがエラーを起こさないように定義し直している
+    # FilterSetはフィールド名のフィルタリングを自動生成するため、ImageFieldがエラーを起こさないように定義し直している
     image = filters.BooleanFilter(field_name="image")
 
     class Meta:
@@ -105,24 +109,49 @@ class AnimeDataFilter(filters.FilterSet):
     def filter_genres(self, queryset, name, value):
         if value:
             for v in value:
-                queryset = queryset.filter(genres=v)  # __inを使うとジャンルをANDの複数条件で検索できないのでFor文で回す
+                # __inを使うとジャンルをANDの複数条件で検索できないのでFor文で回す
+                queryset = queryset.filter(genres=v)
         return queryset
 
 
+# ------------------------------------------------------------
+# Views
+# ------------------------------------------------------------
+
 class AnimeDataViewSet(viewsets.ModelViewSet):
+    """
+
+    目的 :  アニメの簡易情報を取得する
+
+    シリアライザー :  AnimeDataSerializer
+    フィルター     :  AnimeDataFilter
+
+    fields => [
+        'id',
+        'title',            # アニメタイトル
+        'image',            # サムネイル画像
+        'seasonYear',       # 放送年度
+        'seasonName',       # 放送季節
+        'watchersCount',    # 視聴者数
+        'favorite_count',   # お気に入り数
+        'genres',           # ジャンル
+        'reviewanime_set'   # アニメのレビュー
+    ]
+
+    """
     queryset = AnimeData.objects.order_by('?').all()
     serializer_class = AnimeDataSerializer
     filter_class = AnimeDataFilter
 
-    # GET
     def get_seriesAnime(self, request, pk=None):
+        "GET"
         result = {}
         if pk:
             result = self.queryset.filter(seriesList=pk)
         return result
 
-    # PATCH
     def partial_update(self, request, pk=None):
+        "PATCH"
         queryset = self.queryset.get(id=pk)
         validated_data = request.data.copy()
 
@@ -168,31 +197,101 @@ class AnimeDataViewSet(viewsets.ModelViewSet):
 
 
 class AnimeDetailViewSet(viewsets.ModelViewSet):
+    """
+
+    目的 :  アニメの詳細情報を取得する
+
+    シリアライザー :  AnimeDetailSerializer
+
+    fields => [
+        'id',
+        'title',            # アニメタイトル
+        'image',            # サムネイル画像
+        'seasonYear',       # 放送年度
+        'seasonName',       # 放送季節
+        'genres',           # ジャンル
+        'casts',            # 声優
+        'staffs',           # スタッフ・制作会社
+        'episodes',         # エピソード
+        'seriesList',       # シリーズ名
+        'watchersCount',    # 視聴者数
+        'favorite_count',   # お気に入り数
+        'reviewanime_set',  # アニメのレビュー
+        'modified',         # 更新日時
+    ]
+
+    """
     queryset = AnimeData.objects.order_by('?').all()
     serializer_class = AnimeDetailSerializer
 
 
 class AnimeIdViewSet(viewsets.ModelViewSet):
+    """
+
+    目的 :  アニメのID情報をすべて取得する      ※ ISR用
+
+    シリアライザー :  AnimeIdSerializer
+
+    fields => [
+        'id',       # anime_id
+    ]
+
+    """
     queryset = AnimeData.objects.order_by('id').all()
     serializer_class = AnimeIdSerializer
 
 
 class AnimeTitleSuggestViewSet(viewsets.ModelViewSet):
+    """
+
+    目的 :  アニメのタイトル検索時にサジェスト（検索候補）を生成する
+
+    シリアライザー :  AnimeTitleSuggestSerializer
+
+    fields => [
+        'title'     # アニメタイトル
+    ]
+
+    """
     queryset = AnimeData.objects.order_by('-watchersCount').all()
     serializer_class = AnimeTitleSuggestSerializer
 
     def get_queryset(self):
+        "GET"
         title = self.request.GET.get("title")
         queryset = self.queryset.filter(title__icontains=title)
         return queryset
 
 
 class GenreDataViewSet(viewsets.ModelViewSet):
+    """
+
+    目的 :  アニメマスタに格納しているジャンルデータをすべて取得
+
+    シリアライザー :  GenreDataSerializer
+
+    fields => [
+        'genre'     # アニメジャンル
+    ]
+
+    """
     queryset = GenreData.objects.order_by('id').all()
     serializer_class = GenreDataSerializer
 
 
 class CharacterDataViewSet(viewsets.ModelViewSet):
+    """
+
+    目的 :  アニメマスタに格納しているキャラクタデータをすべて取得
+
+    シリアライザー :  CharacterDataSerializer
+
+    fields => [
+        'id'
+        'name'      # キャラクタ名前
+    ]
+
+    """
     queryset = CharacterData.objects.order_by('annictId').all()
     serializer_class = CharacterDataSerializer
     filter_fields = ("annictId",
@@ -219,6 +318,18 @@ class CharacterDataViewSet(viewsets.ModelViewSet):
 
 
 class PersonDataViewSet(viewsets.ModelViewSet):
+    """
+
+    目的 :  アニメマスタに格納しているパーソンデータをすべて取得
+
+    シリアライザー :  CharacterDataSerializer
+
+    fields => [
+        'id'
+        'name'      # パーソン名前
+    ]
+
+    """
     queryset = PersonData.objects.order_by('annictId').all()
     serializer_class = PersonDataSerializer
     filter_fields = ("annictId",
