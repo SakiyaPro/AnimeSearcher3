@@ -2,20 +2,13 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.utils.translation import gettext_lazy as _
 
-from .models import CustomUser, Profile, ReviewAnime
+from .models import CustomUser, Profile, RecommendAnime, RecommendAnimeGroup, ReviewAnime
 
 
 class ProfileInline(admin.StackedInline):
     model = Profile
     max_num = 1
     can_delete = True
-
-
-class ReviewAnimeInline(admin.StackedInline):
-    model = ReviewAnime
-    max_num = 1
-    can_delete = True
-
 
 # Administrator(管理者権限でユーザー情報を編集可能にする)
 class CustomUserAdmin(UserAdmin):
@@ -33,3 +26,5 @@ class CustomUserAdmin(UserAdmin):
 
 admin.site.register(CustomUser, CustomUserAdmin)
 admin.site.register(ReviewAnime)
+admin.site.register(RecommendAnimeGroup)
+admin.site.register(RecommendAnime)

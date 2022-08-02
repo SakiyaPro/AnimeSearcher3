@@ -9,7 +9,15 @@ from anime_data.models.CharacterData import CharacterData
 from anime_data.models.EpisodesData import EpisodesData
 from anime_data.models.PersonData import PersonData
 from anime_data.models.StaffsData import StaffsData
-from users.models import CustomUser
+from users.models.CustomUser import CustomUser
+
+from anime_data.serializers.CharacterDataSerializer import CharacterDataSerializer
+from anime_data.serializers.PersonDataSerializer import PersonDataSerializer
+from anime_data.serializers.GenreDataSerializer import GenreDataSerializer
+from anime_data.serializers.app.AnimeIdSerializer import AnimeIdSerializer
+from anime_data.serializers.app.AnimeSimpleSerializer import AnimeSimpleSerializer
+from anime_data.serializers.app.AnimeDetailSerializer import AnimeDetailSerializer
+from anime_data.serializers.app.AnimeTitleSuggestSerializer import AnimeTitleSuggestSerializer
 
 import glob
 import shutil
@@ -18,8 +26,6 @@ from django_filters import rest_framework as filters
 from django_filters.widgets import CSVWidget
 from rest_framework import viewsets
 from rest_framework.response import Response
-
-from .serializer import AnimeDataSerializer, CharacterDataSerializer, PersonDataSerializer, AnimeIdSerializer, GenreDataSerializer, AnimeTitleSuggestSerializer, AnimeDetailSerializer
 
 from anime_data.functions import driver, All_Genre
 
@@ -123,7 +129,7 @@ class AnimeDataViewSet(viewsets.ModelViewSet):
 
     目的 :  アニメの簡易情報を取得する
 
-    シリアライザー :  AnimeDataSerializer
+    シリアライザー :  AnimeSimpleSerializer
     フィルター     :  AnimeDataFilter
 
     fields => [
@@ -140,7 +146,7 @@ class AnimeDataViewSet(viewsets.ModelViewSet):
 
     """
     queryset = AnimeData.objects.order_by('?').all()
-    serializer_class = AnimeDataSerializer
+    serializer_class = AnimeSimpleSerializer
     filter_class = AnimeDataFilter
 
     def get_seriesAnime(self, request, pk=None):

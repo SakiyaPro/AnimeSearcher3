@@ -1,6 +1,18 @@
+from users.models.CustomUser import CustomUser
+from users.models.Profile import Profile
+from users.models.ReviewAnime import ReviewAnime
+from users.models.RecommendAnime import RecommendAnime
+from users.models.RecommendAnimeGroup import RecommendAnimeGroup
 from anime_data.models.AnimeData import AnimeData
-from users.serializer import CustomUserIdSerializer, CustomUserSerializer, ProfileSerializer, RecommendAnimeGroupSerializer, RecommendAnimeSerializer, ReviewAnimeSerializer
-from users.models import CustomUser, Profile, RecommendAnime, ReviewAnime, RecommendAnimeGroup
+
+from users.serializers.app.CustomUserIdSerializer import CustomUserIdSerializer
+from users.serializers. CustomUserSerializer import CustomUserSerializer
+from users.serializers.ProfileSerializer import ProfileSerializer
+from users.serializers.ReviewAnimeSerializer import ReviewAnimeSerializer
+from users.serializers.RecommendAnimeGroupSerializer import RecommendAnimeGroupSerializer
+from users.serializers.RecommendAnimeSerializer import RecommendAnimeSerializer
+
+
 from django_filters import rest_framework as filters
 from rest_framework import viewsets, permissions
 from rest_framework.response import Response
@@ -243,6 +255,7 @@ class RecommendAnimeViewSet(viewsets.ModelViewSet):
     """
 
     目的 :  ユーザーがおすすめするアニメの情報を取得する
+    ※ 本人のみ編集可能にする
 
     シリアライザー :  RecommendAnimeSerializer
 

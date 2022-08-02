@@ -138,6 +138,11 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    transition: .1s all;
+}
+
+.playlistAddButton:hover {
+    background-color: #111;
 }
 
 .animeFrame .thumbnail {
