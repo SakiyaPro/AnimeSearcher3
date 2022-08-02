@@ -1,26 +1,34 @@
 # coding: utf-8
 from rest_framework import routers
-from . import views
+
+from anime_data.views.AnimeSimpleViewSet import AnimeSimpleViewSet
+from anime_data.views.AnimeDetailViewSet import AnimeDetailViewSet
+from anime_data.views.AnimeIdViewSet import AnimeIdViewSet
+from anime_data.views.AnimeTitleSuggestViewSet import AnimeTitleSuggestViewSet
+from anime_data.views.GenreDataViewSet import GenreDataViewSet
+from anime_data.views.CharacterDataViewSet import CharacterDataViewSet
+from anime_data.views.PersonDataViewSet import PersonDataViewSet
+
 
 router  = routers.DefaultRouter()
 
 # アニメの簡易情報を取得するAPI / ジャンルやキャスト検索等の機能も保有
-router.register('animedata', views.AnimeDataViewSet)
+router.register('AnimeSimple', AnimeSimpleViewSet)
 
 # アニメの詳細情報を取得するAPI
-router.register('animedatadetail', views.AnimeDetailViewSet)
+router.register('AnimeDetail', AnimeDetailViewSet)
 
 # getStaticPaths用のAPIでIdを全て返す
-router.register('animeids', views.AnimeIdViewSet)
+router.register('AnimeId', AnimeIdViewSet)
 
 # アニメタイトル検索時の検索候補(サジェスト)を取得するAPI
-router.register('titlesuggest', views.AnimeTitleSuggestViewSet)
+router.register('AnimeTitleSuggest', AnimeTitleSuggestViewSet)
 
 # 現在存在しているジャンルデータを取得するAPI
-router.register('genredata', views.GenreDataViewSet)
+router.register('GenreData', GenreDataViewSet)
 
 # キャラクターデータを取得するAPI
-router.register('characterdata', views.CharacterDataViewSet)
+router.register('CharacterData', CharacterDataViewSet)
 
 # 声優などの人物情報を取得するAPI
-router.register('persondata', views.PersonDataViewSet)
+router.register('PersonData', PersonDataViewSet)

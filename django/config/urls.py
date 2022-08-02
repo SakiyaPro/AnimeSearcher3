@@ -5,7 +5,7 @@ from . import settings
 from django.contrib.staticfiles.urls import static
 from anime_data.urls import router as anime_data_router
 from users.urls import router as users_router
-from anime_data import views as anime_data_views
+from anime_data import view as anime_data_view
 from django.views.static import serve
 from django.views.generic import TemplateView
 
@@ -23,9 +23,9 @@ urlpatterns = [
     path('api/', include(anime_data_router.urls)),
     path('users/', include(users_router.urls)),
 
-    path('animeDataCreate/', anime_data_views.CreateData),
-    path('animeImageCreate/', anime_data_views.CreateAnimeDataImage),
-    path('animeGenreCreate/', anime_data_views.CreateGenre),
+    path('animeDataCreate/', anime_data_view.CreateData),
+    path('animeImageCreate/', anime_data_view.CreateAnimeDataImage),
+    path('animeGenreCreate/', anime_data_view.CreateGenre),
 ]
 
 if settings.DEBUG:
