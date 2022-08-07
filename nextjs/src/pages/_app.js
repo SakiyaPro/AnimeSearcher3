@@ -8,7 +8,7 @@ import { setGlobal } from "reactn"
 import Layout2 from '../components/layout/Layout2'
 import CustomHead from '../components/layout/CustomHead';
 import { getSeasonAndYear, login_request } from '../utils/functions';
-import { getAllGenre } from '../lib/getGenreData';
+import { getAllGenreData } from '../lib/GenreDataViewSet';
 
 
 export default function MyApp({ Component, pageProps }) {

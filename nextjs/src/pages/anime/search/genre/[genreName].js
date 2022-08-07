@@ -3,8 +3,8 @@ import Link from 'next/link'
 import styles from '../../../../styles/anime_search_genre.module.css'
 import TagWrapper from '../../../../components/item/TagWrapper';
 import AnimeSectionItem from '../../../../components/item/AnimeSectionItem';
-import { getGenresData } from '../../../../lib/getAnimeData';
-import { getAllGenre } from '../../../../lib/getGenreData';
+import { getAllGenreData } from '../../../../lib/GenreDataViewSet';
+import { getAnimeSimpleFindToGenres } from '../../../../lib/AnimeSimpleViewSet';
 import { Swiper, SwiperSlide } from 'swiper/react'
 import SwiperCore, { Pagination, Navigation, EffectCoverflow } from 'swiper'
 
@@ -84,7 +84,7 @@ export default function GenreSort({ allGenre, genreName, genreAnimeData }) {
 
 export async function getStaticPaths() {
     // animeId をすべて取得
-    const res = await (getAllGenre()).then(async res => await res.map(data => data.genre));
+    const res = await (getAllGenreData()).then(async res => await res.map(data => data.genre));
     // params に animeId を指定
     const paths = res.map(genre => ({
         params: {
@@ -97,8 +97,8 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
     // アニメデータ取得
     const genreName = params.genreName
-    const allGenre = await (getAllGenre()).then(async res => await res.map(data => data.genre));
-    const genreAnimeData = await (getGenresData(params.genreName, null, null, { offset: 0 }));
+    const allGenre = await (getAllGenreData()).then(async res => await res.map(data => data.genre));
+    const genreAnimeData = await (getAnimeSimpleFindToGenres(params.genreName, null, null, { offset: 0 }));
 
     return {
         props: { genreName, allGenre, genreAnimeData },

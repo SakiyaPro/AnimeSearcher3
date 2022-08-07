@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import Link from 'next/link'
 import styles from '../../../styles/anime_search.module.css'
 import SearchBar from '../../../components/item/SearchBar'
-import { getAllGenre } from '../../../lib/getGenreData'
+import { getAllGenreData } from '../../../lib/GenreDataViewSet'
 import { conversionSeasonName, getSeasonAndYear } from '../../../utils/functions'
 
 export default function AnimeSearch({ allGenre }) {
@@ -178,7 +178,7 @@ export default function AnimeSearch({ allGenre }) {
 
 export async function getServerSideProps() {
     // ジャンルデータ取得
-    const allGenre = await (getAllGenre()).then(async res => await res.map(data => data.genre));
+    const allGenre = await (getAllGenreData()).then(async res => await res.map(data => data.genre));
 
     return {
         props: { allGenre },

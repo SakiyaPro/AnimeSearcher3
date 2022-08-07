@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import CustomHead from '../../../components/layout/CustomHead'
 import { useRouter } from 'next/router'
-import { getDetailAnimeData } from '../../../lib/getAnimeData'
-import { getAllGenre } from '../../../lib/getGenreData'
+import { getAnimeDatail } from '../../../lib/AnimeDetailViewSet'
+import { getAllGenreData } from '../../../lib/GenreDataViewSet'
 import { conversionStrDate } from '../../../utils/functions'
 import styles from '../../../styles/anime_detail.module.css'
 import BarGraph from '../../../components/item/BarGraph'
@@ -232,10 +232,10 @@ export default function AnimeDetail({ anime, reviewData, allGenre }) {
 }
 
 export async function getServerSideProps({ query }) {
-    const anime = await getDetailAnimeData(query.animeId, { offset: 0 })
-    const reviewData = await (await axios.get(`${process.env.NEXT_PUBLIC_DJANGO_URL}users/review_anime/?anime_id=${query.animeId
+    const anime = await getAnimeDatail(query.animeId, { offset: 0 })
+    const reviewData = await (await axios.get(`${process.env.NEXT_PUBLIC_DJANGO_URL}users/ReviewAnime/?anime_id=${query.animeId
         }`)).data.results
-    const allGenre = await (getAllGenre()).then(async res => await res.map(data => data.genre));
+    const allGenre = await (getAllGenreData()).then(async res => await res.map(data => data.genre));
 
     return { props: { anime, reviewData, allGenre } }
 }

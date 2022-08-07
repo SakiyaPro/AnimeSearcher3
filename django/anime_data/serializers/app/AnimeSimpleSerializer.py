@@ -2,7 +2,7 @@ from rest_framework import serializers
 from anime_data.models.AnimeData import AnimeData
 
 from anime_data.serializers.GenreDataSerializer import GenreDataSerializer
-from users.serializers.ReviewAnimeSerializer import ReviewAnimeSerializer  # usersから引っ張るように変更する
+from users.serializers.ReviewAnimeSerializer import ReviewAnimeSerializer
 from users.serializers.app.CustomUserIdSerializer import CustomUserIdSerializer
 
 

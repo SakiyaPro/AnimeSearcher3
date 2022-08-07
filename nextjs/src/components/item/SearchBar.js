@@ -19,7 +19,7 @@ export default function SearchBar() {
         const asyncEffect = async () => {
             if (keyword === '') return setSearchSuggest()
             setKeyword(keyword)
-            const res = await (await axios.get(`${process.env.NEXT_PUBLIC_DJANGO_URL}api/titlesuggest/?title=${keyword}`)).data.results
+            const res = await (await axios.get(`${process.env.NEXT_PUBLIC_DJANGO_URL}api/AnimeTitleSuggest/?title=${keyword}`)).data.results
             setSearchSuggest(res)
         }
         asyncEffect()

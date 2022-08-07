@@ -10,7 +10,6 @@ from anime_data.serializers.app.AnimeSimpleSerializer import AnimeSimpleSerializ
 from anime_data.views.filters.AnimeDataFilter import AnimeDataFilter
 
 
-
 class AnimeSimpleViewSet(viewsets.ModelViewSet):
     """
 
@@ -34,7 +33,7 @@ class AnimeSimpleViewSet(viewsets.ModelViewSet):
     """
     queryset = AnimeData.objects.order_by('?').all()
     serializer_class = AnimeSimpleSerializer
-    filter_class = AnimeDataFilter
+    filterset_class = AnimeDataFilter
 
     def get_seriesAnime(self, request, pk=None):
         "GET"

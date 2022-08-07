@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import styles from '../../../styles/anime_search.module.css'
 import TagWrapper from '../../../components/item/TagWrapper';
 import AnimeSectionItem from '../../../components/item/AnimeSectionItem';
-import { getAllGenre } from '../../../lib/getGenreData';
+import { getAllGenreData } from '../../../lib/GenreDataViewSet';
 import axios from 'axios';
 import SearchBar from '../../../components/item/SearchBar';
 
@@ -16,7 +16,7 @@ export default function AnimeResult({ searchTitle, allGenre }) {
                 return
             }
 
-            const res = await (await axios.get(`${process.env.NEXT_PUBLIC_DJANGO_URL}api/animedata/?title_contains=${searchTitle}&watchersCount_max=true`)).data.results
+            const res = await (await axios.get(`${process.env.NEXT_PUBLIC_DJANGO_URL}api/AnimeSimple/?title_contains=${searchTitle}&watchersCount_max=true`)).data.results
             // 検索結果があるなら searchResult へ代入
             if (res.length) {
                 setSearchResult(res)
@@ -54,7 +54,7 @@ export async function getServerSideProps({ query }) {
     // クエリ文字列取得
     const searchTitle = query?.searchTitle ? query?.searchTitle : ""
     // ジャンルデータ取得
-    const allGenre = await (getAllGenre()).then(async res => await res.map(data => data.genre));
+    const allGenre = await (getAllGenreData()).then(async res => await res.map(data => data.genre));
 
     return {
         props: { searchTitle, allGenre },

@@ -1,7 +1,7 @@
 services:
-  client:
+  django:
     volumes:
       - .:/workspace:cached
-  server:
+  nextjs:
     volumes:
       - .:/workspace:cached

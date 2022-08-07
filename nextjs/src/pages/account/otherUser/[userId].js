@@ -100,7 +100,7 @@ export default function OtherUserProfile({ reviewData }) {
 }
 
 export async function getServerSideProps({ query }) {
-    const reviewData = await (await axios.get(`${process.env.NEXT_PUBLIC_DJANGO_URL}users/review_anime/?user_id=${query.userId
+    const reviewData = await (await axios.get(`${process.env.NEXT_PUBLIC_DJANGO_URL}users/ReviewAnime/?user_id=${query.userId
         }`)).data.results
 
     return { props: { reviewData } }

@@ -2,8 +2,8 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import styles from '../../../styles/anime_recommend.module.css'
-import { getSeasonData } from "../../../lib/getAnimeData";
-import { getAllGenre } from '../../../lib/getGenreData';
+import { getAnimeSimpleFindToSeason } from '../../../lib/AnimeSimpleViewSet';
+import { getAllGenreData } from '../../../lib/GenreDataViewSet';
 import { getSeasonAndYear } from "../../../utils/functions";
 
 import TagWrapper from '../../../components/item/TagWrapper';
@@ -56,8 +56,8 @@ export default function NowSeason({ nowSeasonData, allGenre }) {
 
 export async function getStaticProps() {
     // アニメデータ取得
-    const nowSeasonData = await getSeasonData(NOWSEASON, NOWYEAR, { offset: 0 })
-    const allGenre = await (getAllGenre()).then(async res => await res.map(data => data.genre));
+    const nowSeasonData = await getAnimeSimpleFindToSeason(NOWSEASON, NOWYEAR, { offset: 0 })
+    const allGenre = await (getAllGenreData()).then(async res => await res.map(data => data.genre));
 
     return {
         props: { nowSeasonData, allGenre },

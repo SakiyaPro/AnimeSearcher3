@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router';
-import Link from 'next/link';
 import styles from '../../../styles/anime_recommend.module.css';
-import { getWatchersData } from "../../../lib/getAnimeData";
-import { getAllGenre } from '../../../lib/getGenreData';
+import { getAnimeSimpleFindToWatchers } from '../../../lib/AnimeSimpleViewSet';
+import { getAllGenreData } from '../../../lib/GenreDataViewSet';
 import { getSeasonAndYear, conversionSeasonName } from "../../../utils/functions";
 import TagWrapper from '../../../components/item/TagWrapper';
 import AnimeSectionItem from '../../../components/item/AnimeSectionItem';
@@ -51,8 +50,8 @@ export default function PopularAnime({ popularData, allGenre }) {
 
 export async function getStaticProps() {
     // アニメデータ取得
-    const popularData = await getWatchersData("", 4000, { offset: 0 });
-    const allGenre = await (getAllGenre()).then(async res => await res.map(data => data.genre));
+    const popularData = await getAnimeSimpleFindToWatchers("", 4000, { offset: 0 });
+    const allGenre = await (getAllGenreData()).then(async res => await res.map(data => data.genre));
 
     return {
         props: { popularData, allGenre },

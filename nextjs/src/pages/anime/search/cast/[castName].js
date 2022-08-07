@@ -3,8 +3,8 @@ import { useRouter } from 'next/router';
 import styles from '../../../../styles/anime_search.module.css'
 import TagWrapper from '../../../../components/item/TagWrapper';
 import AnimeSectionItem from '../../../../components/item/AnimeSectionItem';
-import { getCastAnimeData } from '../../../../lib/getAnimeData';
-import { getAllGenre } from '../../../../lib/getGenreData'
+import { getAnimeSimpleFindToCast } from '../../../../lib/AnimeSimpleViewSet';
+import { getAllGenreData } from '../../../../lib/GenreDataViewSet';
 import axios from 'axios'
 
 export default function CastSearch({ castAnimeData, allGenre }) {
@@ -36,8 +36,8 @@ export default function CastSearch({ castAnimeData, allGenre }) {
 }
 
 export async function getServerSideProps({ query }) {
-    const castAnimeData = await getCastAnimeData(query.castName, { offset: 0 })
-    const allGenre = await (getAllGenre()).then(async res => await res.map(data => data.genre));
+    const castAnimeData = await getAnimeSimpleFindToCast(query.castName, { offset: 0 })
+    const allGenre = await (getAllGenreData()).then(async res => await res.map(data => data.genre));
 
     return { props: { castAnimeData, allGenre } }
 }

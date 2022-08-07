@@ -3,8 +3,8 @@ import { useRouter } from 'next/router';
 import styles from '../../../../styles/anime_search.module.css'
 import AnimeSectionItem from '../../../../components/item/AnimeSectionItem';
 import TagWrapper from '../../../../components/item/TagWrapper';
-import { getSeasonData } from '../../../../lib/getAnimeData';
-import { getAllGenre } from '../../../../lib/getGenreData';
+import { getAnimeSimpleFindToSeason } from '../../../../lib/AnimeSimpleViewSet';
+import { getAllGenreData } from '../../../../lib/GenreDataViewSet';
 import { getSeasonAndYear } from '../../../../utils/functions';
 
 export default function Broadcast({ broadcastData, allGenre }) {
@@ -115,8 +115,8 @@ export default function Broadcast({ broadcastData, allGenre }) {
 }
 
 export async function getServerSideProps({ query }) {
-    const broadcastData = await getSeasonData(query.broadcastSeason, query.broadcastYear, { offset: 0 })
-    const allGenre = await (getAllGenre()).then(async res => await res.map(data => data.genre));
+    const broadcastData = await getAnimeSimpleFindToSeason(query.broadcastSeason, query.broadcastYear, { offset: 0 })
+    const allGenre = await (getAllGenreData()).then(async res => await res.map(data => data.genre));
 
     return { props: { broadcastData, allGenre } }
 }

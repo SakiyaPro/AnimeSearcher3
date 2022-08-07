@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import styles from '../../../styles/anime_recommend.module.css'
-import { getSeasonData } from "../../../lib/getAnimeData";
-import { getAllGenre } from "../../../lib/getGenreData"
+
+import { getAnimeSimpleFindToSeason } from '../../../lib/AnimeSimpleViewSet';
+import { getAllGenreData } from '../../../lib/GenreDataViewSet';
 import { getSeasonAndYear, conversionSeasonName } from "../../../utils/functions";
 
 import ReviewStar from "../../../components/item/ReviewStar";
@@ -53,8 +54,8 @@ export default function OnePrevSeason({ onePrevSeasonData, allGenre }) {
 
 export async function getStaticProps() {
     // アニメデータ取得
-    const onePrevSeasonData = await getSeasonData(BEFORESEASON1, BEFOREYEAR1, { offset: 0 });
-    const allGenre = await (getAllGenre()).then(async res => await res.map(data => data.genre));
+    const onePrevSeasonData = await getAnimeSimpleFindToSeason(BEFORESEASON1, BEFOREYEAR1, { offset: 0 });
+    const allGenre = await (getAllGenreData()).then(async res => await res.map(data => data.genre));
 
     return {
         props: { onePrevSeasonData, allGenre },
