@@ -1,0 +1,12 @@
+.favoriteButton {
+    display: flex;
+    gap: 5px;
+}
+
+.favoriteButton img {
+    width: 18px;
+}
+
+.favoriteButton:hover {
+    filter: invert(11%) sepia(100%) saturate(5170%) hue-rotate(293deg) brightness(100%) contrast(130%);
+}

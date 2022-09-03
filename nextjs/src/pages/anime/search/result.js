@@ -1,29 +1,39 @@
+// React
 import React, { useEffect, useState } from 'react'
+// CSS
 import styles from '../../../styles/anime_search.module.css'
+// components
 import TagWrapper from '../../../components/item/TagWrapper';
 import AnimeSectionItem from '../../../components/item/AnimeSectionItem';
-import { getAllGenreData } from '../../../lib/GenreDataViewSet';
-import axios from 'axios';
 import SearchBar from '../../../components/item/SearchBar';
+// ViewSets
+import { getAllGenreData } from '../../../libs/GenreDataViewSet';
+// Other
+import axios from 'axios';
 
+
+/* 検索結果表示画面 */
 export default function AnimeResult({ searchTitle, allGenre }) {
+    // useState
     const [searchResult, setSearchResult] = useState()
 
+    // useEffect
     useEffect(() => {
         const getSearchResult = async () => {
-            // searchTitle クエリが null なら検索しない
             if (!searchTitle) {
+                // URLパラメータが null なら検索しない
                 return
-            }
+            };
 
-            const res = await (await axios.get(`${process.env.NEXT_PUBLIC_DJANGO_URL}api/AnimeSimple/?title_contains=${searchTitle}&watchersCount_max=true`)).data.results
-            // 検索結果があるなら searchResult へ代入
+            const res = await (await axios.get(`${process.env.NEXT_PUBLIC_DJANGO_URL}api/AnimeSimple/?title_contains=${searchTitle}&watchersCount_max=true`)).data.results;
             if (res.length) {
+                // 検索結果があるなら searchResult へ代入
                 setSearchResult(res)
-            }
-        }
-        getSearchResult()
-    }, [])
+            };
+        };
+        // 検索結果の取得とuseStateへの代入
+        getSearchResult();
+    }, []);
 
 
     return (
@@ -51,8 +61,9 @@ export default function AnimeResult({ searchTitle, allGenre }) {
 }
 
 export async function getServerSideProps({ query }) {
-    // クエリ文字列取得
-    const searchTitle = query?.searchTitle ? query?.searchTitle : ""
+    // URLパラメータのクエリ文字列取得
+    const p_searchTitle = query?.searchTitle;
+    const searchTitle = p_searchTitle ? p_searchTitle : "";
     // ジャンルデータ取得
     const allGenre = await (getAllGenreData()).then(async res => await res.map(data => data.genre));
 

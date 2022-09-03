@@ -1,57 +1,11 @@
-.section {
-    display: flex;
-    flex-direction: column;
-}
-
-.section .content {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.content .contentTitle {
-    width: 100vw;
-    font-size: 1.6rem;
-    font-weight: 500;
-    letter-spacing: 0.3rem;
-    text-align: center;
-    background-color: rgba(255, 255, 255, .5);
-    padding: 20px 0px;
+.SelectRecommendItemWrapper {
     position: fixed;
-    top: 80px;
-    left: 50%;
-    transform: translate(-50%, 0);
-    z-index: 51;
+    z-index: 10;
 }
 
-.sectionItemWrapper {
-    width: 100%;
-    max-width: 1200px;
-    gap: 40px;
+.AnimeSectionItemWrapper {
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
-    margin: 60px auto 40px auto;
-}
-
-.sectionItemWrapper .tags {
-    margin: 10px 0px 0px 18px;
-}
-
-.sectionItem {
-    background-color: rgba(255, 255, 255, 1);
-    filter: drop-shadow(0px 10px 7px rgba(0, 0, 0, .2));
-    border-radius: 16px;
-    position: relative;
-    transition: all .15s;
-}
-
-.sectionItem:hover {
-    transform: scale(1.1);
-}
-
-@media screen and (max-width: 1000px) {
-    .content .contentTitle {
-        top: 0px;
-    }
+    gap: 20px;
+    flex-wrap: wrap;
 }

@@ -1,14 +1,21 @@
-import React from 'react'
+// React
+import React from 'react';
 import { useRouter } from 'next/router';
-import styles from '../../../../styles/anime_search.module.css'
+// CSS
+import styles from '../../../../styles/anime_search.module.css';
+// Components
 import TagWrapper from '../../../../components/item/TagWrapper';
 import AnimeSectionItem from '../../../../components/item/AnimeSectionItem';
-import { getAnimeSimpleFindToCast } from '../../../../lib/AnimeSimpleViewSet';
-import { getAllGenreData } from '../../../../lib/GenreDataViewSet';
-import axios from 'axios'
+// ViewSets
+import { getAnimeSimpleFindToCast } from '../../../../libs/AnimeSimpleViewSet';
+import { getAllGenreData } from '../../../../libs/GenreDataViewSet';
 
+
+/* 声優出演アニメ検索結果 */
 export default function CastSearch({ castAnimeData, allGenre }) {
-    const router = useRouter()
+    // useRouter
+    const router = useRouter();
+
     return (
         <section className={"section"}>
             <div className={`${styles.resultTitle}`}>
@@ -32,12 +39,15 @@ export default function CastSearch({ castAnimeData, allGenre }) {
                 }
             </div>
         </section>
-    )
-}
+    );
+};
+
 
 export async function getServerSideProps({ query }) {
-    const castAnimeData = await getAnimeSimpleFindToCast(query.castName, { offset: 0 })
+    // 声優出演アニメ取得
+    const castAnimeData = await getAnimeSimpleFindToCast(query.castName, { offset: 0 });
+    // ジャンルデータ取得
     const allGenre = await (getAllGenreData()).then(async res => await res.map(data => data.genre));
 
     return { props: { castAnimeData, allGenre } }
-}
+};

@@ -1,0 +1,14 @@
+.wrapper {
+    font-size: 0.95rem;
+    font-weight: bold;
+    color: rgba(83, 100, 113, 0.85);
+}
+
+.recommendButton {
+    display: flex;
+    gap: 20px;
+}
+
+.recommendButton li:hover {
+    text-decoration: underline;
+}

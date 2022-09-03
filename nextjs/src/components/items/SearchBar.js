@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/router'
 import styles from '../../styles/components-css/SearchBar.module.css'
-import { getAnimeData } from '../../lib/getAnimeData'
+import { getAnimeData } from '../../libs/getAnimeData'
 import axios from 'axios'
 
 export default function SearchBar() {

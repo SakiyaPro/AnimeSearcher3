@@ -1,5 +1,6 @@
 :root {
-  --bg-color: #fff;
+  --header-width: calc(100vw / 22);
+  --header-min-width: 60px;
   --border-color: rgb(239, 243, 244);
   --str-base-color: #222;
   --str-accent-color: rgb(29, 155, 240);
@@ -14,8 +15,6 @@ html {
 
 body {
   color: var(--str-base-color);
-  background-color: var(--bg-color);
-  background: url('https://beiz.jp/images_M/wallpaper/wallpaper_00002.jpg');
   background-size: cover;
   font-family: 'Noto Sans JP', メイリオ, sans-serif;
   font-size: 1rem;
@@ -24,16 +23,11 @@ body {
   overflow-y: scroll;
 }
 
-.header {
-  height: 100vh;
-  position: fixed;
-  left: calc(50% - 300px);
-  z-index: 10;
-}
+.header {}
 
 .mainWrapper {
   width: 100%;
-  padding-top: 100px;
+  padding-left: calc(var(--header-width) + 30px);
   position: relative;
 }
 
@@ -43,23 +37,6 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-.section .sectionTitle {
-  font-size: 1.5rem;
-  font-weight: bold;
-  vertical-align: middle;
-  letter-spacing: 10px;
-  margin: 10px 0 30px 0;
-  position: relative;
-}
-
-.section .sectionTitle img {
-  vertical-align: baseline;
-}
-
-.detailSection {
-  margin-top: 45px;
 }
 
 li {
@@ -241,6 +218,7 @@ SectionReviewItem */
   height: 100vh;
   background-color: #000;
   opacity: 0.1;
+  isolation: isolate;
   position: fixed;
   left: calc(50% - 100vw/2);
   top: calc(50% - 100vh/2);
@@ -346,27 +324,30 @@ main (right) */
 
 /* =====================================
 スクロールバー */
+
 ::-webkit-scrollbar {
-  width: 15px;
+  width: 0px;
   height: 10px;
 }
 
 ::-webkit-scrollbar-track {
   border-radius: 5px;
-  background: #ECF0F3;
+  background: rgba(0,0,0,0);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #F6E3E9;
-  scrollbar-width: thin;
+  background: rgba(0,0,0,0);
 }
+
+/* ======================================
+レスポンシブ */
 
 @media screen and (max-width: 600px) {
   html {
     font-size: 15px;
   }
 
-  .mainWrapper{
+  .mainWrapper {
     padding-top: 20px;
   }
 }

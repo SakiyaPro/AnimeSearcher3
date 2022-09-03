@@ -1,0 +1,59 @@
+/* ===================================
+navigation */
+.navigation {
+    /* size */
+    min-width: var(--header-min-width);
+    width: var(--header-width);
+    height: 100vh;
+    /* flex */
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    flex-wrap: wrap;
+    /* font */
+    font-weight: 300;
+    /* color */
+    color: var(--bg-color);
+    background-color: #1b1b1b;
+    /* effect */
+    transition: .25s all;
+    filter: drop-shadow(-2px 0px 3px #333);
+    /* position */
+    position: fixed;
+    left: 0;
+    z-index: 50;
+}
+
+.navigation:hover {
+    width: 300px;
+}
+
+.navigation .items {
+    /* size */
+    width: 100%;
+    max-width: 1000px;
+    /* flex */
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    justify-content: space-around;
+    align-items: center;
+    /* position */
+    margin-top: 60px;
+}
+
+.item a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+
+.item span {
+    display: none;
+}
+
+.item img {
+    width: 30px;
+    height: 30px;
+}

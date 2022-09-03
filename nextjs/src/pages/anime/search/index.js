@@ -1,26 +1,25 @@
-import React, { useEffect, useState, useRef } from 'react'
-import Link from 'next/link'
-import styles from '../../../styles/anime_search.module.css'
-import SearchBar from '../../../components/item/SearchBar'
-import { getAllGenreData } from '../../../lib/GenreDataViewSet'
-import { conversionSeasonName, getSeasonAndYear } from '../../../utils/functions'
+// React
+import React, { useEffect, useState, useRef } from 'react';
+import Link from 'next/link';
+// CSS
+import styles from 'Styles/anime_search.module.css';
+// Components
+import SearchBar from 'Comps/items/SearchBar';
+// ViewSets
+import { getAllGenreData } from 'Libs/GenreDataViewSet';
+// Other
+// import { conversionSeasonName, getSeasonAndYear } from 'Utils/functions';
+import { BEFORESEASON1, BEFOREYEAR1 } from 'Utils/valiables/basicInfo'
+import { conversionSeasonName } from 'Utils/functions/conversionSeasonName';
 
+
+/* アニメ検索画面 */
 export default function AnimeSearch({ allGenre }) {
-    const [BEFORESEASON1, setBEFORESEASON1] = useState()
-    const [BEFOREYEAR1, setBEFOREYEAR1] = useState()
-
-    // 放送年度ディスプレイ状態管理
-    const [broadcastYearDisplay, setBroadcastYearDisplay] = useState()
-    const [broadcastSeasonDisplay, setBroadcastSeasonDisplay] = useState()
-    const broadcastYear = useRef()
-    const broadcastSeason = useRef()
-
-
-
-    useEffect(() => {
-        setBEFORESEASON1(getSeasonAndYear(-3)[0])
-        setBEFOREYEAR1(getSeasonAndYear(-3)[1])
-    }, [])
+    // useState
+    const [broadcastYearDisplay, setBroadcastYearDisplay] = useState();         // 放送年度ディスプレイ状態管理
+    const [broadcastSeasonDisplay, setBroadcastSeasonDisplay] = useState();     // 放送年度ディスプレイ状態管理
+    const broadcastYear = useRef();                                             // 放送年度ディスプレイ状態管理
+    const broadcastSeason = useRef();                                           // 放送年度ディスプレイ状態管理
 
     return (
         <>

@@ -1,48 +1,35 @@
-import React, { useState, useEffect } from 'react'
-import { useRouter } from 'next/router';
-import styles from '../../../styles/anime_recommend.module.css';
-import { getAnimeSimpleFindToWatchers } from '../../../lib/AnimeSimpleViewSet';
-import { getAllGenreData } from '../../../lib/GenreDataViewSet';
-import { getSeasonAndYear, conversionSeasonName } from "../../../utils/functions";
-import TagWrapper from '../../../components/item/TagWrapper';
-import AnimeSectionItem from '../../../components/item/AnimeSectionItem';
+// React
+import React from 'react';
+// CSS
+import styles from 'Styles/anime_recommend.module.css';
+// Components
+import AnimeSectionItem from 'Comps/items/sectionItem/AnimeSectionItem';
+import SelectionRecommendButton from 'Comps/items/_parts/parts/SelectionRecommendButton';
+// ViewSets
+import { getAnimeSimpleFindToWatchers } from 'Libs/AnimeSimpleViewSet';
+import { getAllGenreData } from 'Libs/GenreDataViewSet';
 
 
-const [BEFORESEASON1, BEFOREYEAR1] = getSeasonAndYear(-3)
-
+/* 人気アニメの一覧 */
 export default function PopularAnime({ popularData, allGenre }) {
-    const router = useRouter()
-
-    // ページ移動時のスクロール位置を記録
-    /* useEffect(() => {
-        window.addEventListener('beforeunload', window.scrollTo({ top: sessionStorage.getItem(router.pathname), behavior: "smooth" }))
-        return () => {
-            window.removeEventListener('beforeunload', window.scrollTo({ top: sessionStorage.getItem(router.pathname), behavior: "smooth" }))
-        };
-    }, [router.pathname]) */
 
     return (
         <>
-            <section className={`${styles.section}`}>
-                <div className={`${styles.content}`}>
-                    <div className={`${styles.contentTitle}`}>
-                        <h2>人気のアニメ</h2>
+            <section className={`${styles.wrapper}`}>
+                    <div className={`${styles.SelectRecommendItemWrapper}`}>
+                        <SelectionRecommendButton />
                     </div>
-                    <div className={`${styles.sectionItemWrapper}`}>
+                    <div className={`${styles.AnimeSectionItemWrapper}`}>
                         {
                             popularData?.map((anime, i) => {
                                 return (
-                                    <div key={i} className={`${styles.sectionItem}`}>
-                                        <div className={`${styles.tags}`}>
-                                            <TagWrapper anime={anime} allgenre={allGenre} />
-                                        </div>
-                                        <AnimeSectionItem anime={anime} />
+                                    <div key={i}>
+                                        <AnimeSectionItem anime={anime} allGenre={allGenre} />
                                     </div>
                                 )
                             })
                         }
                     </div>
-                </div>
             </section>
         </>
     )

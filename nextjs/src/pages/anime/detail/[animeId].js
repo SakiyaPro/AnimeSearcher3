@@ -1,18 +1,20 @@
-import React, { useState, useEffect } from 'react'
-import Link from 'next/link'
-import CustomHead from '../../../components/layout/CustomHead'
-import { useRouter } from 'next/router'
-import { getAnimeDatail } from '../../../lib/AnimeDetailViewSet'
-import { getAllGenreData } from '../../../lib/GenreDataViewSet'
-import { conversionStrDate } from '../../../utils/functions'
-import styles from '../../../styles/anime_detail.module.css'
-import BarGraph from '../../../components/item/BarGraph'
-import ReviewStar from '../../../components/item/ReviewStar'
-
-import axios from 'axios'
-import TagWrapper from '../../../components/item/TagWrapper'
-import ReviewSectionItem from '../../../components/item/ReviewSectionItem'
-import Cookies from 'js-cookie'
+// React
+import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
+// CSS
+import styles from '../../../styles/anime_detail.module.css';
+// Components
+import CustomHead from '../../../components/layout/CustomHead';
+import BarGraph from '../../../components/items/BarGraph';
+import ReviewStar from '../../../components/items/ReviewStar';
+import ReviewSectionItem from '../../../components/items/ReviewSectionItem';
+// ViewSets
+import { getAnimeDatail } from '../../../libs/AnimeDetailViewSet';
+import { getAllGenreData } from '../../../libs/GenreDataViewSet';
+// Other
+import axios from 'axios';
+import { conversionStrDate } from '../../../utils/functions';
 
 export default function AnimeDetail({ anime, reviewData, allGenre }) {
     const router = useRouter()
@@ -232,13 +234,13 @@ export default function AnimeDetail({ anime, reviewData, allGenre }) {
 }
 
 export async function getServerSideProps({ query }) {
-    const anime = await getAnimeDatail(query.animeId, { offset: 0 })
+    const anime = await getAnimeDatail(query.animeId, { offset: 0 });
     const reviewData = await (await axios.get(`${process.env.NEXT_PUBLIC_DJANGO_URL}users/ReviewAnime/?anime_id=${query.animeId
-        }`)).data.results
+        }`)).data.results;
     const allGenre = await (getAllGenreData()).then(async res => await res.map(data => data.genre));
 
     return { props: { anime, reviewData, allGenre } }
-}
+};
 
 /* export async function getStaticPaths() {
     // animeId をすべて取得

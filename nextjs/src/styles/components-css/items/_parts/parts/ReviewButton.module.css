@@ -1,0 +1,12 @@
+.reviewButton {
+    display: flex;
+    gap: 5px;
+}
+
+.reviewButton img {
+    width: 18px;
+}
+
+.reviewButton:hover {
+    filter: invert(72%) sepia(26%) saturate(6428%) hue-rotate(1deg) brightness(105%) contrast(102%);
+}

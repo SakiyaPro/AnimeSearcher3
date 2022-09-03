@@ -1,8 +1,10 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, status
 from rest_framework.response import Response
+from rest_framework.decorators import action
 
 from users.models.CustomUser import CustomUser
 from users.serializers.CustomUserSerializer import CustomUserSerializer
+
 
 class CustomUserViewSet(viewsets.ModelViewSet):
     """
@@ -43,3 +45,12 @@ class CustomUserViewSet(viewsets.ModelViewSet):
             queryset.username = username
             queryset.save()
         return Response(f"ユーザー情報を更新しました。")
+
+    @action(detail=True, methods=["POST"])
+    def has_staff(self, request, pk=None):
+        "指定されたアカウントにスタッフ権限があるか"
+        is_staff = self.queryset.get(id=pk).is_staff
+        if is_staff:
+            return Response(f"True")
+        else:
+            return Response(f"")

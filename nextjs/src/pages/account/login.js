@@ -67,6 +67,7 @@ export default function Login(props) {
                 }
             )).data
             Cookies.set("user_id", res_token.user.pk)
+            Cookies.set("is_staff", res_token.user.is_staff);
             Cookies.set("access_token", res_token.access_token);
             Cookies.set("refresh_token", res_token.refresh_token);
             if (loginRetention.current.checked) {

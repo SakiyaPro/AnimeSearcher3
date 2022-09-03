@@ -1,53 +1,36 @@
+// React
+import React from 'react';
+// CSS
+import styles from 'Styles/anime_recommend.module.css'
+// Components
+import AnimeSectionItem from 'Comps/items/sectionItem/AnimeSectionItem';
+import SelectionRecommendButton from 'Comps/items/_parts/parts/SelectionRecommendButton';
+// Libs
+import { getAnimeSimpleFindToSeason } from 'Libs/AnimeSimpleViewSet';
+import { getAllGenreData } from 'Libs/GenreDataViewSet';
+// Utils
+import { NOWSEASON, NOWYEAR } from 'Utils/valiables/basicInfo';
 
-import React, { useEffect } from 'react';
-import { useRouter } from 'next/router';
-import styles from '../../../styles/anime_recommend.module.css'
-import { getAnimeSimpleFindToSeason } from '../../../lib/AnimeSimpleViewSet';
-import { getAllGenreData } from '../../../lib/GenreDataViewSet';
-import { getSeasonAndYear } from "../../../utils/functions";
 
-import TagWrapper from '../../../components/item/TagWrapper';
-import AnimeSectionItem from '../../../components/item/AnimeSectionItem';
-
-import axios from 'axios';
-import RecommendSectionTop from '../../../components/item/RecommendSectionTop';
-
-const [NOWSEASON, NOWYEAR] = getSeasonAndYear(0)
-
+/* 今期アニメの一覧 */
 export default function NowSeason({ nowSeasonData, allGenre }) {
-    const router = useRouter()
-
-    // ページ移動時のスクロール位置を記録
-    /* useEffect(() => {
-        window.addEventListener('beforeunload', window.scrollTo({ top: sessionStorage.getItem(router.pathname), behavior: "smooth" }))
-        return () => {
-            window.removeEventListener('beforeunload', window.scrollTo({ top: sessionStorage.getItem(router.pathname), behavior: "smooth" }))
-        };
-    }, [router.pathname]) */
-
-
 
     return (
         <>
-            <section className={`${styles.section}`}>
-                <div className={`${styles.content}`}>
-                    <div className={`${styles.contentTitle}`}>
-                        <h2>放送中のアニメ</h2>
-                    </div>
-                    <div className={`${styles.sectionItemWrapper}`}>
-                        {
-                            nowSeasonData?.map((anime, i) => {
-                                return (
-                                    <div key={i} className={`${styles.sectionItem}`}>
-                                        <div className={`${styles.tags}`}>
-                                            <TagWrapper anime={anime} allgenre={allGenre} />
-                                        </div>
-                                        <AnimeSectionItem anime={anime} />
-                                    </div>
-                                )
-                            })
-                        }
-                    </div>
+            <section className={`${styles.wrapper}`}>
+                <div className={`${styles.SelectRecommendItemWrapper}`}>
+                    <SelectionRecommendButton />
+                </div>
+                <div className={`${styles.AnimeSectionItemWrapper}`}>
+                    {
+                        nowSeasonData?.map((anime, i) => {
+                            return (
+                                <div key={i}>
+                                    <AnimeSectionItem anime={anime} allGenre={allGenre} />
+                                </div>
+                            )
+                        })
+                    }
                 </div>
             </section>
         </>
@@ -56,7 +39,8 @@ export default function NowSeason({ nowSeasonData, allGenre }) {
 
 export async function getStaticProps() {
     // アニメデータ取得
-    const nowSeasonData = await getAnimeSimpleFindToSeason(NOWSEASON, NOWYEAR, { offset: 0 })
+    const nowSeasonData = await getAnimeSimpleFindToSeason(NOWSEASON, NOWYEAR, { offset: 0 });
+    // ジャンルデータ取得
     const allGenre = await (getAllGenreData()).then(async res => await res.map(data => data.genre));
 
     return {

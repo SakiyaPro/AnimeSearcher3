@@ -5,26 +5,28 @@ import 'swiper/css/bundle'
 import React, { useEffect } from "react";
 import { useRouter } from 'next/router';
 import { setGlobal } from "reactn"
-import Layout2 from '../components/layout/Layout2'
-import CustomHead from '../components/layout/CustomHead';
-import { getSeasonAndYear, login_request } from '../utils/functions';
-import { getAllGenreData } from '../lib/GenreDataViewSet';
+import Layout from 'Comps/layout/Layout'
+import CustomHead from 'Comps/layout/CustomHead';
+// Utils
+import { getLoginState } from 'Utils/functions/getLoginState';
+import { hasStaffParmission } from 'Utils/functions/hasStaffParmission';
+import Cookies from 'js-cookie';
+import axios from 'axios';
 
 
 export default function MyApp({ Component, pageProps }) {
   const router = useRouter()
 
   useEffect(() => {
-    // global state
-    setGlobal(() => {
+    // グルーバルステート
+    setGlobal(async () => {
       const state = {
-        LoginState: login_request(),
-        BEFORESEASON1: getSeasonAndYear(-3)[0],
-        BEFOREYEAR1: getSeasonAndYear(-3)[1]
+        LoginState: getLoginState(),
+        StaffParmission: await hasStaffParmission()
       }
       return state
     })
-  }, [])
+  })
 
   return (
     <>
@@ -32,9 +34,9 @@ export default function MyApp({ Component, pageProps }) {
         !(router.pathname.match(/\/anime\/detail.*/)) &&
         <CustomHead />
       }
-      <Layout2>
+      <Layout>
         <Component {...pageProps} />
-      </Layout2>
+      </Layout>
     </>
   )
 }

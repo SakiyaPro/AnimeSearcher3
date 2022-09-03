@@ -13,20 +13,8 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -100%);
+    isolation: isolate;
     z-index: 9999;
-}
-
-.activeAddButton .desableButton {
-    width: 34px;
-    height: 34px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-}
-
-.activeAddButton .desableButton:hover {
-    background-color: rgba(0, 0, 0, 0.1);
 }
 
 .contentTop {
@@ -42,8 +30,7 @@
     margin-bottom: 40px;
 }
 
-.contentWrapper .apologizeImage {
-}
+.contentWrapper .apologizeImage {}
 
 .contentWrapper .apologizeImage img {
     width: 60px;

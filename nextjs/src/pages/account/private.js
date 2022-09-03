@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
-import Auth from "../../components/auth/Auth";
-import styles from "../../styles/private.module.css";
-import ReviewSectionItem from "../../components/item/ReviewSectionItem";
+import Auth from "Comps/auth/Auth";
+import styles from "Styles/private.module.css";
 import axios from 'axios';
 import Cookies from "js-cookie";
-import { refresh_access_token } from "../../utils/functions";
+import { refresh_access_token } from "Utils/functions";
 
 
 export default function Private() {
@@ -140,14 +139,15 @@ export default function Private() {
 
     //ログアウト処理
     const logout = () => {
-        Cookies.remove("user_id");
-        Cookies.remove("access_token");
-        Cookies.remove("refresh_token");
+        Cookies.remove("user_id")
+        Cookies.remove("is_staff")
+        Cookies.remove("access_token")
+        Cookies.remove("refresh_token")
         Cookies.remove("loginRetention")
         localStorage.removeItem("profile")
         localStorage.removeItem("user_icon")
         localStorage.removeItem("review_anime")
-        router.replace("/account/login");
+        router.replace("/account/login")
     }
 
     const user_date_joined = user?.date_joined.replace('-', '年').replace('-', '月')

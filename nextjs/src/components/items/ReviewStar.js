@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import styles from '../../styles/components-css/ReviewStar.module.css'
 import ReviewPostCenter from './ReviewPostCenter'
-import LoginRequest from '../view/LoginRequest';
-import { login_request } from '../../utils/functions';
+import LoginRequest from 'Comps/portal/LoginRequest';
+import { getLoginState } from 'Utils/functions/getLoginState';
 
 export default function ReviewStar({ reviewanime_set, animeTitle }) {
     const [display, setDisplay] = useState(false);
@@ -10,7 +10,7 @@ export default function ReviewStar({ reviewanime_set, animeTitle }) {
     const [star, setStar] = useState()
 
     useEffect(() => {
-        setLoginState(login_request())
+        setLoginState(getLoginState)
     }, [])
 
     useEffect(() => {

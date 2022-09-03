@@ -1,0 +1,67 @@
+.sectionItemBox {
+    /* 変数 */
+    --anime-section-item-pc-width: 500px;
+    /* CSS */
+    width: var(--anime-section-item-pc-width);
+    height: var(--anime-section-item-pc-hieght);
+    /* flex */
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    /* border */
+    border: 2px solid rgba(0, 0, 0, .1);
+    border-top: none;
+    border-radius: 16px;
+    /* color */
+    background-color: rgba(0, 0, 0, .05);
+    /* effect */
+    transition: .25s all;
+}
+
+.sectionItemBox:hover {
+    transform: scale(1.1);
+}
+
+.sectionItemBox .animeImage img {
+    width: var(--anime-section-item-pc-width);
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+}
+
+.sectionItemBox .animeTitle {
+    width: var(--anime-section-item-pc-width);
+    padding: 10px;
+    background-color: rgba(0, 0, 0, .8);
+    border: 1px solid #ccc;
+}
+
+.sectionItemBox .bottom {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    padding: 15px;
+}
+
+.sectionItemBox .infomation {}
+
+.sectionItemBox .buttonWrapper {
+    display: flex;
+    gap: 10px;
+}
+
+
+@media screen and (max-width:999px) {
+    .sectionItemBox {
+        width: calc(100vw - 20px);
+    }
+}
+
+@media screen and (max-width: 385px) {
+    .sectionItem {
+        flex-direction: column;
+    }
+
+    .sectionItem .thumbnailWrapper img {
+        width: 100%;
+    }
+}

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import styles from '../../styles/components-css/ReviewPostCenter.module.css'
-import { login_request, post_or_update_review } from '../../utils/functions'
+import { post_or_update_review } from '../../utils/functions'
+import { getLoginState } from 'Utils/functions/getLoginState'
 import axios from 'axios'
 
 export default function ReviewPostCenter({ animeTitle }) {
@@ -18,7 +19,7 @@ export default function ReviewPostCenter({ animeTitle }) {
 
     // ユーザーアイコンを取得
     useEffect(() => {
-        if (login_request()) {
+        if (getLoginState) {
             setUserIcon(localStorage.getItem("user_icon"))
         }
         if (animeTitle) {
@@ -31,7 +32,7 @@ export default function ReviewPostCenter({ animeTitle }) {
     useEffect(() => {
         const asyncEffect = async () => {
             if (keyword === '') return setSearchSuggest()
-            const res = await (await axios.get(`${process.env.NEXT_PUBLIC_DJANGO_URL}api/titlesuggest/?title=${keyword}`)).data.results
+            const res = await (await axios.get(`${process.env.NEXT_PUBLIC_DJANGO_URL}api/AnimeTitleSuggest/?title=${keyword}`)).data.results
             setSearchSuggest(res)
         }
         asyncEffect()
@@ -41,7 +42,7 @@ export default function ReviewPostCenter({ animeTitle }) {
         if (!review_title.current.value) {
             return false
         }
-        const res = await (await axios.get(`${process.env.NEXT_PUBLIC_DJANGO_URL}api/animedata/?title=${review_title.current.value
+        const res = await (await axios.get(`${process.env.NEXT_PUBLIC_DJANGO_URL}api/AnimeSimple/?title=${review_title.current.value
             }`)).data.results[0]
         if (res) {
             if (postStar) {

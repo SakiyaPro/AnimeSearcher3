@@ -2,8 +2,9 @@
 レビューの星 */
 
 .noReviewStarWrapper {
-    color: #CCCCCC;
-    font-size: 1.9rem;
+    color: #CCC;
+    font-size: 1.6rem;
+    letter-spacing: 0.2rem;
 }
 
 .noReviewStarWrapper:hover span {
@@ -14,10 +15,7 @@
     display: flex;
     gap: 5px;
     align-items: center;
-}
-
-.reviewStarWrapper:hover .star5_rating {
-    text-decoration: 1px underline #333;
+    letter-spacing: 0.2rem;
 }
 
 .star5_rating {
@@ -25,33 +23,26 @@
     z-index: 0;
     display: inline-block;
     white-space: nowrap;
-    color: #CCCCCC
 }
 
 .star5_rating:before, .star5_rating:after {
-    font-size: 1.7rem;
+    font-size: 1.6rem;
     content: '★★★★★';
-}
-
-.star5_rating:hover .star5_rating:after {
-    text-decoration: underline;
+    color: #CCC;
 }
 
 .star5_rating:after {
+    /* イエローカラー 自由に設定化 */
+    color: #ffcf32;
+    -webkit-text-stroke: 1px #ffcf32;
+    overflow: hidden;
     position: absolute;
     z-index: 1;
     top: 0;
     left: 0;
-    overflow: hidden;
-    white-space: nowrap;
-    color: #ffcf32;
-    /* イエローカラー 自由に設定化 */
 }
 
-.starText {
-    font-size: 1.6rem;
-    color: #333;
-}
+
 
 /* 星5 */
 .star5_rating[datarate="5"]:after {

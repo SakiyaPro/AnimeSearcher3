@@ -8,24 +8,32 @@
 }
 
 .swiperSlideWrapper {
-    height: 300px;
+    height: 280px;
 }
 
 .swiperSlide {
-    width: 300px;
-    height: 250px;
-    background-color: rgba(255, 255, 255, 1);
-    box-shadow: 2px 2px 4px #000;
+    /* 変数 */
+    --siper-slide-width: 300px;
+    --siper-slide-height: 250px;
+    /* CSS */
+    width: var(--siper-slide-width);
+    height: var(--siper-slide-height);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
     position: relative;
 }
 
 .swiperSlide .image {
+    border-radius: 16px;
     position: relative;
 }
 
 .swiperSlide .image img {
     width: 300px;
-    filter: contrast(0.95);
+    border-radius: 8px;
 }
 
 .image .imageMaskX {
@@ -37,33 +45,17 @@
     left: 0;
 }
 
-.swiperSlide .title {
-    width: 250px;
-    color: var(--str-accent-color);
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    font-weight: 500;
-    font-size: 1rem;
-    padding: 2px 5px;
-    position: absolute;
-    top: 180px;
-    left: 5px;
+.animeTitle {
+    width: calc(var(--siper-slide-width) - 40px);
+    text-align: center;
 }
-
-.swiperSlide .title:hover {
-    text-decoration: underline;
-}
-
 
 .reviewStar {
     width: 240px;
     padding-bottom: 2px;
-    filter: drop-shadow(1px 1px 1px #444);
     position: absolute;
+    top: calc(var(--siper-slide-height) - 115px);
     left: 10px;
-    top: 140px;
     z-index: 3;
 }
 

@@ -1,63 +1,49 @@
-import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
-import styles from '../styles/Home.module.css'
-import TagWrapper from '../components/item/TagWrapper';
-import AnimeSectionItem from '../components/item/AnimeSectionItem';
-import AnimeSwiperItem from '../components/item/AnimeSwiperItem';
-import { getAnimeSimpleFindToSeason, getAnimeSimpleFindToWatchers } from '../lib/AnimeSimpleViewSet';
-import { getAllGenreData } from '../lib/GenreDataViewSet';
-import { login_request, getSeasonAndYear } from '../utils/functions';
+// React
+import React from 'react';
+// CSS
+import styles from 'Styles/Home.module.css'
+// Comps
+import AnimeSwiperItem from 'Comps/items/AnimeSwiperItem';
+// Libs
+import { getAnimeSimpleFindToSeason, getAnimeSimpleFindToWatchers } from 'Libs/AnimeSimpleViewSet';
+import { getAllGenreData } from 'Libs/GenreDataViewSet';
+// Utils
+import { NOWSEASON, NOWYEAR, BEFORESEASON1, BEFOREYEAR1 } from 'Utils/valiables/basicInfo';
+import SectionTitle1 from 'Comps/items/sectionTitle/SectionTitle1';
 
 
-const [NOWSEASON, NOWYEAR] = getSeasonAndYear(0);
-const [BEFORESEASON1, BEFOREYEAR1] = getSeasonAndYear(-3);
-
+/* ホーム画面 */
 export default function Home({ nowSeasonData, onePrevSeasonData, popularData, allGenre }) {
-    const [LoginState, setLoginState] = useState();
-    const [secIconWidth, setSecIconWidth] = useState("14px");
-
-    useEffect(() => {
-        setLoginState(login_request());
-        typeof window !== "undefined" && window.outerWidth > 600 && setSecIconWidth("23px");
-    }, [])
-
 
     return (
-        <>
-            <section className="section">
-                <h2 className="sectionTitle">
-                    放送中アニメ
-                    <span className={`${styles.sectionTitleMoreInfo}`}>
-                        <Link href="/anime/recommend/nowSeason" passhref="true"><a>もっと見る（{nowSeasonData.length}作品）</a></Link>
-                    </span>
-                </h2>
-                <AnimeSwiperItem animesData={nowSeasonData?.slice(0, 10)} />
+        <section className="section">
+            <>
+            </>
+            <div className={`${styles.sectionTitleWrapper}`}>
+                <SectionTitle1 title="今期アニメ" link="anime/recommend/nowSeason" />
+            </div>
+            <AnimeSwiperItem animesData={nowSeasonData?.slice(0, 10)} />
 
-                <h2 className="sectionTitle">
-                    前期アニメ
-                    <span className={`${styles.sectionTitleMoreInfo}`}>
-                        <Link href="/anime/recommend/onePrevSeason" passhref="true"><a>もっと見る（{onePrevSeasonData.length}作品）</a></Link>
-                    </span>
-                </h2>
-                <AnimeSwiperItem animesData={onePrevSeasonData?.slice(0, 10)} />
+            <div className={`${styles.sectionTitleWrapper}`}>
+                <SectionTitle1 title="前期アニメ" link="anime/recommend/onePrevSeason" />
+            </div>
+            <AnimeSwiperItem animesData={onePrevSeasonData?.slice(0, 10)} />
 
-                <h2 className="sectionTitle">
-                    人気アニメ
-                    <span className={`${styles.sectionTitleMoreInfo}`}>
-                        <Link href="/anime/recommend/popularAnime" passhref="true"><a>もっと見る</a></Link>
-                    </span>
-                </h2>
-                <AnimeSwiperItem animesData={popularData?.slice(0, 10)} />
-            </section>
-        </>
+            <div className={`${styles.sectionTitleWrapper}`}>
+                <SectionTitle1 title="人気アニメ" link="anime/recommend/popularAnime" />
+            </div>
+            <AnimeSwiperItem animesData={popularData?.slice(0, 10)} />
+        </section>
     );
 };
+
 
 export async function getServerSideProps() {
     // アニメデータ取得
     const nowSeasonData = await getAnimeSimpleFindToSeason(NOWSEASON, NOWYEAR, { offset: 0 });
     const onePrevSeasonData = await getAnimeSimpleFindToSeason(BEFORESEASON1, BEFOREYEAR1, { offset: 0 });
     const popularData = await getAnimeSimpleFindToWatchers("", 4000, { offset: 0 });
+    // ジャンルデータ取得
     const allGenre = await (getAllGenreData()).then(async res => await res.map(data => data.genre));
 
     return {

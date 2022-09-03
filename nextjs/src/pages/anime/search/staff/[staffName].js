@@ -1,13 +1,21 @@
+// React
 import React from 'react'
 import { useRouter } from 'next/router';
+// CSS
 import styles from '../../../../styles/anime_search.module.css';
+// Components
 import TagWrapper from '../../../../components/item/TagWrapper';
 import AnimeSectionItem from '../../../../components/item/AnimeSectionItem';
-import { getStaffAnimeData } from '../../../../lib/getAnimeData';
-import { getAllGenre } from '../../../../lib/getGenreData'
+// ViewSets
+import { getStaffAnimeData } from '../../../../libs/getAnimeData';
+import { getAllGenre } from '../../../../libs/getGenreData'
 
+
+/* スタッフ検索結果 */
 export default function StaffSearch({ staffAnimeData, allGenre }) {
-    const router = useRouter()
+    // useRouter
+    const router = useRouter();
+
     return (
         <section className={"section"}>
             <div className={`${styles.resultTitle}`}>
